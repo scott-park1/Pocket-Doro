@@ -1,9 +1,11 @@
 import Avatar from './Avatar'
+import Timer from './Timer'
 
 function App() {
   return (
     <>
-      <Avatar />
+      {/* <Avatar /> */}
+      <Timer />
       <section className="main">{/* add your code here */}</section>
     </>
   )
