@@ -1,10 +1,13 @@
 import Avatar from './Avatar'
+import { Outlet } from 'react-router-dom'
 
 function App() {
   return (
     <>
       <Avatar />
-      <section className="main">{/* add your code here */}</section>
+      <section className="main">
+        <Outlet />
+      </section>
     </>
   )
 }
