@@ -1,105 +1,82 @@
+import React from 'react'
+import { SpriteAnimator } from 'react-sprite-animator'
+
+const walk = 'assets/CharacterSprites/characters/char1.png'
+const clothes = 'assets/CharacterSprites/separate/walk/clothes/dress_walk.png'
+const hair = 'assets/CharacterSprites/separate/walk/hair/spacebuns_walk.png'
+const earrings =
+  'assets/CharacterSprites/separate/walk/acc/earring_red_silver_walk.png'
+const shoes = 'assets/CharacterSprites/separate/walk/clothes/shoes_walk.png'
+
 export default function Avatar() {
-  const imageUrl = 'public/assets/CharacterSprites/characters/char1.png'
-
-  window.addEventListener('load', () => {
-    const canvas = document.getElementById('canvas1') as HTMLCanvasElement
-    const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
-    canvas.width = 500
-    canvas.height = 500
-    console.log(ctx)
-
-    class Avatar {
-      image: HTMLImageElement
-      spriteWidth: number
-      spriteHeight: number
-      width: number
-      height: number
-      x: number
-      y: number
-      minFrame: number
-      maxFrame: number
-      canvasWidth: number
-      canvasHeight: number
-      scale: number
-      frameX: number
-      frameY: number
-      frame: number
-
-      constructor(canvasWidth: number, canvasHeight: number) {
-        this.canvasWidth = canvasWidth
-        this.canvasHeight = canvasHeight
-        this.image = document.getElementById('avatar') as HTMLImageElement
-        this.spriteWidth = 32
-        this.spriteHeight = 33
-        this.width = this.spriteWidth
-        this.height = this.spriteHeight
-        this.scale = 3
-        this.x = this.canvasWidth / 2 - (this.width * this.scale) / 2
-        this.y = this.canvasHeight / 2 - (this.height * this.scale) / 2
-        this.minFrame = 0
-        this.maxFrame = 32
-        this.frame = 0
-        this.frameX = 0
-        this.frameY = 0
-      }
-
-      draw(context: CanvasRenderingContext2D) {
-        console.log(
-          this.frameX,
-          this.frameY,
-          this.frameX * this.spriteWidth,
-          this.frameY * this.spriteHeight
-        )
-        context.drawImage(
-          this.image,
-          this.frameX * this.spriteWidth,
-          this.frameY * this.spriteHeight,
-          this.spriteWidth,
-          this.spriteHeight,
-          this.x,
-          this.y,
-          this.width * this.scale,
-          this.height * this.scale
-        )
-      }
-
-      update() {
-        this.frame = this.frame < this.maxFrame ? this.frame + 1 : this.minFrame
-        this.frameX = this.frame % 8
-        this.frameY = Math.floor(this.frame / 8)
-      }
-    }
-
-    const bob = new Avatar(canvas.width, canvas.height)
-    console.log(bob)
-
-    let lastTime = 0
-    const delay = 100
-
-    function animate(time = 0) {
-      if (time - lastTime >= delay) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height)
-        bob.draw(ctx)
-        bob.update()
-        lastTime = time
-      }
-      requestAnimationFrame(animate)
-    }
-
-    animate()
-  })
+  const spriteWidth = 32
+  const spriteHeight = 32
+  const scale = 1 / 5
+  const frameCount = 8 // rows
+  const wrapAfter = 8 // columns
+  const fps = 10 // speed
 
   return (
-    <div>
-      <img
-        id="avatar"
-        src={imageUrl}
-        alt="Avatar"
-        style={{ display: 'none' }}
+    <div className="avatar" style={{ imageRendering: 'pixelated' }}>
+      <SpriteAnimator
+        sprite={walk}
+        width={spriteWidth}
+        height={spriteHeight}
+        scale={scale}
+        frameCount={frameCount}
+        wrapAfter={wrapAfter}
+        fps={fps}
+        shouldAnimate={true}
+        direction="horizontal"
       />
-      <div className="container">
-        <canvas id="canvas1" className="canvas1"></canvas>
-      </div>
+      <SpriteAnimator
+        sprite={clothes}
+        width={spriteWidth}
+        height={spriteHeight}
+        scale={scale}
+        frameCount={frameCount}
+        wrapAfter={wrapAfter}
+        fps={fps}
+        shouldAnimate={true}
+        direction="horizontal"
+        className="clothes"
+      />
+      <SpriteAnimator
+        sprite={hair}
+        width={spriteWidth}
+        height={spriteHeight}
+        scale={scale}
+        frameCount={frameCount}
+        wrapAfter={wrapAfter}
+        fps={fps}
+        shouldAnimate={true}
+        direction="horizontal"
+        className="clothes"
+      />
+      <SpriteAnimator
+        sprite={earrings}
+        width={spriteWidth}
+        height={spriteHeight}
+        scale={scale}
+        frameCount={frameCount}
+        wrapAfter={wrapAfter}
+        fps={fps}
+        shouldAnimate={true}
+        direction="horizontal"
+        className="clothes"
+      />
+      <SpriteAnimator
+        sprite={shoes}
+        width={spriteWidth}
+        height={spriteHeight}
+        scale={scale}
+        frameCount={frameCount}
+        wrapAfter={wrapAfter}
+        fps={fps}
+        shouldAnimate={true}
+        direction="horizontal"
+        className="clothes"
+      />
     </div>
   )
 }
