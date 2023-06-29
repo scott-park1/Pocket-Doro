@@ -1,13 +1,13 @@
-import Avatar from './Avatar'
 import { Outlet } from 'react-router-dom'
+import Footer from './Footer'
 
 function App() {
   return (
     <>
-      <Avatar />
       <section className="main">
         <Outlet />
       </section>
+      <Footer />
     </>
   )
 }
