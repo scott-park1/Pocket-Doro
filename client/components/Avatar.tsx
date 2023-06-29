@@ -1,5 +1,5 @@
 export default function Avatar() {
-  const imageUrl = 'public/assets/CharacterSprites/characters/char1.png'
+  const imageUrl = 'assets/CharacterSprites/characters/char1.png'
 
   window.addEventListener('load', () => {
     const canvas = document.getElementById('canvas1') as HTMLCanvasElement
