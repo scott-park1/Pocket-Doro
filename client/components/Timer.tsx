@@ -4,11 +4,11 @@ export default function Timer() {
   const [minutes, setMinutes] = useState(1)
   const [seconds, setSeconds] = useState(0)
   const [resting, setResting] = useState(false)
-
-  // state to hold working (boolean)
-  //state to hold resting (boolean)
-
+  const [skippedBreaks, setSkippedBreaks] = useState(0)
   const [completedCylces, setCompletedCycles] = useState(0)
+
+  // !resting use minutes working
+  // resting use resting minutes
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -29,7 +29,6 @@ export default function Timer() {
             setMinutes(minutes)
             setResting(!resting)
             setCompletedCycles(completedCylces + 1)
-            console.log(completedCylces + 'completed')
           }
         } else {
           setSeconds(seconds - 1)
@@ -42,7 +41,7 @@ export default function Timer() {
             setSeconds(59)
             setMinutes(minutes - 1)
           } else {
-            const minutes = resting ? 24 : 29
+            const minutes = !resting ? 24 : 29
             const seconds = 59
             setSeconds(seconds)
             setMinutes(minutes)
@@ -53,19 +52,36 @@ export default function Timer() {
           setSeconds(seconds - 1)
         }
       }
-    }, 10)
+    }, 1000)
   }, [seconds])
+
+  // if resting === true
+  // skip break
+  //// resting = false
+  //// set num of breaks skipped
+  //// timer goes to next work cycle
+
+  async function skipBreak() {
+    await setResting(false)
+    setSkippedBreaks(skippedBreaks + 1)
+  }
 
   const timerMinutes = minutes < 10 ? `0${minutes}` : minutes
   const timerSeconds = seconds < 10 ? `0${seconds}` : seconds
 
   return (
     <>
-      {resting && <div>Break time! New session starts in: </div>}
+      {resting && (
+        <>
+          <div>Break time! New session starts in: </div>
+          <button onClick={skipBreak}> skip break </button>
+        </>
+      )}
       <div>
         {timerMinutes}:{timerSeconds}
       </div>
-      <div> Completed break cycles: {completedCylces}</div>
+      <div> Completed work cycles: {completedCylces}</div>
+      <div> breaks skipped: {skippedBreaks}</div>
     </>
   )
 }
