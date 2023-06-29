@@ -5,7 +5,7 @@ function App() {
   return (
     <>
       {/* <Avatar /> */}
-      <Timer />
+      {/* <Timer /> */}
       <section className="main">{/* add your code here */}</section>
     </>
   )
