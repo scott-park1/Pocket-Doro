@@ -1,7 +1,14 @@
 import { useState, useEffect } from 'react'
 
+// const audioTune = new Audio('<YOUR_AUDIO_FILE_PATH.mp3>');
+
+// // play audio sound
+// const playSound = () => {
+//   audioTune.play();
+// }
+
 export default function Timer() {
-  const [minutes, setMinutes] = useState(1)
+  const [minutes, setMinutes] = useState(25)
   const [seconds, setSeconds] = useState(0)
   const [resting, setResting] = useState(false)
   const [skippedBreaks, setSkippedBreaks] = useState(0)
@@ -23,7 +30,7 @@ export default function Timer() {
             setSeconds(59)
             setMinutes(minutes - 1)
           } else {
-            const minutes = resting ? 24 : 4
+            const minutes = !resting ? 24 : 4
             const seconds = 59
             setSeconds(seconds)
             setMinutes(minutes)
@@ -71,17 +78,22 @@ export default function Timer() {
 
   return (
     <>
+      <div> Completed work cycles: {completedCylces}</div>
+      <div> breaks skipped: {skippedBreaks}</div> <br />
       {resting && (
         <>
           <div>Break time! New session starts in: </div>
           <button onClick={skipBreak}> skip break </button>
         </>
       )}
-      <div>
-        {timerMinutes}:{timerSeconds}
+      <br />
+      <br />
+      <div className="timer-wrapper">
+        <div className="timer">
+          {timerMinutes}:{timerSeconds}
+        </div>
       </div>
-      <div> Completed work cycles: {completedCylces}</div>
-      <div> breaks skipped: {skippedBreaks}</div>
+      <br />
     </>
   )
 }
