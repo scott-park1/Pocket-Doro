@@ -1,12 +1,14 @@
-import Avatar from './Avatar'
-import Timer from './Timer'
+
+import { Outlet } from 'react-router-dom'
+import Footer from './Footer'
 
 function App() {
   return (
     <>
-      {/* <Avatar /> */}
-      {/* <Timer /> */}
-      <section className="main">{/* add your code here */}</section>
+      <section className="main">
+        <Outlet />
+      </section>
+      <Footer />
     </>
   )
 }
