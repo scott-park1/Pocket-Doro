@@ -21,17 +21,6 @@ body {
   position: absolute;
 }
 
-/* .charComp {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 300px;
-  width: 300px;
-  margin: 0;
-  border: 5px solid black;
-} */
-
-
 .title {
   font-family: 'Cherry Bomb One', cursive;
   font-size: 200px;

@@ -1,8 +1,4 @@
-
-
-import React from 'react'
 import { SpriteAnimator } from 'react-sprite-animator'
-
 
 const walk = 'assets/CharacterSprites/characters/char1.png'
 const clothes = 'assets/CharacterSprites/separate/walk/clothes/dress_walk.png'
