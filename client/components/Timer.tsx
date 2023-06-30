@@ -153,6 +153,20 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
               max={120}
               onChange={(newValue) => setShortBreakLength(newValue)}
             />
+            <div>
+              <input
+                type="range"
+                id="long-break-settings"
+                name="long-break"
+                min="0"
+                max="120"
+                value={longBreakLength}
+                onChange={settings}
+              ></input>
+              <label htmlFor="long-break-settings">
+                Long Break {longBreakLength}
+              </label>
+            </div>
             <div></div>
           </>
         )}
