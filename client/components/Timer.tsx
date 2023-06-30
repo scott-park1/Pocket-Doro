@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 // const audioTune = new Audio('<YOUR_AUDIO_FILE_PATH.mp3>');
 
@@ -7,52 +7,66 @@ import { useState, useEffect } from 'react'
 //   audioTune.play();
 // }
 
-export default function Timer() {
+interface Props {
+  skippedBreaks: number
+  onSkipBreak: () => void
+}
+
+export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
   const [minutes, setMinutes] = useState(25)
   const [seconds, setSeconds] = useState(0)
   const [resting, setResting] = useState(false)
-  const [skippedBreaks, setSkippedBreaks] = useState(0)
-  const [completedCylces, setCompletedCycles] = useState(0)
+  const [completedCycles, setCompletedCycles] = useState(0)
 
   // !resting use minutes working
   // resting use resting minutes
 
+  const changeTimer = () => {
+    setResting(!resting)
+
+    if (resting) {
+      setMinutes(24)
+      setSeconds(59)
+      return
+    }
+
+    if (completedCycles > 2) {
+      setMinutes(29)
+      setSeconds(59)
+      return
+    }
+
+    setMinutes(4)
+    setSeconds(59)
+  }
+
+  // useEffectEvent
   useEffect(() => {
     const interval = setInterval(() => {
-      clearInterval(interval)
-
       // if number of cycles <= 2 short break.
       // if number of cycles > 2 long break, number of cycles = 0
 
-      if (completedCylces <= 2) {
+      if (completedCycles <= 2) {
         if (seconds === 0) {
           if (minutes !== 0) {
             setSeconds(59)
             setMinutes(minutes - 1)
           } else {
-            const minutes = !resting ? 24 : 4
-            const seconds = 59
-            setSeconds(seconds)
-            setMinutes(minutes)
-            setResting(!resting)
-            setCompletedCycles(completedCylces + 1)
+            changeTimer()
+            setCompletedCycles(completedCycles + 1)
           }
         } else {
           setSeconds(seconds - 1)
         }
       }
 
-      if (completedCylces > 2) {
+      if (completedCycles > 2) {
         if (seconds === 0) {
           if (minutes !== 0) {
             setSeconds(59)
             setMinutes(minutes - 1)
           } else {
-            const minutes = !resting ? 24 : 29
-            const seconds = 59
-            setSeconds(seconds)
-            setMinutes(minutes)
-            setResting(!resting)
+            changeTimer()
             setCompletedCycles(0)
           }
         } else {
@@ -60,7 +74,11 @@ export default function Timer() {
         }
       }
     }, 1000)
-  }, [seconds])
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, [seconds, changeTimer, completedCycles, minutes])
 
   // if resting === true
   // skip break
@@ -68,9 +86,9 @@ export default function Timer() {
   //// set num of breaks skipped
   //// timer goes to next work cycle
 
-  async function skipBreak() {
-    await setResting(false)
-    setSkippedBreaks(skippedBreaks + 1)
+  function skipBreak() {
+    changeTimer()
+    onSkipBreak()
   }
 
   const timerMinutes = minutes < 10 ? `0${minutes}` : minutes
@@ -78,7 +96,7 @@ export default function Timer() {
 
   return (
     <>
-      <div> Completed work cycles: {completedCylces}</div>
+      <div> Completed work cycles: {completedCycles}</div>
       <div> breaks skipped: {skippedBreaks}</div> <br />
       {resting && (
         <>
