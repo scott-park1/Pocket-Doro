@@ -7,12 +7,12 @@ import Timer from '../Timer'
 
 describe('<Timer>', () => {
   it('should show countdown from 25 minutes', () => {
-    render(<Timer />)
+    render(<Timer skippedBreaks={0} onSkipBreak={() => {}} />)
     const timeValue = screen.getByText(/25/i)
     expect(timeValue).toBeInTheDocument()
   })
   it('should show 24:58 minutes in the document', async () => {
-    render(<Timer />)
+    render(<Timer skippedBreaks={0} onSkipBreak={() => {}} />)
     await waitFor(
       () => {
         expect(screen.getByText('24:58')).toBeInTheDocument()
