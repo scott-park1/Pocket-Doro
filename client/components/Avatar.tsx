@@ -1,16 +1,16 @@
-import { SpriteAnimator } from 'react-sprite-animator'
+import { SpriteAnimator } from './sprites/SpriteAnimator'
 
-const walk = 'assets/CharacterSprites/characters/char1.png'
-const clothes = 'assets/CharacterSprites/separate/walk/clothes/dress_walk.png'
-const hair = 'assets/CharacterSprites/separate/walk/hair/spacebuns_walk.png'
+const walk = '/assets/CharacterSprites/characters/char1.png'
+const clothes = '/assets/CharacterSprites/separate/walk/clothes/dress_walk.png'
+const hair = '/assets/CharacterSprites/separate/walk/hair/spacebuns_walk.png'
 const earrings =
-  'assets/CharacterSprites/separate/walk/acc/earring_red_silver_walk.png'
-const shoes = 'assets/CharacterSprites/separate/walk/clothes/shoes_walk.png'
+  '/assets/CharacterSprites/separate/walk/acc/earring_red_silver_walk.png'
+const shoes = '/assets/CharacterSprites/separate/walk/clothes/shoes_walk.png'
 
 export default function Avatar() {
   const spriteWidth = 32
   const spriteHeight = 32
-  const scale = 1 / 5
+  const scale = 1 / 4
   const frameCount = 8 // rows
   const wrapAfter = 8 // columns
   const fps = 10 // speed

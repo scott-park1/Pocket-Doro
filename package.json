@@ -33,10 +33,12 @@
     "express": "^4.17.2",
     "knex": "^2.3.0",
     "react-circular-progressbar": "^2.1.0",
+    "react-ios-switch": "^0.1.19",
     "react-slider": "^2.0.6",
-    "react-sprite-animator": "^2.0.2",
     "sqlite3": "^5.1.2",
-    "superagent": "7.1.1"
+    "superagent": "7.1.1",
+    "prop-types": "^15.7.2",
+    "raf": "^3.2.0"
   },
   "devDependencies": {
     "@devacademy/eslint-config": "^1.8.0",
@@ -81,5 +83,11 @@
     "semi": false,
     "singleQuote": true
   },
-  "browserslist": "> 2%, not dead"
+  "browserslist": "> 2%, not dead",
+  "overrides": {
+    "react-sprite-animator": {
+      "react": "^18.2.0"
+    }
+  }
+  
 }

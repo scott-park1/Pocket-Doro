@@ -78,22 +78,25 @@ export default function Timer() {
 
   return (
     <>
-      <div> Completed work cycles: {completedCylces}</div>
-      <div> breaks skipped: {skippedBreaks}</div> <br />
-      {resting && (
-        <>
-          <div>Break time! New session starts in: </div>
-          <button onClick={skipBreak}> skip break </button>
-        </>
-      )}
-      <br />
-      <br />
-      <div className="timer-wrapper">
-        <div className="timer">
-          {timerMinutes}:{timerSeconds}
+      <div className="timeBubble">
+        {resting && (
+          <>
+            <div className="timertext">Break time! New session starts in: </div>
+            <button onClick={skipBreak} className="timertext">
+              Skip break
+            </button>
+          </>
+        )}
+        <div className="timer-wrapper">
+          <div className="timer">
+            {timerMinutes}:{timerSeconds}
+          </div>
+        </div>
+        <div className="timertext">
+          Completed work cycles: {completedCylces} <br />
+          Breaks skipped: {skippedBreaks}
         </div>
       </div>
-      <br />
     </>
   )
 }
