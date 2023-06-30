@@ -6,6 +6,12 @@ import Switch from 'react-ios-switch'
 
 function Start() {
   const [checked, setChecked] = useState(false)
+  const [skippedBreaks, setSkippedBreaks] = useState(0)
+
+  function onSkipBreak() {
+    setSkippedBreaks(skippedBreaks + 1)
+    //change emoticon
+  }
 
   const handleSwitchChange = (checked: any) => {
     setChecked(checked)
@@ -44,7 +50,7 @@ function Start() {
           <Avatar />
         </div>
         <Map checked={checked} />
-        <Timer />
+        <Timer skippedBreaks={skippedBreaks} onSkipBreak={onSkipBreak} />
       </div>
     </>
   )
