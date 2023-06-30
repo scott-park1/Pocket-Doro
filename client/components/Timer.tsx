@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import ReactSlider from 'react-slider'
 
 // const audioTune = new Audio('<YOUR_AUDIO_FILE_PATH.mp3>');
 
@@ -15,14 +16,33 @@ interface Props {
 export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
   const [minutes, setMinutes] = useState(25)
   const [seconds, setSeconds] = useState(0)
-  const [working, setWorking] = useState(false)
+  const [resting, setResting] = useState(false)
   const [completedCycles, setCompletedCycles] = useState(0)
-  const [isPaused, setIsPaused] = useState(false)
+  const [isPaused, setIsPaused] = useState(true)
+
+  // settings
+  /// change values for: working time, shortBreak, longBreak
+  ///
+
+  const [workingLength, setWorkingLength] = useState(24)
+  const [shortBreakLength, setShortBreakLength] = useState(4)
+  const [longBreakLength, setLongBreakLength] = useState(29)
+  const [showSettings, setShowSettings] = useState(false)
+
+  function settings() {
+    setWorkingLength(workingLength)
+    setShortBreakLength(shortBreakLength)
+    setLongBreakLength(longBreakLength)
+  }
+
+  function displaySettings() {
+    setShowSettings(!showSettings)
+  }
 
   const changeTimer = () => {
-    setWorking(!working)
+    setResting(!resting)
 
-    if (working) {
+    if (resting) {
       setMinutes(24)
       setSeconds(59)
       return
@@ -97,7 +117,8 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
       ) : (
         <button onClick={pauseTimer}>Pause</button>
       )}
-      {!working && (
+
+      {resting && (
         <>
           <div>Break time! New session starts in: </div>
           <button onClick={skipBreak}> skip break </button>
@@ -112,6 +133,30 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
       </div>
 
       <br />
+      <div>
+        <button onClick={displaySettings}>
+          {showSettings ? 'Close' : 'Settings'}
+        </button>
+        {showSettings && (
+          <>
+            <label>work minutes: {workingLength}:00</label>
+            <ReactSlider
+              value={workingLength}
+              min={1}
+              max={120}
+              onChange={(newValue) => setWorkingLength(newValue)}
+            />
+            <label>short break minutes: {shortBreakLength}:00</label>
+            <ReactSlider
+              value={shortBreakLength}
+              min={1}
+              max={120}
+              onChange={(newValue) => setShortBreakLength(newValue)}
+            />
+            <div></div>
+          </>
+        )}
+      </div>
     </>
   )
 }
