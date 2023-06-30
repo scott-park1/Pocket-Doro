@@ -19,6 +19,5 @@ describe('<Timer>', () => {
       },
       { timeout: 3000 }
     )
-    screen.debug()
   })
 })

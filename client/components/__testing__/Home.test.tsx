@@ -4,8 +4,6 @@ import { screen } from '@testing-library/react'
 
 import { renderRoute } from '../../test-utils'
 
-// import Home from '../Home'
-
 describe('<Home />', () => {
   it.todo('renders the title Pocket-Doro', () => {
     renderRoute('/')
