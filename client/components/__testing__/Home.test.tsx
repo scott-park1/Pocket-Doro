@@ -11,5 +11,7 @@ describe('<Home />', () => {
 
   it('displays a startlink that has the text start', () => {
     renderRoute('/start')
+
+    const startLink = screen.getByText(/start/i)
   })
 })
