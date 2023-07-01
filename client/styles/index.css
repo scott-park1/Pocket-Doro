@@ -92,7 +92,7 @@ body {
   right: 50px;
   width: 50%;
   height: 30%;
-  background-color: #FFCF5E;
+ 
   border-radius: 20px 20px 0 0;
 }
 .timer{
@@ -171,17 +171,90 @@ body {
 .settings-wrapper{
   margin: 5px;
   padding: 20px;
-  font-family: 'Source Code Pro', monospace;
-  font-weight: 900;
+  
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 30px;
+  top: 450px;
   left: 75px;
   width: 500px;
-  height: 20%;
-  background-color: #FFCF5E;
+  height: 50%;
+  background-color: #b5b5ff;
+  
   border-radius: 20px ;
 }
+
+.settings-headers{
+  font-family: 'Source Code Pro', monospace;
+  font-weight: 900;
+  font-size: x-large;
+}
+
+.settings-values{
+  font-family: 'Source Code Pro', monospace;
+  font-weight: 900;
+  font-size: medium;
+}
+
+/* settings range slider styling */
+
+    .slider {
+      /* removing default appearance */
+      -webkit-appearance: none;
+      appearance: none; 
+      /* creating a custom design */
+      width: 100%;
+      cursor: grab;
+      outline: none;
+      /*  slider progress trick  */
+      overflow: hidden;
+      border-radius: 16px;
+
+    }
+    .slider:active{
+      cursor: grabbing;
+    }
+    
+    /* Track: webkit browsers */
+    .slider::-webkit-slider-runnable-track {
+      height: 15px;
+      background: #ccc;
+      border-radius: 16px;
+    }
+    
+    /* Track: Mozilla Firefox */
+    .slider::-moz-range-track {
+      height: 15px;
+      background: #ccc;
+      border-radius: 16px;
+    }
+    
+    /* Thumb: webkit */
+    .slider::-webkit-slider-thumb {
+      /* removing default appearance */
+      -webkit-appearance: none;
+      appearance: none; 
+      /* creating a custom design */
+      height: 15px;
+      width: 15px;
+      background-color: #fff;
+      border-radius: 50%;
+      border: 2px solid #FF5E8F;
+      /*  slider progress trick  */
+      box-shadow: -407px 0 0 400px #FF5E8F;
+    }
+    
+    
+    /* Thumb: Firefox */
+    .slider::-moz-range-thumb {
+      height: 15px;
+      width: 15px;
+      background-color: #fff;
+      border-radius: 50%;
+      border: 1px solid #f50;
+      /*  slider progress trick  */
+      box-shadow: -407px 0 0 400px #f50;
+    }
+    

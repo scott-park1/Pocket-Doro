@@ -1,7 +1,7 @@
 import { useState, useEffect, ChangeEvent } from 'react'
 // add import for play/pause icons
 
-const alarmTone = new Audio('../../public/alarm.mp3')
+const alarmTone = new Audio('/alarm.mp3')
 
 const playSound = () => {
   alarmTone.play()
@@ -19,14 +19,11 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
   const [completedIntervals, setCompletedIntervals] = useState(0)
   const [isPaused, setIsPaused] = useState(true)
 
-  // settings
-  /// change values for: working time, shortBreak, longBreak
-  ///
-
   const [workingLength, setWorkingLength] = useState(24)
   const [shortBreakLength, setShortBreakLength] = useState(4)
   const [longBreakLength, setLongBreakLength] = useState(29)
   const [showSettings, setShowSettings] = useState(false)
+  const [workingTime, setworkingTime] = useState(0)
 
   function handleWorkingMinutesChange(e: ChangeEvent<HTMLInputElement>) {
     const value = e.target.value
@@ -50,6 +47,8 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
   const changeTimer = () => {
     setResting(!resting)
     playSound()
+
+    // something weird with boolean here
 
     if (resting) {
       setMinutes(workingLength)
@@ -100,12 +99,14 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
           setSeconds(seconds - 1)
         }
       }
+      // does not consider breaks
+      setworkingTime(workingTime + 1)
     }, 1000)
 
     return () => {
       clearInterval(interval)
     }
-  }, [seconds, changeTimer, completedIntervals, minutes])
+  }, [seconds, changeTimer, completedIntervals, minutes, workingTime])
 
   function skipBreak() {
     changeTimer()
@@ -119,8 +120,20 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
   const timerMinutes = minutes < 10 ? `0${minutes}` : minutes
   const timerSeconds = seconds < 10 ? `0${seconds}` : seconds
 
+  const workingMinutes = Math.floor(workingTime / 60)
+  const workingHours = Math.floor(workingMinutes / 60)
+  const timeSpentWorking =
+    workingMinutes < 10
+      ? `${workingHours}:0${workingMinutes}`
+      : `${workingHours}:${workingMinutes}`
+
   return (
     <>
+      <div>
+        Time spent working
+        <br />
+        {timeSpentWorking}
+      </div>
       {resting && (
         <>
           <div className="break-message">
@@ -160,50 +173,77 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
         {showSettings && (
           <>
             <div className="settings-wrapper">
-              <label htmlFor="short-break-settings">
-                Interval Length: {workingLength + 1} minutes
-              </label>
+              <div>
+                <label
+                  className="settings-headers"
+                  htmlFor="short-break-settings"
+                >
+                  Interval:
+                </label>
+                <input
+                  className="slider"
+                  type="range"
+                  id="working-minutes-settings"
+                  name="working-minutes"
+                  min="0"
+                  max="120"
+                  defaultValue={workingLength}
+                  step="5"
+                  onChange={handleWorkingMinutesChange}
+                ></input>
+                <br />
+                <div className="settings-values">
+                  {workingLength + 1} minutes
+                </div>
+              </div>
               <br />
-              <input
-                type="range"
-                id="working-minutes-settings"
-                name="working-minutes"
-                min="0"
-                max="120"
-                defaultValue={workingLength}
-                step="5"
-                onChange={handleWorkingMinutesChange}
-              ></input>
-
-              <label htmlFor="short-break-settings">
-                Short Break Length: {shortBreakLength + 1} minutes
-              </label>
+              <div>
+                <label
+                  className="settings-headers"
+                  htmlFor="short-break-settings"
+                >
+                  Short Break:
+                </label>
+                <input
+                  className="slider"
+                  type="range"
+                  id="short-break-settings"
+                  name="short-break"
+                  min="0"
+                  max="30"
+                  defaultValue={shortBreakLength}
+                  step="5"
+                  onChange={handleShortBreakChange}
+                ></input>
+                <br />
+                <div className="settings-values">
+                  {shortBreakLength + 1} minutes
+                </div>
+              </div>
               <br />
-              <input
-                type="range"
-                id="short-break-settings"
-                name="short-break"
-                min="0"
-                max="30"
-                defaultValue={shortBreakLength}
-                step="5"
-                onChange={handleShortBreakChange}
-              ></input>
-
-              <label htmlFor="long-break-settings">
-                Long Break Length: {longBreakLength + 1} minutes
-              </label>
-              <br />
-              <input
-                type="range"
-                id="long-break-settings"
-                name="long-break"
-                min="0"
-                max="120"
-                defaultValue={longBreakLength}
-                step="5"
-                onChange={handleLongBreakChange}
-              ></input>
+              <div>
+                <label
+                  className="settings-headers"
+                  htmlFor="long-break-settings"
+                >
+                  Long Break:
+                </label>
+                <input
+                  className="slider"
+                  type="range"
+                  id="long-break-settings"
+                  name="long-break"
+                  min="0"
+                  max="120"
+                  defaultValue={longBreakLength}
+                  step="5"
+                  onChange={handleLongBreakChange}
+                ></input>
+                <br />
+                <div className="settings-values">
+                  {longBreakLength + 1} minutes
+                </div>
+              </div>
             </div>
           </>
         )}
