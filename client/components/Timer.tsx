@@ -32,7 +32,7 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
   function handleWorkingMinutesChange(e: ChangeEvent<HTMLInputElement>) {
     const value = e.target.value
     setWorkingLength(parseInt(value) - 1)
-    changeTimer()
+    // needs to reset the timer. at the moment it will only use value for the next interval
   }
   function handleLongBreakChange(e: ChangeEvent<HTMLInputElement>) {
     const value = e.target.value
@@ -121,37 +121,47 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
 
   return (
     <>
-      {!showSettings &&
-        (isPaused ? (
-          <button onClick={pauseTimer}>Start </button>
-        ) : (
-          <button onClick={pauseTimer}>Stop</button>
-        ))}
-
       {resting && (
         <>
-          <div>Break time! New session starts in: </div>
-          <button onClick={skipBreak}> skip break </button>
+          <div className="break-message">
+            Break time! New session starts in:
+          </div>
+          <button className="timer-button" onClick={skipBreak}>
+            {' '}
+            skip break{' '}
+          </button>
         </>
       )}
       <br />
       <br />
-      <div className="timer-wrapper">
+      <div className="timer-digits">
         <div className="timer">
           {timerMinutes}:{timerSeconds}
         </div>
       </div>
 
       <br />
-      <div>
-        <button onClick={displaySettings}>
+      <div className="timer-buttons-wrapper">
+        {!showSettings &&
+          (isPaused ? (
+            <button className="timer-button" onClick={pauseTimer}>
+              Start{' '}
+            </button>
+          ) : (
+            <button className="timer-button" onClick={pauseTimer}>
+              Stop
+            </button>
+          ))}
+        <button className="timer-button" onClick={displaySettings}>
           {showSettings ? 'Close' : 'Settings'}
         </button>
+      </div>
+      <div>
         {showSettings && (
           <>
-            <div>
+            <div className="settings-wrapper">
               <label htmlFor="short-break-settings">
-                Interval Length: {workingLength + 1}
+                Interval Length: {workingLength + 1} minutes
               </label>
               <br />
               <input
@@ -164,10 +174,9 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
                 step="5"
                 onChange={handleWorkingMinutesChange}
               ></input>
-            </div>
-            <div>
+
               <label htmlFor="short-break-settings">
-                Short Break Length: {shortBreakLength + 1}
+                Short Break Length: {shortBreakLength + 1} minutes
               </label>
               <br />
               <input
@@ -180,10 +189,9 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
                 step="5"
                 onChange={handleShortBreakChange}
               ></input>
-            </div>
-            <div>
+
               <label htmlFor="long-break-settings">
-                Long Break Length: {shortBreakLength + 1}
+                Long Break Length: {longBreakLength + 1} minutes
               </label>
               <br />
               <input
@@ -199,7 +207,6 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
             </div>
           </>
         )}
-        <br />
       </div>
     </>
   )

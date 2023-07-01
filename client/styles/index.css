@@ -80,7 +80,7 @@ body {
   position: absolute;
 }
 
-.timer-wrapper {
+.timer-digits {
   font-family: 'Source Code Pro', monospace;
   font-weight: 900;
   display: flex;
@@ -111,4 +111,77 @@ body {
   width: 400px;
   margin: 0 auto;
   font-size: 100px;
+}
+
+.timer-buttons-wrapper{
+  margin: 5px;
+  padding: 20px;
+  font-family: 'Source Code Pro', monospace;
+  font-weight: 900;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 325px;
+  left: 25px;
+  width: 500px;
+  height: 5%;
+  
+  
+}
+
+.timer-button{
+  background-color: #fbeee0;
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 4px 4px 0 0;
+  color: #422800;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.timer-button:hover {
+  background-color: #fff;
+}
+
+.timer-button:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  .timer-button {
+    min-width: 120px;
+    padding: 0 25px;
+  }
+}
+
+
+.settings-wrapper{
+  margin: 5px;
+  padding: 20px;
+  font-family: 'Source Code Pro', monospace;
+  font-weight: 900;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 30px;
+  left: 75px;
+  width: 500px;
+  height: 20%;
+  background-color: #FFCF5E;
+  border-radius: 20px ;
 }
