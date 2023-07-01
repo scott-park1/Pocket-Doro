@@ -1,6 +1,5 @@
-import { useState, useEffect, ChangeEventHandler, ChangeEvent } from 'react'
-import RangeSlider from 'react-range-slider-input'
-import ReactSlider from 'react-slider'
+import { useState, useEffect, ChangeEvent } from 'react'
+// add import for play/pause icons
 
 // const audioTune = new Audio('<YOUR_AUDIO_FILE_PATH.mp3>');
 
@@ -18,7 +17,7 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
   const [minutes, setMinutes] = useState(25)
   const [seconds, setSeconds] = useState(0)
   const [resting, setResting] = useState(false)
-  const [completedCycles, setCompletedCycles] = useState(0)
+  const [completedIntervals, setCompletedIntervals] = useState(0)
   const [isPaused, setIsPaused] = useState(true)
 
   // settings
@@ -33,6 +32,7 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
   function handleWorkingMinutesChange(e: ChangeEvent<HTMLInputElement>) {
     const value = e.target.value
     setWorkingLength(parseInt(value) - 1)
+    changeTimer()
   }
   function handleLongBreakChange(e: ChangeEvent<HTMLInputElement>) {
     const value = e.target.value
@@ -44,6 +44,7 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
   }
 
   function displaySettings() {
+    setIsPaused(true)
     setShowSettings(!showSettings)
   }
 
@@ -51,18 +52,18 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
     setResting(!resting)
 
     if (resting) {
-      setMinutes(24)
+      setMinutes(workingLength)
       setSeconds(59)
       return
     }
 
-    if (completedCycles > 2) {
-      setMinutes(29)
+    if (completedIntervals > 2) {
+      setMinutes(longBreakLength)
       setSeconds(59)
       return
     }
 
-    setMinutes(4)
+    setMinutes(shortBreakLength)
     setSeconds(59)
   }
 
@@ -72,28 +73,28 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
         return
       }
 
-      if (completedCycles <= 2) {
+      if (completedIntervals <= 2) {
         if (seconds === 0) {
           if (minutes !== 0) {
             setSeconds(59)
             setMinutes(minutes - 1)
           } else {
             changeTimer()
-            setCompletedCycles(completedCycles + 1)
+            setCompletedIntervals(completedIntervals + 1)
           }
         } else {
           setSeconds(seconds - 1)
         }
       }
 
-      if (completedCycles > 2) {
+      if (completedIntervals > 2) {
         if (seconds === 0) {
           if (minutes !== 0) {
             setSeconds(59)
             setMinutes(minutes - 1)
           } else {
             changeTimer()
-            setCompletedCycles(0)
+            setCompletedIntervals(0)
           }
         } else {
           setSeconds(seconds - 1)
@@ -104,7 +105,7 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
     return () => {
       clearInterval(interval)
     }
-  }, [seconds, changeTimer, completedCycles, minutes])
+  }, [seconds, changeTimer, completedIntervals, minutes])
 
   function skipBreak() {
     changeTimer()
@@ -120,11 +121,12 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
 
   return (
     <>
-      {isPaused ? (
-        <button onClick={pauseTimer}>Play</button>
-      ) : (
-        <button onClick={pauseTimer}>Pause</button>
-      )}
+      {!showSettings &&
+        (isPaused ? (
+          <button onClick={pauseTimer}>Start </button>
+        ) : (
+          <button onClick={pauseTimer}>Stop</button>
+        ))}
 
       {resting && (
         <>
@@ -145,10 +147,13 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
         <button onClick={displaySettings}>
           {showSettings ? 'Close' : 'Settings'}
         </button>
-        <br />
         {showSettings && (
           <>
             <div>
+              <label htmlFor="short-break-settings">
+                Interval Length: {workingLength + 1}
+              </label>
+              <br />
               <input
                 type="range"
                 id="working-minutes-settings"
@@ -159,11 +164,12 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
                 step="5"
                 onChange={handleWorkingMinutesChange}
               ></input>
-              <label htmlFor="short-break-settings">
-                Working Length {workingLength + 1} minutes
-              </label>
             </div>
             <div>
+              <label htmlFor="short-break-settings">
+                Short Break Length: {shortBreakLength + 1}
+              </label>
+              <br />
               <input
                 type="range"
                 id="short-break-settings"
@@ -174,11 +180,12 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
                 step="5"
                 onChange={handleShortBreakChange}
               ></input>
-              <label htmlFor="short-break-settings">
-                Short Break {shortBreakLength + 1} minutes
-              </label>
             </div>
             <div>
+              <label htmlFor="long-break-settings">
+                Long Break Length: {shortBreakLength + 1}
+              </label>
+              <br />
               <input
                 type="range"
                 id="long-break-settings"
@@ -189,13 +196,10 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
                 step="5"
                 onChange={handleLongBreakChange}
               ></input>
-              <label htmlFor="long-break-settings">
-                Long Break {longBreakLength + 1} minutes
-              </label>
             </div>
-            <div></div>
           </>
         )}
+        <br />
       </div>
     </>
   )
