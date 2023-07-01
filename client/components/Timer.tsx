@@ -1,12 +1,11 @@
 import { useState, useEffect, ChangeEvent } from 'react'
 // add import for play/pause icons
 
-// const audioTune = new Audio('<YOUR_AUDIO_FILE_PATH.mp3>');
+const alarmTone = new Audio('../../public/alarm.mp3')
 
-// // play audio sound
-// const playSound = () => {
-//   audioTune.play();
-// }
+const playSound = () => {
+  alarmTone.play()
+}
 
 interface Props {
   skippedBreaks: number
@@ -50,6 +49,7 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
 
   const changeTimer = () => {
     setResting(!resting)
+    playSound()
 
     if (resting) {
       setMinutes(workingLength)
