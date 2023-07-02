@@ -11,6 +11,7 @@ function Home() {
         <Link to="/start" className="startlink">
           START
         </Link>
+
         <Emoticon />
       </div>
       <Footer />
