@@ -111,6 +111,7 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
   function skipBreak() {
     changeTimer()
     onSkipBreak()
+    setSkippingBreak(true)
   }
 
   function pauseTimer() {
@@ -134,25 +135,6 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
         <br />
         {timeSpentWorking}
       </div>
-      {resting && (
-        <>
-          <div className="break-message">
-            Break time! New session starts in:
-          </div>
-          <button className="timer-button" onClick={skipBreak}>
-            {' '}
-            skip break{' '}
-          </button>
-        </>
-      )}
-      <br />
-      <br />
-      <div className="timer-digits">
-        <div className="timer">
-          {timerMinutes}:{timerSeconds}
-        </div>
-      </div>
-
       <br />
       <div className="timer-buttons-wrapper">
         {!showSettings &&
@@ -244,6 +226,42 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
                   {longBreakLength + 1} minutes
                 </div>
               </div>
+            </div>
+          </>
+        )}
+      </div>
+      {isPaused ? (
+        <button onClick={pauseTimer}>Play</button>
+      ) : (
+        <button onClick={pauseTimer}>Pause</button>
+      )}
+      <div className="timeBubble">
+        {resting ? (
+          <>
+            <div className="break">Break time! New session starts in: </div>
+            <div className="timer-wrapper">
+              <div className="timersecond">
+                {timerMinutes}:{timerSeconds}
+              </div>
+            </div>
+            <button onClick={skipBreak} className="skipbutton">
+              Skip break
+            </button>
+            <div className="timertextbreak">
+              Completed work cycles: {completedCycles} <br />
+              Breaks skipped: {skippedBreaks}
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="timer-wrapper">
+              <div className="timerfirst">
+                {timerMinutes}:{timerSeconds}
+              </div>
+            </div>
+            <div className="timertext">
+              Completed work cycles: {completedCycles} <br />
+              Breaks skipped: {skippedBreaks}
             </div>
           </>
         )}
