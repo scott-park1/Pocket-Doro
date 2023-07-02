@@ -23,16 +23,15 @@ body {
   position: absolute;
 }
 
-/* .charComp {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 300px;
-  width: 300px;
-  margin: 0;
-  border: 5px solid black;
-} */
+.content {
+  position: relative;
+}
 
+.avatar-overlay {
+  position: absolute;
+  top: 10px;
+  right: 50px;
+}
 
 .title {
   font-family: 'Cherry Bomb One', cursive;
@@ -47,33 +46,35 @@ body {
 }
 
 .startlink {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    background-color: rgb(109, 193, 45);
-    border: 3px solid black;
-    border-radius: 12px;
-    color: black;
-    padding: 10px 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 50px;
-    font-family: 'Baloo 2', cursive;
-  }
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: rgb(109, 193, 45);
+  border: 3px solid black;
+  border-radius: 12px;
+  color: black;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 50px;
+  font-family: 'Baloo 2', cursive;
+}
 
-  h2 {
-    font-family: 'Baloo 2', cursive;
-    font-size: 40px;
-  }
+h2 {
+  font-family: 'Baloo 2', cursive;
+  font-size: 40px;
+  color: rgb(242, 71, 71);
+}
 
-  .footer {
-    font-family: 'Baloo 2', cursive;
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-  }
+.footer {
+  font-family: 'Baloo 2', cursive;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  color: rgb(242, 71, 71);
+}
 
 .clothes {
   z-index: 3;
@@ -87,20 +88,13 @@ body {
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 150px;
-  left: 50px;
-  right: 50px;
-  width: 50%;
-  height: 30%;
-  background-color: #FFCF5E;
-  border-radius: 20px 20px 0 0;
 }
-.timer{
+
+.timerfirst{
   position: absolute;
   top: 30px;
   left: 100px;
   right: 30px;
-  width: 100%;
   box-shadow: 0px 50px 0px 80px #FF5E8F;
   border-style: none none solid;
   border-radius: 40px 40px 0 0;
@@ -108,7 +102,437 @@ body {
   color: #ff7e5e;
   display: flex;
   justify-content: center;
-  width: 400px;
-  margin: 0 auto;
-  font-size: 100px;
+  width: 200px;
+  font-size: 50px;
+  margin-top: 50px;
+}
+
+.timersecond{
+  position: absolute;
+  top: 30px;
+  left: 100px;
+  right: 30px;
+  box-shadow: 0px 50px 0px 80px #FF5E8F;
+  border-style: none none solid;
+  border-radius: 40px 40px 0 0;
+  overflow: hidden;
+  color: #ff7e5e;
+  display: flex;
+  justify-content: center;
+  width: 200px;
+  font-size: 50px;
+  margin-top: 20px;
+}
+
+.timertext {
+  font-family: 'Baloo 2', cursive;
+  color: rgb(242, 71, 71);
+  text-align: center;
+  margin-top: 300px;
+  margin-left: 110px;
+}
+
+.timertextbreak {
+  font-family: 'Baloo 2', cursive;
+  color: rgb(242, 71, 71);
+  text-align: center;
+  margin-top: 30px;
+  margin-left: 80px;
+}
+
+.break {
+  font-family: 'Baloo 2', cursive;
+  color: rgb(242, 71, 71);
+  text-align: left;
+  margin-top: 50px;
+  margin-left: 80px;
+}
+
+.skipbutton {
+  font-family: 'Baloo 2', cursive;
+  color: rgb(242, 71, 71);
+  text-align: left;
+  margin-top: 280px;
+  margin-left: 80px;
+  border-radius: 10px;
+  border: 2px solid rgb(242, 71, 71);
+}
+
+.timeBubble {
+  position: absolute;
+  top: 0;
+}
+
+.map {
+  margin-top: 150px;
+  max-width: 40%;
+}
+
+@media (min-width: 0px) and (max-width: 480px) {
+  .title {
+    font-size: 50px;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    text-shadow:
+    -2px -2px 0 #000,
+    2px -2px 0 #000,
+    -2px 2px 0 #000,
+    2px 2px 0 #000;
+  }
+
+  h2 {
+    font-size: 25px;
+  }
+  
+  .startlink {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 2px solid black;
+    border-radius: 12px;
+    padding: 10px 10px;
+    font-size: 20px;
+  }
+  
+  .footer {
+    font-size: 10px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    margin-top: 50px;
+  }
+
+  .map {
+    margin-top: 600px;
+    max-width: 480px;
+    width: 80%;
+  }
+
+  .avatar-overlay {
+    top: 410px;
+    right: 20px;
+  }
+  
+  .timerfirst{
+    box-shadow: 0px 50px 0px 80px #FF5E8F;
+    border-style: none none solid;
+    border-radius: 40px 40px 0 0;
+    overflow: hidden;
+    font-size: 50px;
+    margin-top: 50px;
+    margin-left: 33px;
+  }
+  
+  .timersecond{
+    box-shadow: 0px 50px 0px 80px #FF5E8F;
+    border-style: none none solid;
+    border-radius: 40px 40px 0 0;
+    overflow: hidden;
+    font-size: 50px;
+    margin-left: 33px;
+  }
+  
+  .timertext {
+    margin: 300px 0px 50px 145px;
+  }
+  
+  .timertextbreak {
+    margin-left: 110px;
+  }
+  
+  .break {
+    margin-left: 110px;
+  }
+  
+  .skipbutton {
+    margin-left: 110px;
+    border-radius: 10px;
+    border: 2px solid rgb(242, 71, 71);
+  }
+  
+  .timeBubble {
+    margin: 100px auto 10px auto;
+  }
+
+  .content {
+    margin-bottom: 50px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 720px) {
+  .title {
+    font-size: 80px;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    text-shadow:
+    -3px -3px 0 #000,
+    3px -3px 0 #000,
+    -3px 3px 0 #000,
+    3px 3px 0 #000;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+  
+  .startlink {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 2px solid black;
+    border-radius: 12px;
+    padding: 10px 10px;
+    font-size: 25px;
+  }
+  
+  .footer {
+    font-size: 15px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    margin-top: 50px;
+    margin-bottom: 15px;
+  }
+
+  .map {
+    margin-top: 600px;
+    max-width: 720px;
+    width: 80%;
+  }
+
+  .avatar-overlay {
+    top: 500px;
+    right: 40px;
+  }
+  
+  .timerfirst{
+    box-shadow: 0px 50px 0px 80px #FF5E8F;
+    border-style: none none solid;
+    border-radius: 40px 40px 0 0;
+    overflow: hidden;
+    font-size: 50px;
+    margin-top: 50px;
+    margin-left: 150px;
+  }
+  
+  .timersecond{
+    box-shadow: 0px 50px 0px 80px #FF5E8F;
+    border-style: none none solid;
+    border-radius: 40px 40px 0 0;
+    overflow: hidden;
+    font-size: 50px;
+    margin-left: 150px;
+  }
+  
+  .timertext {
+    margin: 300px 0px 50px 260px;
+  }
+  
+  .timertextbreak {
+    margin-left: 230px;
+  }
+  
+  .break {
+    margin-left: 230px;
+  }
+  
+  .skipbutton {
+    margin-left: 225px;
+    border-radius: 10px;
+    border: 2px solid rgb(242, 71, 71);
+  }
+  
+  .timeBubble {
+    margin: 100px auto 10px auto;
+  }
+
+  .content {
+    margin-bottom: 50px;
+  }
+}
+
+@media (min-width: 721px) and (max-width: 1024px) {
+  .title {
+    font-size: 120px;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    text-shadow:
+    -4px -4px 0 #000,
+    4px -4px 0 #000,
+    -4px 4px 0 #000,
+    4px 4px 0 #000;
+  }
+
+  h2 {
+    font-size: 40px;
+  }
+  
+  .startlink {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 3px solid black;
+    border-radius: 12px;
+    padding: 10px 10px;
+    font-size: 30px;
+  }
+  
+  .footer {
+    font-size: 20px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    margin-top: 50px;
+    margin-bottom: 30px;
+  }
+
+  .map {
+    margin-top: 700px;
+    max-width: 1024px;
+    width: 80%;
+  }
+
+  .avatar-overlay {
+    top: 710px;
+    right: 60px;
+  }
+  
+  .timerfirst{
+    box-shadow: 0px 50px 0px 80px #FF5E8F;
+    border-style: none none solid;
+    border-radius: 40px 40px 0 0;
+    overflow: hidden;
+    font-size: 50px;
+    margin-top: 50px;
+    margin-left: 290px;
+  }
+  
+  .timersecond{
+    box-shadow: 0px 50px 0px 80px #FF5E8F;
+    border-style: none none solid;
+    border-radius: 40px 40px 0 0;
+    overflow: hidden;
+    font-size: 50px;
+    margin-left: 290px;
+  }
+  
+  .timertext {
+    font-size: 20px;
+    margin: 300px 0px 50px 380px;
+  }
+  
+  .timertextbreak {
+    font-size: 20px;
+    margin-left: 340px;
+  }
+  
+  .break {
+    font-size: 20px;
+    margin-left: 340px;
+  }
+  
+  .skipbutton {
+    font-size: 20px;
+    margin-left: 330px;
+    border-radius: 10px;
+    border: 2px solid rgb(242, 71, 71);
+  }
+  
+  .timeBubble {
+    margin: 100px auto 10px auto;
+  }
+
+  .content {
+    margin-bottom: 50px;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .title {
+    font-size: 180px;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    text-shadow:
+    -4px -4px 0 #000,
+    4px -4px 0 #000,
+    -4px 4px 0 #000,
+    4px 4px 0 #000;
+  }
+
+  h2 {
+    font-size: 40px;
+  }
+  
+  .startlink {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 3px solid black;
+    border-radius: 12px;
+    padding: 10px 10px;
+    font-size: 50px;
+  }
+  
+  .footer {
+    font-size: 20px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: -10px;
+  }
+  
+  .map {
+    margin-top: 180px;
+    max-width: 1440px;
+    width: 40%;
+  }
+
+  .avatar-overlay {
+    top: 50px;
+    right: 40px;
+  }
+  
+  .timerfirst{
+    box-shadow: 0px 50px 0px 80px #FF5E8F;
+    border-style: none none solid;
+    border-radius: 40px 40px 0 0;
+    overflow: hidden;
+    font-size: 50px;
+    margin-top: 50px;
+  }
+  
+  .timersecond{
+    box-shadow: 0px 50px 0px 80px #FF5E8F;
+    border-style: none none solid;
+    border-radius: 40px 40px 0 0;
+    overflow: hidden;
+    font-size: 50px;
+    margin-top: 20px;
+  }
+  
+  .timertext {
+    margin-top: 300px;
+    margin-left: 110px;
+  }
+  
+  .timertextbreak {
+    margin-top: 30px;
+    margin-left: 80px;
+  }
+  
+  .break {
+    margin-top: 50px;
+    margin-left: 80px;
+  }
+  
+  .skipbutton {
+    margin-top: 280px;
+    margin-left: 80px;
+    border-radius: 10px;
+    border: 2px solid rgb(242, 71, 71);
+  }
+  
+  .timeBubble {
+    top: 0;
+  }
 }

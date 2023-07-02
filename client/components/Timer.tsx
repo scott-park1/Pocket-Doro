@@ -18,6 +18,10 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
   const [working, setWorking] = useState(false)
   const [completedCycles, setCompletedCycles] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
+  const [skippingBreak, setSkippingBreak] = useState(false)
+
+  // !resting use minutes working
+  // resting use resting minutes
 
   const changeTimer = () => {
     setWorking(!working)
@@ -81,6 +85,7 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
   function skipBreak() {
     changeTimer()
     onSkipBreak()
+    setSkippingBreak(true)
   }
 
   function pauseTimer() {
@@ -97,21 +102,37 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
       ) : (
         <button onClick={pauseTimer}>Pause</button>
       )}
-      {!working && (
-        <>
-          <div>Break time! New session starts in: </div>
-          <button onClick={skipBreak}> skip break </button>
-        </>
-      )}
-      <br />
-      <br />
-      <div className="timer-wrapper">
-        <div className="timer">
-          {timerMinutes}:{timerSeconds}
-        </div>
+      <div className="timeBubble">
+        {resting ? (
+          <>
+            <div className="break">Break time! New session starts in: </div>
+            <div className="timer-wrapper">
+              <div className="timersecond">
+                {timerMinutes}:{timerSeconds}
+              </div>
+            </div>
+            <button onClick={skipBreak} className="skipbutton">
+              Skip break
+            </button>
+            <div className="timertextbreak">
+              Completed work cycles: {completedCycles} <br />
+              Breaks skipped: {skippedBreaks}
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="timer-wrapper">
+              <div className="timerfirst">
+                {timerMinutes}:{timerSeconds}
+              </div>
+            </div>
+            <div className="timertext">
+              Completed work cycles: {completedCycles} <br />
+              Breaks skipped: {skippedBreaks}
+            </div>
+          </>
+        )}
       </div>
-
-      <br />
     </>
   )
 }
