@@ -227,6 +227,10 @@ h2 {
   cursor: grabbing;
 }
 
+.slider:active {
+  cursor: grabbing;
+}
+
 /* Track: webkit browsers */
 .slider::-webkit-slider-runnable-track {
   height: 15px;
