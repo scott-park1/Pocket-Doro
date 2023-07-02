@@ -15,17 +15,18 @@ interface Props {
 export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
   const [minutes, setMinutes] = useState(25)
   const [seconds, setSeconds] = useState(0)
-  const [resting, setResting] = useState(false)
+  const [working, setWorking] = useState(false)
   const [completedCycles, setCompletedCycles] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
   const [skippingBreak, setSkippingBreak] = useState(false)
 
   // !resting use minutes working
   // resting use resting minutes
 
   const changeTimer = () => {
-    setResting(!resting)
+    setWorking(!working)
 
-    if (resting) {
+    if (working) {
       setMinutes(24)
       setSeconds(59)
       return
@@ -41,11 +42,11 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
     setSeconds(59)
   }
 
-  // useEffectEvent
   useEffect(() => {
     const interval = setInterval(() => {
-      // if number of cycles <= 2 short break.
-      // if number of cycles > 2 long break, number of cycles = 0
+      if (isPaused) {
+        return
+      }
 
       if (completedCycles <= 2) {
         if (seconds === 0) {
@@ -81,16 +82,14 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
     }
   }, [seconds, changeTimer, completedCycles, minutes])
 
-  // if resting === true
-  // skip break
-  //// resting = false
-  //// set num of breaks skipped
-  //// timer goes to next work cycle
-
   function skipBreak() {
     changeTimer()
     onSkipBreak()
     setSkippingBreak(true)
+  }
+
+  function pauseTimer() {
+    setIsPaused(!isPaused)
   }
 
   const timerMinutes = minutes < 10 ? `0${minutes}` : minutes
@@ -98,6 +97,11 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
 
   return (
     <>
+      {isPaused ? (
+        <button onClick={pauseTimer}>Play</button>
+      ) : (
+        <button onClick={pauseTimer}>Pause</button>
+      )}
       <div className="timeBubble">
         {resting ? (
           <>
