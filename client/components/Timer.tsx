@@ -248,7 +248,7 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
               Skip break
             </button>
             <div className="timertextbreak">
-              Completed work cycles: {completedCycles} <br />
+              Completed work cycles: {completedIntervals} <br />
               Breaks skipped: {skippedBreaks}
             </div>
           </>
@@ -260,7 +260,7 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
               </div>
             </div>
             <div className="timertext">
-              Completed work cycles: {completedCycles} <br />
+              Completed work cycles: {completedIntervals} <br />
               Breaks skipped: {skippedBreaks}
             </div>
           </>

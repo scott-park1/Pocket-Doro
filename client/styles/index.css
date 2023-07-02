@@ -274,10 +274,6 @@ h2 {
       /*  slider progress trick  */
       box-shadow: -407px 0 0 400px #f50;
     }
-  width: 200px;
-  font-size: 50px;
-  margin-top: 20px;
-}
 
 .timertext {
   font-family: 'Baloo 2', cursive;

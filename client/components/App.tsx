@@ -4,7 +4,7 @@ function App() {
   return (
     <>
       <section className="main">
-        <Timer skippedBreaks={skippedBreaks} onSkipBreak={onSkipBreak} />
+        {/* <Timer skippedBreaks={skippedBreaks} onSkipBreak={onSkipBreak} /> */}
         <Outlet />
       </section>
     </>
