@@ -1,5 +1,5 @@
 import React from 'react'
-import { SpriteAnimator } from 'react-sprite-animator'
+import { SpriteAnimator } from './sprites/SpriteAnimator'
 
 const emoticonSheet = 'assets/CharacterSprites/emoticons.png'
 
@@ -10,15 +10,6 @@ export default function Emoticon() {
   const frameCount = 6 // rows
   const wrapAfter = 5 // columns
   const fps = 0 // speed
-
-  // get frame positions:
-  // let tired = framePos(0,0)
-  // let happy = framePos(0,3)
-  // let veryTired = framePos(2,3)
-  // let veryVeryTired = framePos(x,y)
-
-  // array of emoticonCycle
-  // const emoticonCycle [happy, tired, veryTired, veryVeryTired]
 
   return (
     <div className="emoticonSheet" style={{ imageRendering: 'pixelated' }}>
