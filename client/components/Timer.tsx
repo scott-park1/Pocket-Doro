@@ -111,7 +111,7 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
   function skipBreak() {
     changeTimer()
     onSkipBreak()
-    setSkippingBreak(true)
+    // setSkippingBreak(true)
   }
 
   function pauseTimer() {

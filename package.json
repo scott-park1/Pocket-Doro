@@ -83,11 +83,7 @@
     "semi": false,
     "singleQuote": true
   },
-  "browserslist": "> 2%, not dead",
-  "overrides": {
-    "react-sprite-animator": {
-      "react": "^18.2.0"
-    }
-  }
+  "browserslist": "> 2%, not dead"
+  
   
 }
