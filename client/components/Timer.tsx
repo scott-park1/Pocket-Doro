@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, ChangeEvent } from 'react'
+// add import for play/pause icons
 
-// const audioTune = new Audio('<YOUR_AUDIO_FILE_PATH.mp3>');
+const alarmTone = new Audio('/alarm.mp3')
 
-// // play audio sound
-// const playSound = () => {
-//   audioTune.play();
-// }
+const playSound = () => {
+  alarmTone.play()
+}
 
 interface Props {
   skippedBreaks: number
@@ -15,30 +15,54 @@ interface Props {
 export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
   const [minutes, setMinutes] = useState(25)
   const [seconds, setSeconds] = useState(0)
-  const [working, setWorking] = useState(false)
-  const [completedCycles, setCompletedCycles] = useState(0)
-  const [isPaused, setIsPaused] = useState(false)
-  const [skippingBreak, setSkippingBreak] = useState(false)
+  const [resting, setResting] = useState(false)
+  const [completedIntervals, setCompletedIntervals] = useState(0)
+  const [isPaused, setIsPaused] = useState(true)
 
-  // !resting use minutes working
-  // resting use resting minutes
+  const [workingLength, setWorkingLength] = useState(24)
+  const [shortBreakLength, setShortBreakLength] = useState(4)
+  const [longBreakLength, setLongBreakLength] = useState(29)
+  const [showSettings, setShowSettings] = useState(false)
+  const [workingTime, setworkingTime] = useState(0)
+
+  function handleWorkingMinutesChange(e: ChangeEvent<HTMLInputElement>) {
+    const value = e.target.value
+    setWorkingLength(parseInt(value) - 1)
+    // needs to reset the timer. at the moment it will only use value for the next interval
+  }
+  function handleLongBreakChange(e: ChangeEvent<HTMLInputElement>) {
+    const value = e.target.value
+    setLongBreakLength(parseInt(value) - 1)
+  }
+  function handleShortBreakChange(e: ChangeEvent<HTMLInputElement>) {
+    const value = e.target.value
+    setShortBreakLength(parseInt(value) - 1)
+  }
+
+  function displaySettings() {
+    setIsPaused(true)
+    setShowSettings(!showSettings)
+  }
 
   const changeTimer = () => {
-    setWorking(!working)
+    setResting(!resting)
+    playSound()
 
-    if (working) {
-      setMinutes(24)
+    // something weird with boolean here
+
+    if (resting) {
+      setMinutes(workingLength)
       setSeconds(59)
       return
     }
 
-    if (completedCycles > 2) {
-      setMinutes(29)
+    if (completedIntervals > 2) {
+      setMinutes(longBreakLength)
       setSeconds(59)
       return
     }
 
-    setMinutes(4)
+    setMinutes(shortBreakLength)
     setSeconds(59)
   }
 
@@ -48,39 +72,41 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
         return
       }
 
-      if (completedCycles <= 2) {
+      if (completedIntervals <= 2) {
         if (seconds === 0) {
           if (minutes !== 0) {
             setSeconds(59)
             setMinutes(minutes - 1)
           } else {
             changeTimer()
-            setCompletedCycles(completedCycles + 1)
+            setCompletedIntervals(completedIntervals + 1)
           }
         } else {
           setSeconds(seconds - 1)
         }
       }
 
-      if (completedCycles > 2) {
+      if (completedIntervals > 2) {
         if (seconds === 0) {
           if (minutes !== 0) {
             setSeconds(59)
             setMinutes(minutes - 1)
           } else {
             changeTimer()
-            setCompletedCycles(0)
+            setCompletedIntervals(0)
           }
         } else {
           setSeconds(seconds - 1)
         }
       }
+      // does not consider breaks
+      setworkingTime(workingTime + 1)
     }, 1000)
 
     return () => {
       clearInterval(interval)
     }
-  }, [seconds, changeTimer, completedCycles, minutes])
+  }, [seconds, changeTimer, completedIntervals, minutes, workingTime])
 
   function skipBreak() {
     changeTimer()
@@ -95,8 +121,115 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
   const timerMinutes = minutes < 10 ? `0${minutes}` : minutes
   const timerSeconds = seconds < 10 ? `0${seconds}` : seconds
 
+  const workingMinutes = Math.floor(workingTime / 60)
+  const workingHours = Math.floor(workingMinutes / 60)
+  const timeSpentWorking =
+    workingMinutes < 10
+      ? `${workingHours}:0${workingMinutes}`
+      : `${workingHours}:${workingMinutes}`
+
   return (
     <>
+      <div>
+        Time spent working
+        <br />
+        {timeSpentWorking}
+      </div>
+      <br />
+      <div className="timer-buttons-wrapper">
+        {!showSettings &&
+          (isPaused ? (
+            <button className="timer-button" onClick={pauseTimer}>
+              Start{' '}
+            </button>
+          ) : (
+            <button className="timer-button" onClick={pauseTimer}>
+              Stop
+            </button>
+          ))}
+        <button className="timer-button" onClick={displaySettings}>
+          {showSettings ? 'Close' : 'Settings'}
+        </button>
+      </div>
+      <div>
+        {showSettings && (
+          <>
+            <div className="settings-wrapper">
+              <div>
+                <label
+                  className="settings-headers"
+                  htmlFor="short-break-settings"
+                >
+                  Interval:
+                </label>
+                <input
+                  className="slider"
+                  type="range"
+                  id="working-minutes-settings"
+                  name="working-minutes"
+                  min="0"
+                  max="120"
+                  defaultValue={workingLength}
+                  step="5"
+                  onChange={handleWorkingMinutesChange}
+                ></input>
+                <br />
+                <div className="settings-values">
+                  {workingLength + 1} minutes
+                </div>
+              </div>
+              <br />
+              <div>
+                <label
+                  className="settings-headers"
+                  htmlFor="short-break-settings"
+                >
+                  Short Break:
+                </label>
+                <input
+                  className="slider"
+                  type="range"
+                  id="short-break-settings"
+                  name="short-break"
+                  min="0"
+                  max="30"
+                  defaultValue={shortBreakLength}
+                  step="5"
+                  onChange={handleShortBreakChange}
+                ></input>
+                <br />
+                <div className="settings-values">
+                  {shortBreakLength + 1} minutes
+                </div>
+              </div>
+              <br />
+              <div>
+                <label
+                  className="settings-headers"
+                  htmlFor="long-break-settings"
+                >
+                  Long Break:
+                </label>
+                <input
+                  className="slider"
+                  type="range"
+                  id="long-break-settings"
+                  name="long-break"
+                  min="0"
+                  max="120"
+                  defaultValue={longBreakLength}
+                  step="5"
+                  onChange={handleLongBreakChange}
+                ></input>
+                <br />
+                <div className="settings-values">
+                  {longBreakLength + 1} minutes
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
       {isPaused ? (
         <button onClick={pauseTimer}>Play</button>
       ) : (

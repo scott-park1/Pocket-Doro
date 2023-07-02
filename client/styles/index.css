@@ -81,13 +81,19 @@ h2 {
   position: absolute;
 }
 
-.timer-wrapper {
+.timer-digits {
   font-family: 'Source Code Pro', monospace;
   font-weight: 900;
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
+  top: 150px;
+  left: 50px;
+  right: 50px;
+  width: 50%;
+  height: 30%;
+  border-radius: 20px 20px 0 0;
 }
 
 .timerfirst{
@@ -119,6 +125,155 @@ h2 {
   color: #ff7e5e;
   display: flex;
   justify-content: center;
+  width: 400px;
+  margin: 0 auto;
+  font-size: 100px;
+}
+
+.timer-buttons-wrapper{
+  margin: 5px;
+  padding: 20px;
+  font-family: 'Source Code Pro', monospace;
+  font-weight: 900;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 325px;
+  left: 25px;
+  width: 500px;
+  height: 5%;
+  
+  
+}
+
+.timer-button{
+  background-color: #fbeee0;
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 4px 4px 0 0;
+  color: #422800;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.timer-button:hover {
+  background-color: #fff;
+}
+
+.timer-button:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  .timer-button {
+    min-width: 120px;
+    padding: 0 25px;
+  }
+}
+
+
+.settings-wrapper{
+  margin: 5px;
+  padding: 20px;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 450px;
+  left: 75px;
+  width: 500px;
+  height: 50%;
+  background-color: #b5b5ff;
+  
+  border-radius: 20px ;
+}
+
+.settings-headers{
+  font-family: 'Source Code Pro', monospace;
+  font-weight: 900;
+  font-size: x-large;
+}
+
+.settings-values{
+  font-family: 'Source Code Pro', monospace;
+  font-weight: 900;
+  font-size: medium;
+}
+
+/* settings range slider styling */
+
+    .slider {
+      /* removing default appearance */
+      -webkit-appearance: none;
+      appearance: none; 
+      /* creating a custom design */
+      width: 100%;
+      cursor: grab;
+      outline: none;
+      /*  slider progress trick  */
+      overflow: hidden;
+      border-radius: 16px;
+
+    }
+    .slider:active{
+      cursor: grabbing;
+    }
+    
+    /* Track: webkit browsers */
+    .slider::-webkit-slider-runnable-track {
+      height: 15px;
+      background: #ccc;
+      border-radius: 16px;
+    }
+    
+    /* Track: Mozilla Firefox */
+    .slider::-moz-range-track {
+      height: 15px;
+      background: #ccc;
+      border-radius: 16px;
+    }
+    
+    /* Thumb: webkit */
+    .slider::-webkit-slider-thumb {
+      /* removing default appearance */
+      -webkit-appearance: none;
+      appearance: none; 
+      /* creating a custom design */
+      height: 15px;
+      width: 15px;
+      background-color: #fff;
+      border-radius: 50%;
+      border: 2px solid #FF5E8F;
+      /*  slider progress trick  */
+      box-shadow: -407px 0 0 400px #FF5E8F;
+    }
+    
+    
+    /* Thumb: Firefox */
+    .slider::-moz-range-thumb {
+      height: 15px;
+      width: 15px;
+      background-color: #fff;
+      border-radius: 50%;
+      border: 1px solid #f50;
+      /*  slider progress trick  */
+      box-shadow: -407px 0 0 400px #f50;
+    }
   width: 200px;
   font-size: 50px;
   margin-top: 20px;
