@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import DayBackground from '../../images/DayBackground.png'
 import NightBackground from '../../images/NightBackground.png'
 
-export default function Map() {
+interface MapProps {
+  checked: boolean
+}
+
+export default function Map({ checked }: MapProps) {
   const [backgroundImage, setBackgroundImage] = useState(DayBackground)
 
   useEffect(() => {
@@ -19,5 +23,15 @@ export default function Map() {
     }
   }, [])
 
-  return <img src={backgroundImage} alt="Day Map" />
+  useEffect(() => {
+    setBackgroundImage(checked ? NightBackground : DayBackground)
+  }, [checked])
+
+  return (
+    <img
+      src={backgroundImage}
+      alt={checked ? 'Night Map' : 'Day Map'}
+      className="map"
+    />
+  )
 }

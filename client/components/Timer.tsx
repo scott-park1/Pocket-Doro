@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 
 // const audioTune = new Audio('<YOUR_AUDIO_FILE_PATH.mp3>');
 
@@ -17,6 +17,7 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
   const [seconds, setSeconds] = useState(0)
   const [resting, setResting] = useState(false)
   const [completedCycles, setCompletedCycles] = useState(0)
+  const [skippingBreak, setSkippingBreak] = useState(false)
 
   // !resting use minutes working
   // resting use resting minutes
@@ -89,6 +90,7 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
   function skipBreak() {
     changeTimer()
     onSkipBreak()
+    setSkippingBreak(true)
   }
 
   const timerMinutes = minutes < 10 ? `0${minutes}` : minutes
@@ -96,22 +98,37 @@ export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
 
   return (
     <>
-      <div> Completed work cycles: {completedCycles}</div>
-      <div> breaks skipped: {skippedBreaks}</div> <br />
-      {resting && (
-        <>
-          <div>Break time! New session starts in: </div>
-          <button onClick={skipBreak}> skip break </button>
-        </>
-      )}
-      <br />
-      <br />
-      <div className="timer-wrapper">
-        <div className="timer">
-          {timerMinutes}:{timerSeconds}
-        </div>
+      <div className="timeBubble">
+        {resting ? (
+          <>
+            <div className="break">Break time! New session starts in: </div>
+            <div className="timer-wrapper">
+              <div className="timersecond">
+                {timerMinutes}:{timerSeconds}
+              </div>
+            </div>
+            <button onClick={skipBreak} className="skipbutton">
+              Skip break
+            </button>
+            <div className="timertextbreak">
+              Completed work cycles: {completedCycles} <br />
+              Breaks skipped: {skippedBreaks}
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="timer-wrapper">
+              <div className="timerfirst">
+                {timerMinutes}:{timerSeconds}
+              </div>
+            </div>
+            <div className="timertext">
+              Completed work cycles: {completedCycles} <br />
+              Breaks skipped: {skippedBreaks}
+            </div>
+          </>
+        )}
       </div>
-      <br />
     </>
   )
 }
