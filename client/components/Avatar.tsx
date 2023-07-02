@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { SpriteAnimator } from './sprites/SpriteAnimator'
 
 const walk = '/assets/CharacterSprites/characters/char1.png'
@@ -10,10 +11,24 @@ const shoes = '/assets/CharacterSprites/separate/walk/clothes/shoes_walk.png'
 export default function Avatar() {
   const spriteWidth = 32
   const spriteHeight = 32
-  const scale = 1 / 4
+  const [scale, setScale] = useState(0.25)
   const frameCount = 8 // rows
   const wrapAfter = 8 // columns
   const fps = 10 // speed
+
+  useEffect(() => {
+    const handleResize = () => {
+      const newScale = 300 / window.innerWidth // adjust to find best fit
+      setScale(newScale)
+    }
+
+    handleResize()
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
 
   return (
     <div className="avatar" style={{ imageRendering: 'pixelated' }}>

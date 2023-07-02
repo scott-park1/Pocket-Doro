@@ -45,7 +45,7 @@ function Start() {
           margin: '50px 30px 0px 0px',
         }}
       />
-      <div style={{ position: 'relative' }}>
+      <div className="content">
         <div className="avatar-overlay">
           <Avatar />
         </div>
