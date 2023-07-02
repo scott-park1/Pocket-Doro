@@ -1,5 +1,5 @@
 import React from 'react'
-import { SpriteAnimator } from 'react-sprite-animator'
+import { SpriteAnimator } from './sprites/SpriteAnimator'
 
 const emoticonSheet = 'assets/CharacterSprites/emoticons.png'
 
