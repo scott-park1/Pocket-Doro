@@ -21,9 +21,9 @@ export default function Timer({
   resting,
   setResting,
 }: Props) {
-  const [minutes, setMinutes] = useState(2)
-  const [seconds, setSeconds] = useState(0)
 
+  const [minutes, setMinutes] = useState(25)
+  const [seconds, setSeconds] = useState(0)
   const [completedIntervals, setCompletedIntervals] = useState(0)
   const [isPaused, setIsPaused] = useState(true)
   const [workingLength, setWorkingLength] = useState(24)
@@ -160,58 +160,51 @@ export default function Timer({
 
   return (
     <>
-      <div className="timeBubble">
-        {resting ? (
-          <>
-            <div className="break">Break time! New session starts in: </div>
-            <div className="timer-wrapper">
-              <div className="timersecond">
-                {timerMinutes}:{timerSeconds}
-              </div>
-            </div>
-            <button onClick={skipBreak} className="skipbutton">
-              Skip break
-            </button>
-            <div className="timertextbreak">
-              Completed work cycles: {completedIntervals} <br />
-              Breaks skipped: {skippedBreaks}
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="timer-wrapper">
-              <div className="timerfirst">
-                {timerMinutes}:{timerSeconds}
-              </div>
-            </div>
-            <div className="timertext">
-              Completed work cycles: {completedIntervals} <br />
-              Breaks skipped: {skippedBreaks}
-            </div>
-            {/* <Emoticon skippedBreaks={skippedBreaks} resting={resting} /> */}
-          </>
-        )}
-      </div>
+      {resting ? (
+        <>
+          <p className="break">Break time! New session starts in:</p>
+          <div className="timer">
+            {timerMinutes}:{timerSeconds}
+          </div>
+          <p className="timertext">
+            Completed work cycles: {completedIntervals} <br />
+            Breaks skipped: {skippedBreaks} <br />
+            Time spent working: {timeSpentWorking}
+          </p>
+          <button onClick={skipBreak} className="skipbutton">
+            Skip break
+          </button>
+        </>
+      ) : (
+        <>
+          <div className="timer">
+            {timerMinutes}:{timerSeconds}
+          </div>
+          <p className="timertext">
+            Completed work cycles: {completedIntervals} <br />
+            Breaks skipped: {skippedBreaks} <br />
+            Time spent working: {timeSpentWorking}
+          </p>
+        </>
+      )}
       <br />
-      <div>
-        Time spent working
-        <br />
-        {displayTimeSpentWorking()}
-        <br />
-      </div>
+      <p className="timertext"></p>
       <br />
       <div className="timer-buttons-wrapper">
         {!showSettings &&
           (isPaused ? (
             <button className="timer-button" onClick={pauseTimer}>
-              Start{' '}
+              Start
             </button>
           ) : (
             <button className="timer-button" onClick={pauseTimer}>
               Stop
             </button>
           ))}
-        <button className="timer-button" onClick={displaySettings}>
+        <button
+          className="timer-button-close-settings"
+          onClick={displaySettings}
+        >
           {showSettings ? 'Close' : 'Settings'}
         </button>
       </div>
@@ -219,76 +212,65 @@ export default function Timer({
         {showSettings && (
           <>
             <div className="settings-wrapper">
-              <div>
-                <label
-                  className="settings-headers"
-                  htmlFor="short-break-settings"
-                >
-                  Interval:
-                </label>
-                <input
-                  className="slider"
-                  type="range"
-                  id="working-minutes-settings"
-                  name="working-minutes"
-                  min="0"
-                  max="120"
-                  defaultValue={workingLength}
-                  step="5"
-                  onChange={handleWorkingMinutesChange}
-                ></input>
-                <br />
-                <div className="settings-values">
-                  {workingLength + 1} minutes
-                </div>
+              <label
+                className="settings-headers"
+                htmlFor="short-break-settings"
+              >
+                Interval:
+              </label>
+              <input
+                className="slider"
+                type="range"
+                id="working-minutes-settings"
+                name="working-minutes"
+                min="0"
+                max="120"
+                defaultValue={workingLength}
+                step="5"
+                onChange={handleWorkingMinutesChange}
+              ></input>
+              <br />
+              <div className="settings-values">{workingLength + 1} minutes</div>
+              <br />
+              <label
+                className="settings-headers"
+                htmlFor="short-break-settings"
+              >
+                Short Break:
+              </label>
+              <input
+                className="slider"
+                type="range"
+                id="short-break-settings"
+                name="short-break"
+                min="0"
+                max="30"
+                defaultValue={shortBreakLength}
+                step="5"
+                onChange={handleShortBreakChange}
+              ></input>
+              <br />
+              <div className="settings-values">
+                {shortBreakLength + 1} minutes
               </div>
               <br />
-              <div>
-                <label
-                  className="settings-headers"
-                  htmlFor="short-break-settings"
-                >
-                  Short Break:
-                </label>
-                <input
-                  className="slider"
-                  type="range"
-                  id="short-break-settings"
-                  name="short-break"
-                  min="0"
-                  max="30"
-                  defaultValue={shortBreakLength}
-                  step="5"
-                  onChange={handleShortBreakChange}
-                ></input>
-                <br />
-                <div className="settings-values">
-                  {shortBreakLength + 1} minutes
-                </div>
-              </div>
+              <label className="settings-headers" htmlFor="long-break-settings">
+                Long Break:
+              </label>
+              <input
+                className="slider"
+                type="range"
+                id="long-break-settings"
+                name="long-break"
+                min="0"
+                max="120"
+                defaultValue={longBreakLength}
+                step="5"
+                onChange={handleLongBreakChange}
+              ></input>
               <br />
-              <div>
-                <label
-                  className="settings-headers"
-                  htmlFor="long-break-settings"
-                >
-                  Long Break:
-                </label>
-                <input
-                  className="slider"
-                  type="range"
-                  id="long-break-settings"
-                  name="long-break"
-                  min="0"
-                  max="120"
-                  defaultValue={longBreakLength}
-                  step="5"
-                  onChange={handleLongBreakChange}
-                ></input>
-                <br />
-                <div className="settings-values">
-                  {longBreakLength + 1} minutes
-                </div>
+              <div className="settings-values">
+                {longBreakLength + 1} minutes
               </div>
             </div>
           </>
