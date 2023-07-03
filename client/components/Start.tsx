@@ -13,6 +13,9 @@ function Start() {
   const [resting, setResting] = useState(false)
 
   function handleSetResting(value: React.SetStateAction<boolean>) {
+    if (value && skippedBreaks > 0) {
+      setSkippedBreaks(skippedBreaks - 1)
+    }
     setResting(value)
   }
 

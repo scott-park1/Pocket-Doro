@@ -30,7 +30,7 @@ body {
 .avatar-overlay {
   position: absolute;
   top: 10px;
-  right: 600px;
+  right: 50px;
 }
 
 .title {
@@ -87,20 +87,20 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* position: absolute;
+  position: absolute;
   top: 150px;
   left: 50px;
   right: 50px;
   width: 50%;
-  height: 30%; */
+  height: 30%;
   border-radius: 20px 20px 0 0;
 }
 
-.timerfirst{
-  /* position: absolute;
+.timerfirst {
+  position: absolute;
   top: 30px;
   left: 100px;
-  right: 30px; */
+  right: 30px; 
   box-shadow: 0px 50px 0px 80px #FF5E8F;
   border-style: none none solid;
   border-radius: 40px 40px 0 0;
@@ -113,11 +113,11 @@ h2 {
   margin-top: 50px;
 }
 
-.timersecond{
-  /* position: absolute;
+.timersecond {
+  position: absolute;
   top: 30px;
   left: 100px;
-  right: 30px; */
+  right: 30px; 
   box-shadow: 0px 50px 0px 80px #FF5E8F;
   border-style: none none solid;
   border-radius: 40px 40px 0 0;
@@ -139,7 +139,7 @@ h2 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* position: absolute;
+  position: absolute;
   top: 325px;
   left: 25px;
   width: 500px;
@@ -279,24 +279,24 @@ h2 {
   font-family: 'Baloo 2', cursive;
   color: rgb(242, 71, 71);
   text-align: center;
-  /* margin-top: 300px;
-  margin-left: 110px; */
+  margin-top: 300px;
+  margin-left: 110px;
 }
 
 .timertextbreak {
   font-family: 'Baloo 2', cursive;
   color: rgb(242, 71, 71);
   text-align: center;
-  /* margin-top: 30px;
-  margin-left: 80px; */
+  margin-top: 30px;
+  margin-left: 80px;
 }
 
 .break {
   font-family: 'Baloo 2', cursive;
   color: rgb(242, 71, 71);
   text-align: left;
-  /* margin-top: 50px;
-  margin-left: 80px; */
+  margin-top: 50px;
+  margin-left: 80px;
 }
 
 .skipbutton {
@@ -311,21 +311,12 @@ h2 {
 
 .timeBubble {
   position: absolute;
-  top: 400px;
-  right:10px;
-  flex: 1;
+  top: 0;
 }
 
 .map {
   margin-top: 150px;
   max-width: 40%;
-  flex: 1;
-}
-
-.flex-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
 }
 
 @media (min-width: 0px) and (max-width: 480px) {
