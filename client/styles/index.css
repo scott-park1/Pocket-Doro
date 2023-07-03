@@ -2,7 +2,7 @@
 
 body {
   background-color: rgb(253, 198, 59);
-  text-align: center
+  text-align: center;
 }
 
 .avatar {
@@ -38,11 +38,8 @@ body {
   font-size: 200px;
   color: rgb(242, 71, 71);
   margin-bottom: 10px;
-  text-shadow:
-  -4px -4px 0 #000,
-  4px -4px 0 #000,
-  -4px 4px 0 #000,
-  4px 4px 0 #000;
+  text-shadow: -4px -4px 0 #000, 4px -4px 0 #000, -4px 4px 0 #000,
+    4px 4px 0 #000;
 }
 
 .startlink {
@@ -96,12 +93,13 @@ h2 {
   border-radius: 20px 20px 0 0;
 }
 
-.timerfirst{
-  /* position: absolute;
+
+.timerfirst {
+  position: absolute;
   top: 30px;
   left: 100px;
-  right: 30px; */
-  box-shadow: 0px 50px 0px 80px #FF5E8F;
+  right: 30px;
+  box-shadow: 0px 50px 0px 80px #ff5e8f;
   border-style: none none solid;
   border-radius: 40px 40px 0 0;
   overflow: hidden;
@@ -113,12 +111,13 @@ h2 {
   margin-top: 50px;
 }
 
-.timersecond{
-  /* position: absolute;
+
+.timersecond {
+  position: absolute;
   top: 30px;
   left: 100px;
-  right: 30px; */
-  box-shadow: 0px 50px 0px 80px #FF5E8F;
+  right: 30px;
+  box-shadow: 0px 50px 0px 80px #ff5e8f;
   border-style: none none solid;
   border-radius: 40px 40px 0 0;
   overflow: hidden;
@@ -130,7 +129,7 @@ h2 {
   font-size: 100px;
 }
 
-.timer-buttons-wrapper{
+.timer-buttons-wrapper {
   margin: 5px;
   padding: 20px;
   font-family: 'Source Code Pro', monospace;
@@ -143,12 +142,10 @@ h2 {
   top: 325px;
   left: 25px;
   width: 500px;
-  height: 5%; */
-  
-  
+  height: 5%;
 }
 
-.timer-button{
+.timer-button {
   background-color: #fbeee0;
   border: 2px solid #422800;
   border-radius: 30px;
@@ -184,11 +181,10 @@ h2 {
   }
 }
 
-
-.settings-wrapper{
+.settings-wrapper {
   margin: 5px;
   padding: 20px;
-  
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -199,17 +195,17 @@ h2 {
   width: 500px;
   height: 50%;
   background-color: #b5b5ff;
-  
-  border-radius: 20px ;
+
+  border-radius: 20px;
 }
 
-.settings-headers{
+.settings-headers {
   font-family: 'Source Code Pro', monospace;
   font-weight: 900;
   font-size: x-large;
 }
 
-.settings-values{
+.settings-values {
   font-family: 'Source Code Pro', monospace;
   font-weight: 900;
   font-size: medium;
@@ -217,65 +213,65 @@ h2 {
 
 /* settings range slider styling */
 
-    .slider {
-      /* removing default appearance */
-      -webkit-appearance: none;
-      appearance: none; 
-      /* creating a custom design */
-      width: 100%;
-      cursor: grab;
-      outline: none;
-      /*  slider progress trick  */
-      overflow: hidden;
-      border-radius: 16px;
+.slider {
+  /* removing default appearance */
+  -webkit-appearance: none;
+  appearance: none;
+  /* creating a custom design */
+  width: 100%;
+  cursor: grab;
+  outline: none;
+  /*  slider progress trick  */
+  overflow: hidden;
+  border-radius: 16px;
+}
+.slider:active {
+  cursor: grabbing;
+}
 
-    }
-    .slider:active{
-      cursor: grabbing;
-    }
-    
-    /* Track: webkit browsers */
-    .slider::-webkit-slider-runnable-track {
-      height: 15px;
-      background: #ccc;
-      border-radius: 16px;
-    }
-    
-    /* Track: Mozilla Firefox */
-    .slider::-moz-range-track {
-      height: 15px;
-      background: #ccc;
-      border-radius: 16px;
-    }
-    
-    /* Thumb: webkit */
-    .slider::-webkit-slider-thumb {
-      /* removing default appearance */
-      -webkit-appearance: none;
-      appearance: none; 
-      /* creating a custom design */
-      height: 15px;
-      width: 15px;
-      background-color: #fff;
-      border-radius: 50%;
-      border: 2px solid #FF5E8F;
-      /*  slider progress trick  */
-      box-shadow: -407px 0 0 400px #FF5E8F;
-    }
-    
-    
-    /* Thumb: Firefox */
-    .slider::-moz-range-thumb {
-      height: 15px;
-      width: 15px;
-      background-color: #fff;
-      border-radius: 50%;
-      border: 1px solid #f50;
-      /*  slider progress trick  */
-      box-shadow: -407px 0 0 400px #f50;
-    }
-  
+.slider:active {
+  cursor: grabbing;
+}
 
+/* Track: webkit browsers */
+.slider::-webkit-slider-runnable-track {
+  height: 15px;
+  background: #ccc;
+  border-radius: 16px;
+}
+
+/* Track: Mozilla Firefox */
+.slider::-moz-range-track {
+  height: 15px;
+  background: #ccc;
+  border-radius: 16px;
+}
+
+/* Thumb: webkit */
+.slider::-webkit-slider-thumb {
+  /* removing default appearance */
+  -webkit-appearance: none;
+  appearance: none;
+  /* creating a custom design */
+  height: 15px;
+  width: 15px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 2px solid #ff5e8f;
+  /*  slider progress trick  */
+  box-shadow: -407px 0 0 400px #ff5e8f;
+}
+
+/* Thumb: Firefox */
+.slider::-moz-range-thumb {
+  height: 15px;
+  width: 15px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 1px solid #f50;
+  /*  slider progress trick  */
+  box-shadow: -407px 0 0 400px #f50;
+}
 
 .timertext {
   font-family: 'Baloo 2', cursive;
@@ -335,17 +331,14 @@ h2 {
     font-size: 50px;
     margin-top: 50px;
     margin-bottom: 10px;
-    text-shadow:
-    -2px -2px 0 #000,
-    2px -2px 0 #000,
-    -2px 2px 0 #000,
-    2px 2px 0 #000;
+    text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
+      2px 2px 0 #000;
   }
 
   h2 {
     font-size: 25px;
   }
-  
+
   .startlink {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -354,7 +347,7 @@ h2 {
     padding: 10px 10px;
     font-size: 20px;
   }
-  
+
   .footer {
     font-size: 10px;
     left: 0;
@@ -374,9 +367,9 @@ h2 {
     top: 410px;
     right: 20px;
   }
-  
-  .timerfirst{
-    box-shadow: 0px 50px 0px 80px #FF5E8F;
+
+  .timerfirst {
+    box-shadow: 0px 50px 0px 80px #ff5e8f;
     border-style: none none solid;
     border-radius: 40px 40px 0 0;
     overflow: hidden;
@@ -384,34 +377,34 @@ h2 {
     margin-top: 50px;
     margin-left: 33px;
   }
-  
-  .timersecond{
-    box-shadow: 0px 50px 0px 80px #FF5E8F;
+
+  .timersecond {
+    box-shadow: 0px 50px 0px 80px #ff5e8f;
     border-style: none none solid;
     border-radius: 40px 40px 0 0;
     overflow: hidden;
     font-size: 50px;
     margin-left: 33px;
   }
-  
+
   .timertext {
     margin: 300px 0px 50px 145px;
   }
-  
+
   .timertextbreak {
     margin-left: 110px;
   }
-  
+
   .break {
     margin-left: 110px;
   }
-  
+
   .skipbutton {
     margin-left: 110px;
     border-radius: 10px;
     border: 2px solid rgb(242, 71, 71);
   }
-  
+
   .timeBubble {
     margin: 100px auto 10px auto;
   }
@@ -426,17 +419,14 @@ h2 {
     font-size: 80px;
     margin-top: 50px;
     margin-bottom: 10px;
-    text-shadow:
-    -3px -3px 0 #000,
-    3px -3px 0 #000,
-    -3px 3px 0 #000,
-    3px 3px 0 #000;
+    text-shadow: -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000,
+      3px 3px 0 #000;
   }
 
   h2 {
     font-size: 30px;
   }
-  
+
   .startlink {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -445,7 +435,7 @@ h2 {
     padding: 10px 10px;
     font-size: 25px;
   }
-  
+
   .footer {
     font-size: 15px;
     left: 0;
@@ -466,9 +456,9 @@ h2 {
     top: 500px;
     right: 40px;
   }
-  
-  .timerfirst{
-    box-shadow: 0px 50px 0px 80px #FF5E8F;
+
+  .timerfirst {
+    box-shadow: 0px 50px 0px 80px #ff5e8f;
     border-style: none none solid;
     border-radius: 40px 40px 0 0;
     overflow: hidden;
@@ -476,34 +466,34 @@ h2 {
     margin-top: 50px;
     margin-left: 150px;
   }
-  
-  .timersecond{
-    box-shadow: 0px 50px 0px 80px #FF5E8F;
+
+  .timersecond {
+    box-shadow: 0px 50px 0px 80px #ff5e8f;
     border-style: none none solid;
     border-radius: 40px 40px 0 0;
     overflow: hidden;
     font-size: 50px;
     margin-left: 150px;
   }
-  
+
   .timertext {
     margin: 300px 0px 50px 260px;
   }
-  
+
   .timertextbreak {
     margin-left: 230px;
   }
-  
+
   .break {
     margin-left: 230px;
   }
-  
+
   .skipbutton {
     margin-left: 225px;
     border-radius: 10px;
     border: 2px solid rgb(242, 71, 71);
   }
-  
+
   .timeBubble {
     margin: 100px auto 10px auto;
   }
@@ -518,17 +508,14 @@ h2 {
     font-size: 120px;
     margin-top: 50px;
     margin-bottom: 10px;
-    text-shadow:
-    -4px -4px 0 #000,
-    4px -4px 0 #000,
-    -4px 4px 0 #000,
-    4px 4px 0 #000;
+    text-shadow: -4px -4px 0 #000, 4px -4px 0 #000, -4px 4px 0 #000,
+      4px 4px 0 #000;
   }
 
   h2 {
     font-size: 40px;
   }
-  
+
   .startlink {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -537,7 +524,7 @@ h2 {
     padding: 10px 10px;
     font-size: 30px;
   }
-  
+
   .footer {
     font-size: 20px;
     left: 0;
@@ -558,9 +545,9 @@ h2 {
     top: 710px;
     right: 60px;
   }
-  
-  .timerfirst{
-    box-shadow: 0px 50px 0px 80px #FF5E8F;
+
+  .timerfirst {
+    box-shadow: 0px 50px 0px 80px #ff5e8f;
     border-style: none none solid;
     border-radius: 40px 40px 0 0;
     overflow: hidden;
@@ -568,38 +555,38 @@ h2 {
     margin-top: 50px;
     margin-left: 290px;
   }
-  
-  .timersecond{
-    box-shadow: 0px 50px 0px 80px #FF5E8F;
+
+  .timersecond {
+    box-shadow: 0px 50px 0px 80px #ff5e8f;
     border-style: none none solid;
     border-radius: 40px 40px 0 0;
     overflow: hidden;
     font-size: 50px;
     margin-left: 290px;
   }
-  
+
   .timertext {
     font-size: 20px;
     margin: 300px 0px 50px 380px;
   }
-  
+
   .timertextbreak {
     font-size: 20px;
     margin-left: 340px;
   }
-  
+
   .break {
     font-size: 20px;
     margin-left: 340px;
   }
-  
+
   .skipbutton {
     font-size: 20px;
     margin-left: 330px;
     border-radius: 10px;
     border: 2px solid rgb(242, 71, 71);
   }
-  
+
   .timeBubble {
     margin: 100px auto 10px auto;
   }
@@ -614,17 +601,14 @@ h2 {
     font-size: 180px;
     margin-top: 50px;
     margin-bottom: 10px;
-    text-shadow:
-    -4px -4px 0 #000,
-    4px -4px 0 #000,
-    -4px 4px 0 #000,
-    4px 4px 0 #000;
+    text-shadow: -4px -4px 0 #000, 4px -4px 0 #000, -4px 4px 0 #000,
+      4px 4px 0 #000;
   }
 
   h2 {
     font-size: 40px;
   }
-  
+
   .startlink {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -633,7 +617,7 @@ h2 {
     padding: 10px 10px;
     font-size: 50px;
   }
-  
+
   .footer {
     font-size: 20px;
     left: 0;
@@ -642,7 +626,7 @@ h2 {
     margin-top: 50px;
     margin-bottom: -10px;
   }
-  
+
   .map {
     margin-top: 180px;
     max-width: 1440px;
@@ -653,47 +637,47 @@ h2 {
     top: 50px;
     right: 40px;
   }
-  
-  .timerfirst{
-    box-shadow: 0px 50px 0px 80px #FF5E8F;
+
+  .timerfirst {
+    box-shadow: 0px 50px 0px 80px #ff5e8f;
     border-style: none none solid;
     border-radius: 40px 40px 0 0;
     overflow: hidden;
     font-size: 50px;
     margin-top: 50px;
   }
-  
-  .timersecond{
-    box-shadow: 0px 50px 0px 80px #FF5E8F;
+
+  .timersecond {
+    box-shadow: 0px 50px 0px 80px #ff5e8f;
     border-style: none none solid;
     border-radius: 40px 40px 0 0;
     overflow: hidden;
     font-size: 50px;
     margin-top: 20px;
   }
-  
+
   .timertext {
     margin-top: 300px;
     margin-left: 110px;
   }
-  
+
   .timertextbreak {
     margin-top: 30px;
     margin-left: 80px;
   }
-  
+
   .break {
     margin-top: 50px;
     margin-left: 80px;
   }
-  
+
   .skipbutton {
     margin-top: 280px;
     margin-left: 80px;
     border-radius: 10px;
     border: 2px solid rgb(242, 71, 71);
   }
-  
+
   .timeBubble {
     top: 0;
   }
