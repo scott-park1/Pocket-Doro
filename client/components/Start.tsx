@@ -11,6 +11,9 @@ function Start() {
   const [resting, setResting] = useState(false)
 
   function handleSetResting(value: React.SetStateAction<boolean>) {
+    if (value && skippedBreaks > 0) {
+      setSkippedBreaks(skippedBreaks - 1)
+    }
     setResting(value)
   }
 
@@ -58,13 +61,13 @@ function Start() {
         <Map checked={checked} />
         <Emoticon skippedBreaks={skippedBreaks} resting={resting} />
         <div className="timeBubble">
-        <Timer
-          skippedBreaks={skippedBreaks}
-          onSkipBreak={onSkipBreak}
-          resting={resting}
-          setResting={handleSetResting}
-        />
-      </div>
+          <Timer
+            skippedBreaks={skippedBreaks}
+            onSkipBreak={onSkipBreak}
+            resting={resting}
+            setResting={handleSetResting}
+          />
+        </div>
       </div>
     </>
   )

@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom'
+import Emoticon from './Emoticon'
 
 function App() {
   return (
@@ -7,6 +8,9 @@ function App() {
         {/* <Timer skippedBreaks={skippedBreaks} onSkipBreak={onSkipBreak} /> */}
         <Outlet />
       </section>
+      <div className="workinprogress">
+        {/* <Emoticon skippedBreaks={3} resting={false} /> */}
+      </div>
     </>
   )
 }

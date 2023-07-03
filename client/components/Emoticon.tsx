@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { SpriteAnimator } from './sprites/SpriteAnimator'
 import { useState } from 'react'
 
@@ -11,6 +11,7 @@ interface Props {
 
 export default function Emoticon({ skippedBreaks, resting }: Props) {
   const [tiredLevel, setTiredLevel] = useState(0)
+  const [previousSkippedBreaks, setPreviousSkippedBreaks] = useState(0)
 
   const spriteWidth = 16
   const spriteHeight = 16
@@ -20,36 +21,32 @@ export default function Emoticon({ skippedBreaks, resting }: Props) {
   const fps = 0
 
   // let startEmoticon = 5
-  let onBreak = 14
-  let study = 3
-  let tired = 6 //skip 1 break
-  let veryTired = 9 //skip 2 breaks
-  let veryVeryTired = 13
+  const onBreak = 14
+  const study = 3
+  const tired = 6 //skip 1 break
+  const veryTired = 9 //skip 2 breaks
+  const veryVeryTired = 13
 
-  setTiredLevel(0)
-
-  // function countTiredLevel() {
-  //   if (resting) {tiredLevel === 0 }
-  //   // if (skippedBreaks === 0)
-  //   if (skippedBreaks === 1) tiredLevel + 1
-  //   if (skippedBreaks === 2) tiredLevel + 1
-  //   if (skippedBreaks >= 3) tiredLevel + 1
-  // }
-
-  // function emoticonCycle () {
-  //   if (resting) return onBreak
-  //   if (tiredLevel === 0) return study
-  //   if (tiredLevel === 1) return tired
-  //   if (tiredLevel === 2) return veryTired
-  //   if (tiredLevel >= 3) return veryVeryTired
-  // }
+  useEffect(() => {
+    if (skippedBreaks < previousSkippedBreaks && tiredLevel > 0) {
+      setTiredLevel(tiredLevel - 1)
+    } else if (skippedBreaks > previousSkippedBreaks && tiredLevel < 3) {
+      setTiredLevel(tiredLevel + 1)
+    }
+    setPreviousSkippedBreaks(skippedBreaks)
+  }, [skippedBreaks])
 
   function emoticonCycle() {
-    if (resting) return onBreak
-    if (skippedBreaks === 0) return study // start break =+ 1
-    if (skippedBreaks === 1) return tired
-    if (skippedBreaks === 2) return veryTired
-    if (skippedBreaks >= 3) return veryVeryTired
+    switch (tiredLevel) {
+      case 0:
+        return study
+      case 1:
+        return tired
+      case 2:
+        return veryTired
+      case 3:
+        return veryVeryTired
+    }
   }
 
   return (
