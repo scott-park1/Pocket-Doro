@@ -3,6 +3,8 @@ import { SpriteAnimator } from './sprites/SpriteAnimator'
 
 const emoticonSheet = 'assets/CharacterSprites/emoticons.png'
 
+import { useState } from 'react'
+
 interface Props {
   skippedBreaks: number
   resting: boolean

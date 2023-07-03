@@ -29,16 +29,19 @@
     ]
   },
   "dependencies": {
+    "@auth0/auth0-react": "^2.1.1",
     "@devacademy/eslint-config": "^1.8.0",
+    "auth0": "^3.5.0",
     "express": "^4.17.2",
+    "express-oauth2-jwt-bearer": "^1.5.0",
     "knex": "^2.3.0",
+    "prop-types": "^15.7.2",
+    "raf": "^3.2.0",
     "react-circular-progressbar": "^2.1.0",
     "react-ios-switch": "^0.1.19",
     "react-slider": "^2.0.6",
     "sqlite3": "^5.1.2",
-    "superagent": "7.1.1",
-    "prop-types": "^15.7.2",
-    "raf": "^3.2.0"
+    "superagent": "7.1.1"
   },
   "devDependencies": {
     "@devacademy/eslint-config": "^1.8.0",
@@ -84,6 +87,4 @@
     "singleQuote": true
   },
   "browserslist": "> 2%, not dead"
-  
-  
 }
