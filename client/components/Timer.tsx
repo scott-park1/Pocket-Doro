@@ -10,12 +10,18 @@ const playSound = () => {
 interface Props {
   skippedBreaks: number
   onSkipBreak: () => void
+  resting: boolean
+  setResting: (value: React.SetStateAction<boolean>) => void
 }
 
-export default function Timer({ skippedBreaks, onSkipBreak }: Props) {
+export default function Timer({
+  skippedBreaks,
+  onSkipBreak,
+  resting,
+  setResting,
+}: Props) {
   const [minutes, setMinutes] = useState(25)
   const [seconds, setSeconds] = useState(0)
-  const [resting, setResting] = useState(false)
   const [completedIntervals, setCompletedIntervals] = useState(0)
   const [isPaused, setIsPaused] = useState(true)
 

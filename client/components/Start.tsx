@@ -3,10 +3,16 @@ import Avatar from './Avatar'
 import Map from './Map'
 import { useState, useEffect } from 'react'
 import Switch from 'react-ios-switch'
+import Emoticon from './Emoticon'
 
 function Start() {
   const [checked, setChecked] = useState(false)
   const [skippedBreaks, setSkippedBreaks] = useState(0)
+  const [resting, setResting] = useState(false)
+
+  function handleSetResting(value: React.SetStateAction<boolean>) {
+    setResting(value)
+  }
 
   function onSkipBreak() {
     setSkippedBreaks(skippedBreaks + 1)
@@ -50,7 +56,13 @@ function Start() {
           <Avatar />
         </div>
         <Map checked={checked} />
-        <Timer skippedBreaks={skippedBreaks} onSkipBreak={onSkipBreak} />
+        <Emoticon skippedBreaks={skippedBreaks} resting={resting} />
+        <Timer
+          skippedBreaks={skippedBreaks}
+          onSkipBreak={onSkipBreak}
+          resting={resting}
+          setResting={handleSetResting}
+        />
       </div>
     </>
   )

@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import Footer from './Footer'
-import Emoticon from './Emoticon'
 
 function Home() {
   return (
@@ -11,8 +10,6 @@ function Home() {
         <Link to="/start" className="startlink">
           START
         </Link>
-
-        <Emoticon />
       </div>
       <Footer />
     </>
