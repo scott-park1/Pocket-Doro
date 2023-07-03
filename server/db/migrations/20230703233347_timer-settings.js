@@ -4,9 +4,9 @@
  */
 exports.up = function (knex) {
   return knex.schema.createTable('timerPreferences', (table) => {
-    table.interger('interval_length')
-    table.interger('short_break_length')
-    table.interger('long_break_length')
+    table.integer('interval_length')
+    table.integer('short_break_length')
+    table.integer('long_break_length')
   })
 }
 
