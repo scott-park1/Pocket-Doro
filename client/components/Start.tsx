@@ -45,13 +45,17 @@ function Start() {
           margin: '50px 30px 0px 0px',
         }}
       />
-      <div className="content">
+      {/* <div className="content"> */}
+      <div className="flex-container">
         <div className="avatar-overlay">
           <Avatar />
         </div>
         <Map checked={checked} />
+      </div>
+      <div className="timeBubble">
         <Timer skippedBreaks={skippedBreaks} onSkipBreak={onSkipBreak} />
       </div>
+      {/* </div> */}
     </>
   )
 }
