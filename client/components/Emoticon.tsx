@@ -4,6 +4,8 @@ import { useState } from 'react'
 
 const emoticonSheet = 'assets/CharacterSprites/emoticons.png'
 
+import { useState } from 'react'
+
 interface Props {
   skippedBreaks: number
   resting: boolean

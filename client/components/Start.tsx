@@ -4,6 +4,8 @@ import Map from './Map'
 import { useState, useEffect } from 'react'
 import Switch from 'react-ios-switch'
 import Emoticon from './Emoticon'
+import TaskForm from './TaskForm'
+import TaskList from './TaskList'
 
 function Start() {
   const [checked, setChecked] = useState(false)
@@ -22,7 +24,7 @@ function Start() {
     //change emoticon
   }
 
-  const handleSwitchChange = (checked: any) => {
+  const handleSwitchChange = (checked: any) => { // Does this need to be "any" or could it be a boolean?
     setChecked(checked)
   }
 
@@ -30,7 +32,7 @@ function Start() {
     document.body.style.backgroundColor = checked
       ? 'black'
       : 'rgb(253, 198, 59)'
-  }, [checked])
+  }, [checked]) // good use of useEffect dependencies
 
   return (
     <>
@@ -43,7 +45,7 @@ function Start() {
         offColor="white"
         onChange={handleSwitchChange}
         onColor="rgb(76, 217, 100)"
-        pendingOffColor={undefined}
+        pendingOffColor={undefined} // For these undefined props, I wonder if they can be omitted entirely?
         pendingOnColor={undefined}
         readOnly={false}
         style={{
@@ -61,6 +63,8 @@ function Start() {
         <Map checked={checked} />
         <Emoticon skippedBreaks={skippedBreaks} resting={resting} />
         <div className="timeBubble">
+          <TaskList />
+          <TaskForm />
           <Timer
             skippedBreaks={skippedBreaks}
             onSkipBreak={onSkipBreak}

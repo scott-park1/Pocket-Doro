@@ -12,6 +12,7 @@ function App() {
         {/* <Emoticon skippedBreaks={3} resting={false} /> */}
       </div>
     </>
+    // Don't really need the fragment, since the section is wrapping everything.
   )
 }
 
