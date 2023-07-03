@@ -14,6 +14,7 @@ interface Props {
   setResting: (value: React.SetStateAction<boolean>) => void
 }
 
+
 export default function Timer({
   skippedBreaks,
   onSkipBreak,
@@ -25,7 +26,7 @@ export default function Timer({
   const [completedIntervals, setCompletedIntervals] = useState(0)
   const [isPaused, setIsPaused] = useState(true)
 
-  const [workingLength, setWorkingLength] = useState(24)
+  const [workingLength, setWorkingLength] = useState(0)
   const [shortBreakLength, setShortBreakLength] = useState(4)
   const [longBreakLength, setLongBreakLength] = useState(29)
   const [showSettings, setShowSettings] = useState(false)
@@ -107,7 +108,7 @@ export default function Timer({
       }
       // does not consider breaks
       setworkingTime(workingTime + 1)
-    }, 1000)
+    }, 10)
 
     return () => {
       clearInterval(interval)
@@ -136,6 +137,38 @@ export default function Timer({
 
   return (
     <>
+      <div className="timeBubble">
+        {resting ? (
+          <>
+            <div className="break">Break time! New session starts in: </div>
+            <div className="timer-wrapper">
+              <div className="timersecond">
+                {timerMinutes}:{timerSeconds}
+              </div>
+            </div>
+            <button onClick={skipBreak} className="skipbutton">
+              Skip break
+            </button>
+            <div className="timertextbreak">
+              Completed work cycles: {completedIntervals} <br />
+              Breaks skipped: {skippedBreaks}
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="timer-wrapper">
+              <div className="timerfirst">
+                {timerMinutes}:{timerSeconds}
+              </div>
+            </div>
+            <div className="timertext">
+              Completed work cycles: {completedIntervals} <br />
+              Breaks skipped: {skippedBreaks}
+            </div>
+          </>
+        )}
+      </div>
+      <br />
       <div>
         Time spent working
         <br />
@@ -236,42 +269,11 @@ export default function Timer({
           </>
         )}
       </div>
-      {isPaused ? (
+      {/* {isPaused ? (
         <button onClick={pauseTimer}>Play</button>
       ) : (
         <button onClick={pauseTimer}>Pause</button>
-      )}
-      <div className="timeBubble">
-        {resting ? (
-          <>
-            <div className="break">Break time! New session starts in: </div>
-            <div className="timer-wrapper">
-              <div className="timersecond">
-                {timerMinutes}:{timerSeconds}
-              </div>
-            </div>
-            <button onClick={skipBreak} className="skipbutton">
-              Skip break
-            </button>
-            <div className="timertextbreak">
-              Completed work cycles: {completedIntervals} <br />
-              Breaks skipped: {skippedBreaks}
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="timer-wrapper">
-              <div className="timerfirst">
-                {timerMinutes}:{timerSeconds}
-              </div>
-            </div>
-            <div className="timertext">
-              Completed work cycles: {completedIntervals} <br />
-              Breaks skipped: {skippedBreaks}
-            </div>
-          </>
-        )}
-      </div>
+      )} */}
     </>
   )
 }

@@ -30,7 +30,7 @@ body {
 .avatar-overlay {
   position: absolute;
   top: 10px;
-  right: 50px;
+  right: 600px;
 }
 
 .title {
@@ -84,14 +84,15 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  /* position: absolute;
   top: 150px;
   left: 50px;
   right: 50px;
   width: 50%;
-  height: 30%;
+  height: 30%; */
   border-radius: 20px 20px 0 0;
 }
+
 
 .timerfirst {
   position: absolute;
@@ -109,6 +110,7 @@ h2 {
   font-size: 50px;
   margin-top: 50px;
 }
+
 
 .timersecond {
   position: absolute;
@@ -136,7 +138,7 @@ h2 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  /* position: absolute;
   top: 325px;
   left: 25px;
   width: 500px;
@@ -275,24 +277,24 @@ h2 {
   font-family: 'Baloo 2', cursive;
   color: rgb(242, 71, 71);
   text-align: center;
-  margin-top: 300px;
-  margin-left: 110px;
+  /* margin-top: 300px;
+  margin-left: 110px; */
 }
 
 .timertextbreak {
   font-family: 'Baloo 2', cursive;
   color: rgb(242, 71, 71);
   text-align: center;
-  margin-top: 30px;
-  margin-left: 80px;
+  /* margin-top: 30px;
+  margin-left: 80px; */
 }
 
 .break {
   font-family: 'Baloo 2', cursive;
   color: rgb(242, 71, 71);
   text-align: left;
-  margin-top: 50px;
-  margin-left: 80px;
+  /* margin-top: 50px;
+  margin-left: 80px; */
 }
 
 .skipbutton {
@@ -307,12 +309,21 @@ h2 {
 
 .timeBubble {
   position: absolute;
-  top: 0;
+  top: 400px;
+  right:10px;
+  flex: 1;
 }
 
 .map {
   margin-top: 150px;
   max-width: 40%;
+  flex: 1;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 @media (min-width: 0px) and (max-width: 480px) {
