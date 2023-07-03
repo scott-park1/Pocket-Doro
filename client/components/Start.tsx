@@ -19,7 +19,7 @@ function Start() {
     //change emoticon
   }
 
-  const handleSwitchChange = (checked: any) => {
+  const handleSwitchChange = (checked: any) => { // Does this need to be "any" or could it be a boolean?
     setChecked(checked)
   }
 
@@ -27,7 +27,7 @@ function Start() {
     document.body.style.backgroundColor = checked
       ? 'black'
       : 'rgb(253, 198, 59)'
-  }, [checked])
+  }, [checked]) // good use of useEffect dependencies
 
   return (
     <>
@@ -40,7 +40,7 @@ function Start() {
         offColor="white"
         onChange={handleSwitchChange}
         onColor="rgb(76, 217, 100)"
-        pendingOffColor={undefined}
+        pendingOffColor={undefined} // For these undefined props, I wonder if they can be omitted entirely?
         pendingOnColor={undefined}
         readOnly={false}
         style={{

@@ -45,6 +45,8 @@ export default function Timer({
     const value = e.target.value
     setShortBreakLength(parseInt(value) - 1)
   }
+  // All of these handleChange functions probably need to multiply the value by 60,
+  // so the timer works in minutes, rather than seconds?
 
   function displaySettings() {
     setIsPaused(true)

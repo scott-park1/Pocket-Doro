@@ -16,6 +16,7 @@ describe('<Timer>', () => {
     await waitFor(
       () => {
         expect(screen.getByText('24:58')).toBeInTheDocument()
+        // This one is failing. Testing timers is really hard.
       },
       { timeout: 3000 }
     )

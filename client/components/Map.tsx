@@ -25,7 +25,7 @@ export default function Map({ checked }: MapProps) {
 
   useEffect(() => {
     setBackgroundImage(checked ? NightBackground : DayBackground)
-  }, [checked])
+  }, [checked]) // Again, good usage of this.
 
   return (
     <img
