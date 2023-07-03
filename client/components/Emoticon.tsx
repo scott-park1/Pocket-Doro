@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { SpriteAnimator } from './sprites/SpriteAnimator'
+import { useState } from 'react'
 
 const emoticonSheet = 'assets/CharacterSprites/emoticons.png'
+
+import { useState } from 'react'
 
 interface Props {
   skippedBreaks: number
@@ -9,6 +12,9 @@ interface Props {
 }
 
 export default function Emoticon({ skippedBreaks, resting }: Props) {
+  const [tiredLevel, setTiredLevel] = useState(0)
+  const [previousSkippedBreaks, setPreviousSkippedBreaks] = useState(0)
+
   const spriteWidth = 16
   const spriteHeight = 16
   const scale = 1 / 5
@@ -16,19 +22,33 @@ export default function Emoticon({ skippedBreaks, resting }: Props) {
   const wrapAfter = 5
   const fps = 0
 
-  let startEmoticon = 5
-  let onBreak = 14
-  let study = 3
-  let tired = 6 //skip 1 break
-  let veryTired = 9 //skip 2 breaks
-  let veryVeryTired = 13
+  // let startEmoticon = 5
+  const onBreak = 14
+  const study = 3
+  const tired = 6 //skip 1 break
+  const veryTired = 9 //skip 2 breaks
+  const veryVeryTired = 13
+
+  useEffect(() => {
+    if (skippedBreaks < previousSkippedBreaks && tiredLevel > 0) {
+      setTiredLevel(tiredLevel - 1)
+    } else if (skippedBreaks > previousSkippedBreaks && tiredLevel < 3) {
+      setTiredLevel(tiredLevel + 1)
+    }
+    setPreviousSkippedBreaks(skippedBreaks)
+  }, [skippedBreaks])
 
   function emoticonCycle() {
-    if (resting) return onBreak
-    if (skippedBreaks === 0) return study
-    if (skippedBreaks === 1) return tired
-    if (skippedBreaks === 2) return veryTired
-    if (skippedBreaks >= 3) return veryVeryTired
+    switch (tiredLevel) {
+      case 0:
+        return study
+      case 1:
+        return tired
+      case 2:
+        return veryTired
+      case 3:
+        return veryVeryTired
+    }
   }
 
   return (

@@ -1,0 +1,6 @@
+.workinprogress {
+  /* position top left of screen */
+  position: absolute;
+  top: 0;
+  left: 0;
+}

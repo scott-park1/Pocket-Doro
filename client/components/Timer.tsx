@@ -1,4 +1,5 @@
 import { useState, useEffect, ChangeEvent } from 'react'
+import Emoticon from './Emoticon'
 // add import for play/pause icons
 
 const alarmTone = new Audio('/alarm.mp3')
@@ -20,16 +21,16 @@ export default function Timer({
   resting,
   setResting,
 }: Props) {
-  const [minutes, setMinutes] = useState(0)
+
+  const [minutes, setMinutes] = useState(25)
   const [seconds, setSeconds] = useState(0)
   const [completedIntervals, setCompletedIntervals] = useState(0)
   const [isPaused, setIsPaused] = useState(true)
-
-  const [workingLength, setWorkingLength] = useState(0)
+  const [workingLength, setWorkingLength] = useState(24)
   const [shortBreakLength, setShortBreakLength] = useState(4)
-  const [longBreakLength, setLongBreakLength] = useState(29)
+  const [longBreakLength, setLongBreakLength] = useState(2)
   const [showSettings, setShowSettings] = useState(false)
-  const [workingTime, setworkingTime] = useState(0)
+  const [totalWorkingTime, setTotalWorkingTime] = useState(0)
 
   function handleWorkingMinutesChange(e: ChangeEvent<HTMLInputElement>) {
     const value = e.target.value
@@ -44,6 +45,8 @@ export default function Timer({
     const value = e.target.value
     setShortBreakLength(parseInt(value) - 1)
   }
+  // All of these handleChange functions probably need to multiply the value by 60,
+  // so the timer works in minutes, rather than seconds?
 
   function displaySettings() {
     setIsPaused(true)
@@ -84,6 +87,7 @@ export default function Timer({
             setSeconds(59)
             setMinutes(minutes - 1)
           } else {
+            if (resting) console.log('end of rest')
             changeTimer()
             setCompletedIntervals(completedIntervals + 1)
           }
@@ -105,14 +109,21 @@ export default function Timer({
           setSeconds(seconds - 1)
         }
       }
-      // does not consider breaks
-      setworkingTime(workingTime + 1)
-    }, 10)
+      if (!resting) setTotalWorkingTime(totalWorkingTime + 1)
+    }, 1000)
+
 
     return () => {
       clearInterval(interval)
     }
-  }, [seconds, changeTimer, completedIntervals, minutes, workingTime])
+  }, [
+    seconds,
+    changeTimer,
+    completedIntervals,
+    minutes,
+    totalWorkingTime,
+    setTotalWorkingTime,
+  ])
 
   function skipBreak() {
     changeTimer()
@@ -127,12 +138,25 @@ export default function Timer({
   const timerMinutes = minutes < 10 ? `0${minutes}` : minutes
   const timerSeconds = seconds < 10 ? `0${seconds}` : seconds
 
-  const workingMinutes = Math.floor(workingTime / 60)
+  const workingMinutes = Math.floor(totalWorkingTime / 60)
   const workingHours = Math.floor(workingMinutes / 60)
-  const timeSpentWorking =
-    workingMinutes < 10
-      ? `${workingHours}:0${workingMinutes}`
-      : `${workingHours}:${workingMinutes}`
+
+  function displayTimeSpentWorking() {
+    if (workingMinutes < 10) {
+      return `${workingHours}:0${workingMinutes}`
+    }
+
+    return `${workingHours}:${workingMinutes}`
+  }
+
+  //   if (workingMinutes > 100) {
+  //     return `${workingHours} hours and ${workingMinutes - 100} minutes`
+  //   }
+  //   if (workingHours === 0) {
+  //     return `${workingMinutes - 100} minutes`
+  //   }
+  //   return `${workingHours} hours and ${workingMinutes - 100} minutes`
+  // }
 
   return (
     <>

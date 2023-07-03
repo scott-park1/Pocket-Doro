@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:900');
 
+
 .flex-container {
   display: flex;
   flex-direction: row;
@@ -15,8 +16,11 @@ body {
   font-size: 200px;
   color: rgb(242, 71, 71);
   margin-bottom: 10px;
-  text-shadow: -4px -4px 0 #000, 4px -4px 0 #000, -4px 4px 0 #000,
-    4px 4px 0 #000;
+  text-shadow:
+  -4px -4px 0 #000,
+  4px -4px 0 #000,
+  -4px 4px 0 #000,
+  4px 4px 0 #000;
 }
 
 .startlink {
@@ -80,21 +84,6 @@ body {
   position: absolute;
 }
 
-/*UNSURE WHAT THIS IS
-/* .timer-digits {
-  font-family: 'Source Code Pro', monospace;
-  font-weight: 900;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* position: absolute;
-  top: 150px;
-  left: 50px;
-  right: 50px;
-  width: 50%;
-  height: 30%; */
-  /* border-radius: 20px 20px 0 0;
-} */
 
 .timeBubble {
   position: absolute;
@@ -135,9 +124,9 @@ body {
   left: -70px;
   width: 500px;
   height: 5%;
-}
+} 
 
-.timer-button {
+.timer-button{
   background-color: #fbeee0;
   border: 2px solid #422800;
   border-radius: 30px;
@@ -252,7 +241,6 @@ body {
 }
 
 /* settings range slider styling */
-
 .slider {
   /* removing default appearance */
   -webkit-appearance: none;
@@ -288,32 +276,6 @@ body {
   border-radius: 16px;
 }
 
-/* Thumb: webkit */
-.slider::-webkit-slider-thumb {
-  /* removing default appearance */
-  -webkit-appearance: none;
-  appearance: none;
-  /* creating a custom design */
-  height: 15px;
-  width: 15px;
-  background-color: #fff;
-  border-radius: 50%;
-  border: 2px solid #ff5e8f;
-  /*  slider progress trick  */
-  box-shadow: -407px 0 0 400px #ff5e8f;
-}
-
-/* Thumb: Firefox */
-.slider::-moz-range-thumb {
-  height: 15px;
-  width: 15px;
-  background-color: #fff;
-  border-radius: 50%;
-  border: 1px solid #f50;
-  /*  slider progress trick  */
-  box-shadow: -407px 0 0 400px #f50;
-}
-
 @media (min-width: 0px) and (max-width: 480px) {
   .title {
     font-size: 78px;
@@ -322,7 +284,7 @@ body {
     text-shadow: -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000,
       3px 3px 0 #000;
   }
-
+  
   .startlink {
     margin-top: 50px;
     margin-bottom: 50px;
@@ -331,7 +293,7 @@ body {
     padding: 10px 10px;
     font-size: 15px;
   }
-
+  
   .footer {
     font-size: 12px;
     left: 0;
@@ -369,7 +331,7 @@ body {
     margin-top: 50px;
     z-index: -1;
   }
-
+  
   .timertext {
     font-size: 10px;
     margin-left: -160px;
@@ -389,7 +351,7 @@ body {
     border-radius: 10px;
     border: 2px solid rgb(242, 71, 71);
   }
-
+  
   .timer-buttons-wrapper {
     margin-top: 50px;
     margin-left: -255px;
@@ -449,8 +411,11 @@ body {
     font-size: 90px;
     margin-top: 50px;
     margin-bottom: 10px;
-    text-shadow: -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000,
-      3px 3px 0 #000;
+    text-shadow:
+    -3px -3px 0 #000,
+    3px -3px 0 #000,
+    -3px 3px 0 #000,
+    3px 3px 0 #000;
   }
 
   .startlink {
@@ -461,7 +426,7 @@ body {
     padding: 10px 10px;
     font-size: 20px;
   }
-
+  
   .footer {
     font-size: 12px;
     left: 0;
@@ -499,7 +464,7 @@ body {
     margin-top: 50px;
     z-index: -1;
   }
-
+  
   .timertext {
     font-size: 10px;
     margin-left: -160px;
@@ -582,7 +547,7 @@ body {
     text-shadow: -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000,
       3px 3px 0 #000;
   }
-
+  
   .startlink {
     margin-top: 50px;
     margin-bottom: 50px;
@@ -591,7 +556,7 @@ body {
     padding: 10px 10px;
     font-size: 30px;
   }
-
+  
   .footer {
     font-size: 15px;
     left: 0;
@@ -648,7 +613,7 @@ body {
     border-radius: 10px;
     border: 2px solid rgb(242, 71, 71);
   }
-
+  
   .timer-buttons-wrapper {
     margin-top: 50px;
     margin-left: -255px;
@@ -708,8 +673,11 @@ body {
     font-size: 180px;
     margin-top: 50px;
     margin-bottom: 10px;
-    text-shadow: -4px -4px 0 #000, 4px -4px 0 #000, -4px 4px 0 #000,
-      4px 4px 0 #000;
+    text-shadow:
+    -4px -4px 0 #000,
+    4px -4px 0 #000,
+    -4px 4px 0 #000,
+    4px 4px 0 #000;
   }
 
   .startlink {
@@ -720,7 +688,7 @@ body {
     padding: 10px 10px;
     font-size: 40px;
   }
-
+  
   .footer {
     font-size: 20px;
     left: 0;
@@ -729,7 +697,7 @@ body {
     margin-top: 50px;
     margin-bottom: -10px;
   }
-
+  
   .map {
     margin-top: 60px;
     max-width: 1440px;
@@ -740,7 +708,7 @@ body {
     top: 20px;
     right: 350px;
   }
-
+  
   .timeBubble {
     top: 120px;
     right: 150px;
