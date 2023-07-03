@@ -29,7 +29,7 @@ export default function Timer({
   const [shortBreakLength, setShortBreakLength] = useState(4)
   const [longBreakLength, setLongBreakLength] = useState(29)
   const [showSettings, setShowSettings] = useState(false)
-  const [workingTime, setworkingTime] = useState(0)
+  const [totalWorkingTimer, setTotalWorkingTime] = useState(0)
 
   function handleWorkingMinutesChange(e: ChangeEvent<HTMLInputElement>) {
     const value = e.target.value
@@ -105,14 +105,21 @@ export default function Timer({
           setSeconds(seconds - 1)
         }
       }
-      // does not consider breaks
-      setworkingTime(workingTime + 1)
+
+      if (!resting) setTotalWorkingTime(totalWorkingTimer + 1)
     }, 10)
 
     return () => {
       clearInterval(interval)
     }
-  }, [seconds, changeTimer, completedIntervals, minutes, workingTime])
+  }, [
+    seconds,
+    changeTimer,
+    completedIntervals,
+    minutes,
+    totalWorkingTimer,
+    setTotalWorkingTime,
+  ])
 
   function skipBreak() {
     changeTimer()
@@ -127,12 +134,23 @@ export default function Timer({
   const timerMinutes = minutes < 10 ? `0${minutes}` : minutes
   const timerSeconds = seconds < 10 ? `0${seconds}` : seconds
 
-  const workingMinutes = Math.floor(workingTime / 60)
+  const workingMinutes = Math.floor(totalWorkingTimer / 60)
   const workingHours = Math.floor(workingMinutes / 60)
-  const timeSpentWorking =
+
+  const displayTimeSpentWorking =
     workingMinutes < 10
       ? `${workingHours}:0${workingMinutes}`
       : `${workingHours}:${workingMinutes}`
+  // function displayTimeSpentWorking() {
+
+  //   if (workingMinutes > 100) {
+  //     return `${workingHours} hours and ${workingMinutes - 100} minutes`
+  //   }
+  //   if (workingHours === 0) {
+  //     return `${workingMinutes - 100} minutes`
+  //   }
+  //   return `${workingHours} hours and ${workingMinutes - 100} minutes`
+  // }
 
   return (
     <>
@@ -171,7 +189,10 @@ export default function Timer({
       <div>
         Time spent working
         <br />
-        {timeSpentWorking}
+        {displayTimeSpentWorking}
+        <br />
+        {workingHours} hours and {workingMinutes} minutes
+        {/* {displayTimeSpentWorking()} */}
       </div>
       <br />
       <div className="timer-buttons-wrapper">
@@ -268,11 +289,6 @@ export default function Timer({
           </>
         )}
       </div>
-      {/* {isPaused ? (
-        <button onClick={pauseTimer}>Play</button>
-      ) : (
-        <button onClick={pauseTimer}>Pause</button>
-      )} */}
     </>
   )
 }
