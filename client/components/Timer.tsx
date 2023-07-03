@@ -14,7 +14,6 @@ interface Props {
   setResting: (value: React.SetStateAction<boolean>) => void
 }
 
-
 export default function Timer({
   skippedBreaks,
   onSkipBreak,
@@ -26,7 +25,7 @@ export default function Timer({
   const [completedIntervals, setCompletedIntervals] = useState(0)
   const [isPaused, setIsPaused] = useState(true)
 
-  const [workingLength, setWorkingLength] = useState(0)
+  const [workingLength, setWorkingLength] = useState(24)
   const [shortBreakLength, setShortBreakLength] = useState(4)
   const [longBreakLength, setLongBreakLength] = useState(29)
   const [showSettings, setShowSettings] = useState(false)
@@ -85,6 +84,7 @@ export default function Timer({
             setSeconds(59)
             setMinutes(minutes - 1)
           } else {
+            if (resting) console.log('end of rest')
             changeTimer()
             setCompletedIntervals(completedIntervals + 1)
           }
@@ -108,7 +108,7 @@ export default function Timer({
       }
       // does not consider breaks
       setworkingTime(workingTime + 1)
-    }, 10)
+    }, 50)
 
     return () => {
       clearInterval(interval)
