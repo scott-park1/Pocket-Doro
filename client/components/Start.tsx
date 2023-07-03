@@ -4,6 +4,8 @@ import Map from './Map'
 import { useState, useEffect } from 'react'
 import Switch from 'react-ios-switch'
 import Emoticon from './Emoticon'
+import TaskForm from './TaskForm'
+import TaskList from './TaskList'
 
 function Start() {
   const [checked, setChecked] = useState(false)
@@ -58,13 +60,15 @@ function Start() {
         <Map checked={checked} />
         <Emoticon skippedBreaks={skippedBreaks} resting={resting} />
         <div className="timeBubble">
-        <Timer
-          skippedBreaks={skippedBreaks}
-          onSkipBreak={onSkipBreak}
-          resting={resting}
-          setResting={handleSetResting}
-        />
-      </div>
+          <TaskList />
+          <TaskForm />
+          <Timer
+            skippedBreaks={skippedBreaks}
+            onSkipBreak={onSkipBreak}
+            resting={resting}
+            setResting={handleSetResting}
+          />
+        </div>
       </div>
     </>
   )
