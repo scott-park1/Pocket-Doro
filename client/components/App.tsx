@@ -8,6 +8,7 @@ function App() {
         <Outlet />
       </section>
     </>
+    // Don't really need the fragment, since the section is wrapping everything.
   )
 }
 
