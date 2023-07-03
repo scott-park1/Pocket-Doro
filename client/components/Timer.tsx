@@ -14,7 +14,6 @@ interface Props {
   setResting: (value: React.SetStateAction<boolean>) => void
 }
 
-
 export default function Timer({
   skippedBreaks,
   onSkipBreak,
@@ -26,7 +25,7 @@ export default function Timer({
   const [completedIntervals, setCompletedIntervals] = useState(0)
   const [isPaused, setIsPaused] = useState(true)
 
-  const [workingLength, setWorkingLength] = useState(0)
+  const [workingLength, setWorkingLength] = useState(24)
   const [shortBreakLength, setShortBreakLength] = useState(4)
   const [longBreakLength, setLongBreakLength] = useState(29)
   const [showSettings, setShowSettings] = useState(false)
