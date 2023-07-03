@@ -12,20 +12,16 @@ export default function Emoticon({ skippedBreaks, resting }: Props) {
   const spriteWidth = 16
   const spriteHeight = 16
   const scale = 1 / 5
-  const frameCount = 6 // rows
-  const wrapAfter = 5 // columns
-  const fps = 0 // speed
+  const frameCount = 6
+  const wrapAfter = 5
+  const fps = 0
 
-  // get frame positions:
   let startEmoticon = 5
   let onBreak = 14
   let study = 3
   let tired = 6 //skip 1 break
   let veryTired = 9 //skip 2 breaks
   let veryVeryTired = 13
-
-  // array of emoticonCycle
-  // const emoticonCycle [happy, tired, veryTired, veryVeryTired]
 
   function emoticonCycle() {
     if (resting) return onBreak
