@@ -52,19 +52,19 @@ function Start() {
         }}
       />
       <div className="flex-container">
-        <div className="avatar-overlay">
+        {/* <div className="avatar-overlay">
           <Avatar />
-        </div>
+        </div> */}
         <Map checked={checked} />
-        <Emoticon skippedBreaks={skippedBreaks} resting={resting} />
+        {/* <Emoticon skippedBreaks={skippedBreaks} resting={resting} /> */}
         <div className="timeBubble">
-        <Timer
-          skippedBreaks={skippedBreaks}
-          onSkipBreak={onSkipBreak}
-          resting={resting}
-          setResting={handleSetResting}
-        />
-      </div>
+          <Timer
+            skippedBreaks={skippedBreaks}
+            onSkipBreak={onSkipBreak}
+            resting={resting}
+            setResting={handleSetResting}
+          />
+        </div>
       </div>
     </>
   )

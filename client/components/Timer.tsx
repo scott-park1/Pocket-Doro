@@ -14,14 +14,13 @@ interface Props {
   setResting: (value: React.SetStateAction<boolean>) => void
 }
 
-
 export default function Timer({
   skippedBreaks,
   onSkipBreak,
   resting,
   setResting,
 }: Props) {
-  const [minutes, setMinutes] = useState(25)
+  const [minutes, setMinutes] = useState(0)
   const [seconds, setSeconds] = useState(0)
   const [completedIntervals, setCompletedIntervals] = useState(0)
   const [isPaused, setIsPaused] = useState(true)
@@ -137,37 +136,36 @@ export default function Timer({
 
   return (
     <>
-      <div className="timeBubble">
-        {resting ? (
-          <>
-            <div className="break">Break time! New session starts in: </div>
-            <div className="timer-wrapper">
-              <div className="timersecond">
-                {timerMinutes}:{timerSeconds}
-              </div>
+      {resting ? (
+        <>
+          <div className="break">Break time! New session starts in: </div>
+          <div className="timer-wrapper">
+            <div className="timersecond">
+              {timerMinutes}:{timerSeconds}
             </div>
-            <button onClick={skipBreak} className="skipbutton">
-              Skip break
-            </button>
-            <div className="timertextbreak">
-              Completed work cycles: {completedIntervals} <br />
-              Breaks skipped: {skippedBreaks}
+          </div>
+          <button onClick={skipBreak} className="skipbutton">
+            Skip break
+          </button>
+          <div className="timertextbreak">
+            Completed work cycles: {completedIntervals} <br />
+            Breaks skipped: {skippedBreaks}
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="break"></div>
+          <div className="timer-wrapper">
+            <div className="timersecond">
+              {timerMinutes}:{timerSeconds}
             </div>
-          </>
-        ) : (
-          <>
-            <div className="timer-wrapper">
-              <div className="timerfirst">
-                {timerMinutes}:{timerSeconds}
-              </div>
-            </div>
-            <div className="timertext">
-              Completed work cycles: {completedIntervals} <br />
-              Breaks skipped: {skippedBreaks}
-            </div>
-          </>
-        )}
-      </div>
+          </div>
+          <div className="timertext">
+            Completed work cycles: {completedIntervals} <br />
+            Breaks skipped: {skippedBreaks}
+          </div>
+        </>
+      )}
       <br />
       <div>
         Time spent working

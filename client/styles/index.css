@@ -78,7 +78,8 @@ h2 {
   position: absolute;
 }
 
-.timer-digits {
+/*UNSURE WHAT THIS IS
+/* .timer-digits {
   font-family: 'Source Code Pro', monospace;
   font-weight: 900;
   display: flex;
@@ -90,11 +91,11 @@ h2 {
   right: 50px;
   width: 50%;
   height: 30%; */
-  border-radius: 20px 20px 0 0;
-}
+  /* border-radius: 20px 20px 0 0;
+} */
 
-
-.timerfirst {
+/*Timer first study period*/
+.timerfirst, .timersecond {
   position: absolute;
   top: 30px;
   left: 100px;
@@ -104,15 +105,16 @@ h2 {
   border-radius: 40px 40px 0 0;
   overflow: hidden;
   color: #ff7e5e;
-  display: flex;
-  justify-content: center;
+  /* display: flex;
+  justify-content: center; */
   width: 200px;
   font-size: 50px;
   margin-top: 50px;
+  z-index: -1;
 }
 
-
-.timersecond {
+/*Timer second study period*/
+/* .timersecond {
   position: absolute;
   top: 30px;
   left: 100px;
@@ -127,7 +129,8 @@ h2 {
   width: 400px;
   margin: 0 auto;
   font-size: 100px;
-}
+} */
+
 
 .timer-buttons-wrapper {
   margin: 5px;
@@ -138,9 +141,9 @@ h2 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* position: absolute;
+  position: absolute;
   top: 325px;
-  left: 25px;
+  left: -70px;
   width: 500px;
   height: 5%;
 }
@@ -155,7 +158,6 @@ h2 {
   display: inline-block;
   font-weight: 600;
   font-size: 18px;
-
   padding: 0 18px;
   line-height: 50px;
   text-align: center;
@@ -163,6 +165,7 @@ h2 {
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  margin-top: ;
 }
 
 .timer-button:hover {
@@ -275,24 +278,28 @@ h2 {
 
 .timertext {
   font-family: 'Baloo 2', cursive;
-  color: rgb(242, 71, 71);
+  color: black;
   text-align: center;
-  /* margin-top: 300px;
-  margin-left: 110px; */
+  margin-left: 110px;
+  margin-top: 150px;
+  z-index: 99999;
 }
 
 .timertextbreak {
   font-family: 'Baloo 2', cursive;
-  color: rgb(242, 71, 71);
+  color: black;
   text-align: center;
-  /* margin-top: 30px;
-  margin-left: 80px; */
+  margin-top: -150px;
+  margin-left: 105px;
 }
 
 .break {
+  position: absolute;
   font-family: 'Baloo 2', cursive;
   color: rgb(242, 71, 71);
   text-align: left;
+  width: 247px;
+  height: 26px;
   /* margin-top: 50px;
   margin-left: 80px; */
 }
@@ -307,22 +314,23 @@ h2 {
   border: 2px solid rgb(242, 71, 71);
 }
 
-.timeBubble {
-  position: absolute;
-  top: 400px;
-  right:10px;
-  flex: 1;
+.map {
+  position: relative;
+  margin-top: 40px;
+  max-width: 55%;
 }
 
-.map {
-  margin-top: 150px;
-  max-width: 40%;
-  flex: 1;
+.timeBubble {
+  position:fixed;
+  top: 200px;
+  right: 400px;
+  /* width: max-content; */
 }
 
 .flex-container {
   display: flex;
   flex-direction: row;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -477,7 +485,7 @@ h2 {
   }
 
   .timertext {
-    margin: 300px 0px 50px 260px;
+    margin: 3000px 0px 50px 260px;
   }
 
   .timertextbreak {
