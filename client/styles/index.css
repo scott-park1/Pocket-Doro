@@ -1,36 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:900');
 
+.flex-container {
+  display: flex;
+  flex-direction: row;
+}
+
 body {
   background-color: rgb(253, 198, 59);
   text-align: center;
-}
-
-.avatar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
-}
-
-.base {
-  z-index: 1;
-  position: absolute;
-}
-
-.hair {
-  z-index: 2;
-  position: absolute;
-}
-
-.content {
-  position: relative;
-}
-
-.avatar-overlay {
-  position: absolute;
-  top: 10px;
-  right: 600px;
 }
 
 .title {
@@ -57,12 +34,6 @@ body {
   font-family: 'Baloo 2', cursive;
 }
 
-h2 {
-  font-family: 'Baloo 2', cursive;
-  font-size: 40px;
-  color: rgb(242, 71, 71);
-}
-
 .footer {
   font-family: 'Baloo 2', cursive;
   position: absolute;
@@ -71,6 +42,37 @@ h2 {
   width: 100%;
   text-align: center;
   color: rgb(242, 71, 71);
+}
+
+.map {
+  position: relative;
+  margin-top: 40px;
+  margin-left: 50px;
+  max-width: 50%;
+}
+
+.avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.avatar-overlay {
+  position: absolute;
+  top: 5px;
+  right: 480px;
+}
+
+.base {
+  z-index: 1;
+  position: absolute;
+}
+
+.hair {
+  z-index: 2;
+  position: absolute;
 }
 
 .clothes {
@@ -94,51 +96,38 @@ h2 {
   /* border-radius: 20px 20px 0 0;
 } */
 
-/*Timer first study period*/
-.timerfirst, .timersecond {
+.timeBubble {
+  position: absolute;
+  top: 200px;
+  right: 250px;
+  padding-right: 110px;
+}
+
+.timer {
+  font-weight: bold;
+  font-family: 'Baloo 2', cursive;
   position: absolute;
   top: 30px;
   left: 100px;
   right: 30px;
-  box-shadow: 0px 50px 0px 80px #ff5e8f;
+  box-shadow: 0px 50px 0px 80px #ff81a7;
   border-style: none none solid;
   border-radius: 40px 40px 0 0;
   overflow: hidden;
   color: #ff7e5e;
-  /* display: flex;
-  justify-content: center; */
   width: 200px;
   font-size: 50px;
   margin-top: 50px;
   z-index: -1;
 }
 
-/*Timer second study period*/
-/* .timersecond {
-  position: absolute;
-  top: 30px;
-  left: 100px;
-  right: 30px;
-  box-shadow: 0px 50px 0px 80px #ff5e8f;
-  border-style: none none solid;
-  border-radius: 40px 40px 0 0;
-  overflow: hidden;
-  color: #ff7e5e;
-  display: flex;
-  justify-content: center;
-  width: 400px;
-  margin: 0 auto;
-  font-size: 100px;
-} */
-
-
 .timer-buttons-wrapper {
-  margin: 5px;
-  padding: 20px;
-  font-family: 'Source Code Pro', monospace;
+  margin-top: 50px;
+  margin-left: 25px;
+  font-family: 'Baloo 2', cursive;
   font-weight: 900;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   position: absolute;
@@ -165,10 +154,34 @@ h2 {
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  margin-top: ;
+  margin-right: 20px;
+}
+
+.timer-button-close-settings {
+  background-color: #fbeee0;
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 4px 4px 0 0;
+  color: #422800;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-left: -5px;
 }
 
 .timer-button:hover {
+  background-color: #fff;
+}
+
+.timer-button-close-settings:hover {
   background-color: #fff;
 }
 
@@ -177,39 +190,63 @@ h2 {
   transform: translate(2px, 2px);
 }
 
-@media (min-width: 768px) {
+.timer-button-close-settings:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+.timertext {
+  font-family: 'Baloo 2', cursive;
+  color: black;
+  text-align: center;
+  margin-left: 110px;
+  margin-top: 190px;
+}
+
+.break {
+  position: absolute;
+  font-family: 'Baloo 2', cursive;
+  color: rgb(242, 71, 71);
+  margin-left: 75px;
+}
+
+.skipbutton {
+  font-family: 'Baloo 2', cursive;
+  color: rgb(242, 71, 71);
+  margin-top: 30px;
+  margin-left: 110px;
+  border-radius: 10px;
+  border: 2px solid rgb(242, 71, 71);
+}
+
+/* @media (min-width: 768px) {
   .timer-button {
     min-width: 120px;
     padding: 0 25px;
   }
-}
+} */
 
 .settings-wrapper {
-  margin: 5px;
+  bottom: -300px;
+  right: -70px;
   padding: 20px;
-
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   position: absolute;
-  top: 450px;
-  left: 75px;
   width: 500px;
-  height: 50%;
+  height: 60%;
   background-color: #b5b5ff;
-
   border-radius: 20px;
 }
 
 .settings-headers {
-  font-family: 'Source Code Pro', monospace;
+  font-family: 'Baloo 2', cursive;
   font-weight: 900;
   font-size: x-large;
 }
 
 .settings-values {
-  font-family: 'Source Code Pro', monospace;
+  font-family: 'Baloo 2', cursive;
   font-weight: 900;
   font-size: medium;
 }
@@ -228,6 +265,7 @@ h2 {
   overflow: hidden;
   border-radius: 16px;
 }
+
 .slider:active {
   cursor: grabbing;
 }
@@ -276,257 +314,278 @@ h2 {
   box-shadow: -407px 0 0 400px #f50;
 }
 
-.timertext {
-  font-family: 'Baloo 2', cursive;
-  color: black;
-  text-align: center;
-  margin-left: 110px;
-  margin-top: 150px;
-  z-index: 99999;
-}
-
-.timertextbreak {
-  font-family: 'Baloo 2', cursive;
-  color: black;
-  text-align: center;
-  margin-top: -150px;
-  margin-left: 105px;
-}
-
-.break {
-  position: absolute;
-  font-family: 'Baloo 2', cursive;
-  color: rgb(242, 71, 71);
-  text-align: left;
-  width: 247px;
-  height: 26px;
-  /* margin-top: 50px;
-  margin-left: 80px; */
-}
-
-.skipbutton {
-  font-family: 'Baloo 2', cursive;
-  color: rgb(242, 71, 71);
-  text-align: left;
-  margin-top: 280px;
-  margin-left: 80px;
-  border-radius: 10px;
-  border: 2px solid rgb(242, 71, 71);
-}
-
-.map {
-  position: relative;
-  margin-top: 40px;
-  max-width: 55%;
-}
-
-.timeBubble {
-  position:fixed;
-  top: 200px;
-  right: 400px;
-  /* width: max-content; */
-}
-
-.flex-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-}
-
 @media (min-width: 0px) and (max-width: 480px) {
   .title {
-    font-size: 50px;
-    margin-top: 50px;
-    margin-bottom: 10px;
-    text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
-      2px 2px 0 #000;
-  }
-
-  h2 {
-    font-size: 25px;
-  }
-
-  .startlink {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border: 2px solid black;
-    border-radius: 12px;
-    padding: 10px 10px;
-    font-size: 20px;
-  }
-
-  .footer {
-    font-size: 10px;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 30px;
-    margin-top: 50px;
-  }
-
-  .map {
-    margin-top: 600px;
-    max-width: 480px;
-    width: 80%;
-  }
-
-  .avatar-overlay {
-    top: 410px;
-    right: 20px;
-  }
-
-  .timerfirst {
-    box-shadow: 0px 50px 0px 80px #ff5e8f;
-    border-style: none none solid;
-    border-radius: 40px 40px 0 0;
-    overflow: hidden;
-    font-size: 50px;
-    margin-top: 50px;
-    margin-left: 33px;
-  }
-
-  .timersecond {
-    box-shadow: 0px 50px 0px 80px #ff5e8f;
-    border-style: none none solid;
-    border-radius: 40px 40px 0 0;
-    overflow: hidden;
-    font-size: 50px;
-    margin-left: 33px;
-  }
-
-  .timertext {
-    margin: 300px 0px 50px 145px;
-  }
-
-  .timertextbreak {
-    margin-left: 110px;
-  }
-
-  .break {
-    margin-left: 110px;
-  }
-
-  .skipbutton {
-    margin-left: 110px;
-    border-radius: 10px;
-    border: 2px solid rgb(242, 71, 71);
-  }
-
-  .timeBubble {
-    margin: 100px auto 10px auto;
-  }
-
-  .content {
-    margin-bottom: 50px;
-  }
-}
-
-@media (min-width: 481px) and (max-width: 720px) {
-  .title {
-    font-size: 80px;
+    font-size: 78px;
     margin-top: 50px;
     margin-bottom: 10px;
     text-shadow: -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000,
       3px 3px 0 #000;
   }
 
-  h2 {
-    font-size: 30px;
-  }
-
   .startlink {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border: 2px solid black;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    border: 3px solid black;
     border-radius: 12px;
     padding: 10px 10px;
-    font-size: 25px;
+    font-size: 15px;
   }
 
   .footer {
-    font-size: 15px;
+    font-size: 12px;
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 30px;
     margin-top: 50px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
   }
 
   .map {
-    margin-top: 600px;
-    max-width: 720px;
-    width: 80%;
+    margin-top: 140px;
+    margin-left: 95px;
+    max-width: 480px;
+    width: 60%;
   }
 
   .avatar-overlay {
-    top: 500px;
-    right: 40px;
+    top: -90px;
+    right: 20px;
   }
 
-  .timerfirst {
-    box-shadow: 0px 50px 0px 80px #ff5e8f;
+  .timeBubble {
+    top: 300px;
+    right: 50px;
+  }
+
+  .timer {
+    left: -130px;
+    top: 100px;
+    box-shadow: 0px 30px 0px 50px #ff81a7;
     border-style: none none solid;
-    border-radius: 40px 40px 0 0;
-    overflow: hidden;
-    font-size: 50px;
+    border-radius: 30px 30px 0 0;
+    width: 100px;
+    font-size: 20px;
     margin-top: 50px;
-    margin-left: 150px;
-  }
-
-  .timersecond {
-    box-shadow: 0px 50px 0px 80px #ff5e8f;
-    border-style: none none solid;
-    border-radius: 40px 40px 0 0;
-    overflow: hidden;
-    font-size: 50px;
-    margin-left: 150px;
+    z-index: -1;
   }
 
   .timertext {
-    margin: 3000px 0px 50px 260px;
+    font-size: 10px;
+    margin-left: -160px;
+    margin-top: 195px;
   }
-
-  .timertextbreak {
-    margin-left: 230px;
-  }
-
+  
   .break {
-    margin-left: 230px;
+    font-size: 10px;
+    top: 90px;
+    margin-left: -160px;
   }
-
+  
   .skipbutton {
-    margin-left: 225px;
+    font-size: 10px;
+    margin-top: 30px;
+    margin-left: -160px;
     border-radius: 10px;
     border: 2px solid rgb(242, 71, 71);
   }
 
-  .timeBubble {
-    margin: 100px auto 10px auto;
+  .timer-buttons-wrapper {
+    margin-top: 50px;
+    margin-left: -255px;
+    top: 300px;
+    left: -75px;
+    width: 500px;
+    height: 1%;
+  }
+  
+  .timer-button {
+    border: 2px solid #422800;
+    border-radius: 30px;
+    box-shadow: #422800 4px 4px 0 0;
+    font-size: 10px;
+    padding: 0 20px 0 20px;
+    line-height: 30px;
+    margin-right: 15px;
+  }
+  
+  .timer-button-close-settings {
+    border: 2px solid #422800;
+    border-radius: 30px;
+    box-shadow: #422800 4px 4px 0 0;
+    font-size: 10px;
+    padding: 0 20px 0 20px;
+    line-height: 30px;
+    margin-left: -5px;
   }
 
-  .content {
+  .settings-wrapper {
+    bottom: -230px;
+    right: 15px;
+    padding: 1px;
+    width: 350px;
+    height: 60%;
+    border-radius: 20px;
+  }
+  
+  .settings-headers {
+    margin-top: 20px;
+    font-size: 13px;
+  }
+  
+  .settings-values {
+    font-size: 10px;
+  }
+
+  .slider {
+    height: 2%;
+    width: 60%;
+    margin-left: 70px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 720px) {
+  .title {
+    font-size: 90px;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    text-shadow: -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000,
+      3px 3px 0 #000;
+  }
+
+  .startlink {
+    margin-top: 50px;
     margin-bottom: 50px;
+    border: 3px solid black;
+    border-radius: 12px;
+    padding: 10px 10px;
+    font-size: 20px;
+  }
+
+  .footer {
+    font-size: 12px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: 5px;
+  }
+
+  .map {
+    margin-top: 140px;
+    margin-left: 175px;
+    max-width: 720px;
+    width: 50%;
+  }
+
+  .avatar-overlay {
+    top: -60px;
+    right: 30px;
+  }
+
+  .timeBubble {
+    top: 370px;
+    right: 170px;
+  }
+
+  .timer {
+    left: -130px;
+    top: 100px;
+    box-shadow: 0px 30px 0px 50px #ff81a7;
+    border-style: none none solid;
+    border-radius: 30px 30px 0 0;
+    width: 100px;
+    font-size: 20px;
+    margin-top: 50px;
+    z-index: -1;
+  }
+
+  .timertext {
+    font-size: 10px;
+    margin-left: -160px;
+    margin-top: 195px;
+  }
+  
+  .break {
+    font-size: 10px;
+    top: 90px;
+    margin-left: -160px;
+  }
+  
+  .skipbutton {
+    font-size: 10px;
+    margin-top: 30px;
+    margin-left: -160px;
+    border-radius: 10px;
+    border: 2px solid rgb(242, 71, 71);
+  }
+
+  .timer-buttons-wrapper {
+    margin-top: 50px;
+    margin-left: -255px;
+    top: 300px;
+    left: -75px;
+    width: 500px;
+    height: 1%;
+  }
+  
+  .timer-button {
+    border: 2px solid #422800;
+    border-radius: 30px;
+    box-shadow: #422800 4px 4px 0 0;
+    font-size: 10px;
+    padding: 0 20px 0 20px;
+    line-height: 30px;
+    margin-right: 15px;
+  }
+  
+  .timer-button-close-settings {
+    border: 2px solid #422800;
+    border-radius: 30px;
+    box-shadow: #422800 4px 4px 0 0;
+    font-size: 10px;
+    padding: 0 20px 0 20px;
+    line-height: 30px;
+    margin-left: -5px;
+  }
+
+  .settings-wrapper {
+    bottom: -230px;
+    right: 15px;
+    padding: 1px;
+    width: 350px;
+    height: 60%;
+    border-radius: 20px;
+  }
+  
+  .settings-headers {
+    margin-top: 20px;
+    font-size: 13px;
+  }
+  
+  .settings-values {
+    font-size: 10px;
+  }
+
+  .slider {
+    height: 2%;
+    width: 80%;
+    margin-left: 35px;
   }
 }
 
 @media (min-width: 721px) and (max-width: 1024px) {
   .title {
-    font-size: 120px;
+    font-size: 110px;
     margin-top: 50px;
     margin-bottom: 10px;
-    text-shadow: -4px -4px 0 #000, 4px -4px 0 #000, -4px 4px 0 #000,
-      4px 4px 0 #000;
-  }
-
-  h2 {
-    font-size: 40px;
+    text-shadow: -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000,
+      3px 3px 0 #000;
   }
 
   .startlink {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
     border: 3px solid black;
     border-radius: 12px;
     padding: 10px 10px;
@@ -534,73 +593,113 @@ h2 {
   }
 
   .footer {
-    font-size: 20px;
+    font-size: 15px;
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 30px;
     margin-top: 50px;
-    margin-bottom: 30px;
+    margin-bottom: 5px;
   }
 
   .map {
-    margin-top: 700px;
+    margin-top: 140px;
     max-width: 1024px;
-    width: 80%;
+    width: 50%;
   }
 
   .avatar-overlay {
-    top: 710px;
-    right: 60px;
+    top: 10px;
+    right: 250px;
   }
 
-  .timerfirst {
-    box-shadow: 0px 50px 0px 80px #ff5e8f;
+  .timeBubble {
+    top: 120px;
+    right: 40px;
+  }
+
+  .timer {
+    left: -130px;
+    top: 100px;
+    box-shadow: 0px 30px 0px 50px #ff81a7;
     border-style: none none solid;
-    border-radius: 40px 40px 0 0;
-    overflow: hidden;
-    font-size: 50px;
+    border-radius: 30px 30px 0 0;
+    width: 100px;
+    font-size: 20px;
     margin-top: 50px;
-    margin-left: 290px;
-  }
-
-  .timersecond {
-    box-shadow: 0px 50px 0px 80px #ff5e8f;
-    border-style: none none solid;
-    border-radius: 40px 40px 0 0;
-    overflow: hidden;
-    font-size: 50px;
-    margin-left: 290px;
+    z-index: -1;
   }
 
   .timertext {
-    font-size: 20px;
-    margin: 300px 0px 50px 380px;
+    font-size: 10px;
+    margin-left: -160px;
+    margin-top: 195px;
   }
-
-  .timertextbreak {
-    font-size: 20px;
-    margin-left: 340px;
-  }
-
+  
   .break {
-    font-size: 20px;
-    margin-left: 340px;
+    font-size: 10px;
+    top: 90px;
+    margin-left: -160px;
   }
-
+  
   .skipbutton {
-    font-size: 20px;
-    margin-left: 330px;
+    font-size: 10px;
+    margin-top: 30px;
+    margin-left: -160px;
     border-radius: 10px;
     border: 2px solid rgb(242, 71, 71);
   }
 
-  .timeBubble {
-    margin: 100px auto 10px auto;
+  .timer-buttons-wrapper {
+    margin-top: 50px;
+    margin-left: -255px;
+    top: 300px;
+    left: -75px;
+    width: 500px;
+    height: 1%;
+  }
+  
+  .timer-button {
+    border: 2px solid #422800;
+    border-radius: 30px;
+    box-shadow: #422800 4px 4px 0 0;
+    font-size: 10px;
+    padding: 0 20px 0 20px;
+    line-height: 30px;
+    margin-right: 15px;
+  }
+  
+  .timer-button-close-settings {
+    border: 2px solid #422800;
+    border-radius: 30px;
+    box-shadow: #422800 4px 4px 0 0;
+    font-size: 10px;
+    padding: 0 20px 0 20px;
+    line-height: 30px;
+    margin-left: -5px;
   }
 
-  .content {
-    margin-bottom: 50px;
+  .settings-wrapper {
+    bottom: -230px;
+    right: 15px;
+    padding: 1px;
+    width: 350px;
+    height: 60%;
+    border-radius: 20px;
+  }
+  
+  .settings-headers {
+    margin-top: 20px;
+    font-size: 13px;
+  }
+  
+  .settings-values {
+    font-size: 10px;
+  }
+
+  .slider {
+    height: 2%;
+    width: 80%;
+    margin-left: 35px;
   }
 }
 
@@ -613,17 +712,13 @@ h2 {
       4px 4px 0 #000;
   }
 
-  h2 {
-    font-size: 40px;
-  }
-
   .startlink {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
     border: 3px solid black;
     border-radius: 12px;
     padding: 10px 10px;
-    font-size: 50px;
+    font-size: 40px;
   }
 
   .footer {
@@ -636,57 +731,18 @@ h2 {
   }
 
   .map {
-    margin-top: 180px;
+    margin-top: 60px;
     max-width: 1440px;
-    width: 40%;
+    width: 50%;
   }
 
   .avatar-overlay {
-    top: 50px;
-    right: 40px;
-  }
-
-  .timerfirst {
-    box-shadow: 0px 50px 0px 80px #ff5e8f;
-    border-style: none none solid;
-    border-radius: 40px 40px 0 0;
-    overflow: hidden;
-    font-size: 50px;
-    margin-top: 50px;
-  }
-
-  .timersecond {
-    box-shadow: 0px 50px 0px 80px #ff5e8f;
-    border-style: none none solid;
-    border-radius: 40px 40px 0 0;
-    overflow: hidden;
-    font-size: 50px;
-    margin-top: 20px;
-  }
-
-  .timertext {
-    margin-top: 300px;
-    margin-left: 110px;
-  }
-
-  .timertextbreak {
-    margin-top: 30px;
-    margin-left: 80px;
-  }
-
-  .break {
-    margin-top: 50px;
-    margin-left: 80px;
-  }
-
-  .skipbutton {
-    margin-top: 280px;
-    margin-left: 80px;
-    border-radius: 10px;
-    border: 2px solid rgb(242, 71, 71);
+    top: 20px;
+    right: 350px;
   }
 
   .timeBubble {
-    top: 0;
+    top: 120px;
+    right: 150px;
   }
 }
