@@ -1,19 +1,42 @@
 import request from 'superagent'
 
-import { TimePreference, UpdateTimePreference } from '../../models/timer'
+import { TimePreference } from '../../models/timer'
 
 const rootUrl = '/api/v1/timer'
 
 export async function getTimerSettings(): Promise<TimePreference[]> {
   return request
     .get(`${rootUrl}`)
-    .then((res) => res.body)
-    .catch(Error)
+    .then((res) => res.body.timerSettings)
+    .catch(logError)
 }
 
-/*const recipeURL = '/api/v1/recipe'
-// GET /api/v1/recipe/:recipeId
-export async function getRecipeById(recipeId: string): Promise<Recipe> {
-  const response = await request.get(`${rootUrl}/${id}`)
-  return response.body.recipe
-}*/
+interface UpdateTimerFunction {
+  timerSettings: TimePreference
+  token: string
+}
+export async function updateTimerSettings({
+  timerSettings,
+  token,
+}: UpdateTimerFunction) {
+  return await request
+    .put(`${rootUrl}/${timerSettings.id}`)
+    .set(`Authorization`, `Bearer ${token}`)
+    .send({ timerSettings })
+    .then((res) => res.body.timerSettings)
+    .catch(logError)
+}
+
+function logError(err: Error) {
+  console.log(err)
+  if (err.message === 'Username Taken') {
+    throw new Error('Username already taken - please choose another')
+  } else if (err.message === 'Forbidden') {
+    throw new Error(
+      'Only users who are logged in can set the timer preferences'
+    )
+  } else {
+    console.error('Error consuming the API (in client/api.js):', err.message)
+    throw err
+  }
+}

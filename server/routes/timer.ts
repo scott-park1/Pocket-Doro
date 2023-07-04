@@ -1,5 +1,5 @@
 import express from 'express'
-import { UpdateTimePreference } from '../../models/timer'
+import { TimePreference } from '../../models/timer'
 import { checkJwt, JwtRequest } from '../utils/auth'
 
 import * as db from '../db/db'
@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
 })
 
 router.put('/:id', checkJwt, async (req: JwtRequest, res) => {
-  const { timerSettings } = req.body as { timerSettings: UpdateTimePreference }
+  const { timerSettings } = req.body as { timerSettings: TimePreference }
 
   const auth0Id = req.auth?.sub
 

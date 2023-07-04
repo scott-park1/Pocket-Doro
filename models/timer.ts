@@ -1,5 +1,5 @@
 export interface TimePreference {
-  user_id: number
+  id: number
   interval_length: number
   short_break_length: number
   long_break_length: number
