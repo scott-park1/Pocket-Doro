@@ -42,26 +42,24 @@ export default function TaskForm({ setCurrentTask }: Props) {
   }
 
   return (
-    <>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <div className="task-submit">
-            <label htmlFor="tasks" className="tasks">
-              Task:{' '}
-            </label>
-            <input
-              type="text"
-              name="task"
-              id="task"
-              value={tasks.task}
-              onChange={handleChange}
-            />
-            <button type="submit" className="submitbutton">
-              Submit
-            </button>
-          </div>
-        </form>
-      </div>
-    </>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div className="task-submit">
+          <label htmlFor="task" className="tasks">
+            Task:
+          </label>
+          <input
+            type="text"
+            name="task"
+            id="task"
+            value={tasks.task}
+            onChange={handleChange}
+          />
+          <button type="submit" className="submitbutton">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
   )
 }
