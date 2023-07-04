@@ -41,7 +41,7 @@ export default function TaskForm() {
       <h3>What do you want to work on? ✍🏼</h3>
       <div>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="tasks">Task:</label>
+          <label htmlFor="tasks">Task: </label>
           <input
             type="text"
             name="tasks"
@@ -49,7 +49,9 @@ export default function TaskForm() {
             value={tasks.task}
             onChange={handleChange}
           />
-          <button type="submit">Submit</button>
+          <button type="submit" className="submitbutton">
+            Submit
+          </button>
         </form>
       </div>
     </>
