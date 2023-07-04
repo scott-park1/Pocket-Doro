@@ -23,7 +23,7 @@ export default function TaskList() {
           ? tasks[tasks.length - 1].task
           : tasks[tasks.length - 2].task}
       </div>
-      <h3>What you're working on today</h3>
+      <h3>What you are working on today</h3>
       <div>{currentTask}</div>
       <TaskForm setCurrentTask={setCurrentTask} />
     </>
