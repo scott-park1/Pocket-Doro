@@ -15,7 +15,7 @@ export default function Emoticon({ skippedBreaks, resting }: Props) {
 
   const spriteWidth = 16
   const spriteHeight = 16
-  const scale = 1 / 5
+  const [scale, setScale] = useState(0.2)
   const frameCount = 6
   const wrapAfter = 5
   const fps = 0
@@ -35,6 +35,20 @@ export default function Emoticon({ skippedBreaks, resting }: Props) {
     }
     setPreviousSkippedBreaks(skippedBreaks)
   }, [skippedBreaks])
+
+  useEffect(() => {
+    const handleResize = () => {
+      const newScale = 300 / window.innerWidth // adjust to find best fit
+      setScale(newScale)
+    }
+
+    handleResize()
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
 
   function emoticonCycle() {
     switch (tiredLevel) {

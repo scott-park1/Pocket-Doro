@@ -46,7 +46,9 @@ export default function TaskForm({ setCurrentTask }: Props) {
       <h3>What do you want to work on today? ✍🏼</h3>
       <div>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="tasks">Task: </label>
+          <label htmlFor="tasks" className="tasks">
+            Task:{' '}
+          </label>
           <input
             type="text"
             name="task"
