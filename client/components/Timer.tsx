@@ -1,4 +1,5 @@
 import { useState, useEffect, ChangeEvent } from 'react'
+import TaskList from './TaskList'
 
 const alarmTone = new Audio('/alarm.mp3')
 
@@ -28,6 +29,7 @@ export default function Timer({
   const [longBreakLength, setLongBreakLength] = useState(2)
   const [showSettings, setShowSettings] = useState(false)
   const [totalWorkingTime, setTotalWorkingTime] = useState(0)
+  const [showForm, setShowForm] = useState(false)
 
   function handleWorkingMinutesChange(e: ChangeEvent<HTMLInputElement>) {
     const value = e.target.value
@@ -48,6 +50,10 @@ export default function Timer({
   function displaySettings() {
     setIsPaused(true)
     setShowSettings(!showSettings)
+  }
+
+  function displayForm() {
+    setShowForm(!showForm)
   }
 
   const changeTimer = () => {
@@ -142,15 +148,6 @@ export default function Timer({
     return `${workingHours}:${workingMinutes}`
   }
 
-  //   if (workingMinutes > 100) {
-  //     return `${workingHours} hours and ${workingMinutes - 100} minutes`
-  //   }
-  //   if (workingHours === 0) {
-  //     return `${workingMinutes - 100} minutes`
-  //   }
-  //   return `${workingHours} hours and ${workingMinutes - 100} minutes`
-  // }
-
   return (
     <>
       {resting ? (
@@ -200,6 +197,15 @@ export default function Timer({
         >
           {showSettings ? 'Close' : 'Settings'}
         </button>
+        <button className="timer-button" onClick={displayForm}>
+          {showForm ? 'Close' : 'Tasks'}
+        </button>
+        {showForm && (
+          <div className="task-settings-wrapper">
+            {' '}
+            <TaskList />{' '}
+          </div>
+        )}
       </div>
       <div>
         {showSettings && (
