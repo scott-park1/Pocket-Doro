@@ -42,12 +42,11 @@ export default function TaskForm({ setCurrentTask }: Props) {
   }
 
   return (
-    <>
-      <h3>What do you want to work on today? ✍🏼</h3>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="tasks" className="tasks">
-            Task:{' '}
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div className="task-submit">
+          <label htmlFor="task" className="tasks">
+            Task:
           </label>
           <input
             type="text"
@@ -59,8 +58,8 @@ export default function TaskForm({ setCurrentTask }: Props) {
           <button type="submit" className="submitbutton">
             Submit
           </button>
-        </form>
-      </div>
-    </>
+        </div>
+      </form>
+    </div>
   )
 }

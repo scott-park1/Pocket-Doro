@@ -1,0 +1,53 @@
+.cloud-container {
+  position: relative;
+  /* move left off screen slightly */
+  left: -20%;
+}
+
+
+.clouds {
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  /* center */
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -100;
+
+}
+
+.cloud-left {
+  position: absolute;
+  /* animation: cloud-animation-left 600s linear infinite; */
+  /* animate smoothly */
+  /* animation: cloud-animation-left 60s linear infinite; */
+  /* Clouds start from the right edge of the screen */
+  /* right: 20%;  */
+}
+
+.cloud-right {
+  position: absolute;
+  /* animation: cloud-animation-right 60s linear infinite; */
+  /* Clouds start from the left edge of the screen */
+  /* left: 80%;  */
+}
+
+@keyframes cloud-animation-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50vw); /* Clouds end off the left edge of the screen */
+  }
+}
+
+@keyframes cloud-animation-right {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(50vw); /* Clouds end off the right edge of the screen */
+  }
+}

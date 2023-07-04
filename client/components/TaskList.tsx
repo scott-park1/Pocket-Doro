@@ -17,13 +17,13 @@ export default function TaskList() {
 
   return (
     <>
-      <h3>What you worked on previously:</h3>
+      <h2>What you worked on previously: </h2>
       <div className="current-previous-task">
         {!currentTask
           ? tasks[tasks.length - 1].task
           : tasks[tasks.length - 2].task}
       </div>
-      <h3>What you are working on today:</h3>
+      <h2>Task of the day:</h2>
       <div className="current-previous-task">{currentTask}</div>
       <TaskForm setCurrentTask={setCurrentTask} />
     </>
