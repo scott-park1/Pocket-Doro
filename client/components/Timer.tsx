@@ -233,7 +233,7 @@ export default function Timer({
           <div className="timer">
             {timerMinutes}:{timerSeconds}
           </div>
-          <p className="timertext">
+          <p className="timertext" data-testid="timer-information">
             Completed work cycles: {completedIntervals} <br />
             Breaks skipped: {skippedBreaks} <br />
             Time spent working: {totalWorkingTime}
@@ -247,15 +247,13 @@ export default function Timer({
           <div className="timer">
             {timerMinutes}:{timerSeconds}
           </div>
-          <p className="timertext">
+          <p className="timertext" data-testid="timer-information">
             Completed work cycles: {completedIntervals} <br />
             Breaks skipped: {skippedBreaks} <br />
             Time spent working: {totalWorkingTime}
           </p>
         </>
       )}
-      <br />
-      <p className="timertext"></p>
       <br />
       <div className="timer-buttons-wrapper">
         {!showSettings &&
