@@ -62,9 +62,13 @@ function Start() {
           <Avatar />
         </div>
         <Map checked={checked} />
-        <Emoticon skippedBreaks={skippedBreaks} resting={resting} />
-        <div className="timeBubble">
+        <div className="emoticon-overlay">
+          <Emoticon skippedBreaks={skippedBreaks} resting={resting} />
+        </div>
+        <div className="taskBubble">
           <TaskList />
+        </div>
+        <div className="timeBubble">
           <Timer
             skippedBreaks={skippedBreaks}
             onSkipBreak={onSkipBreak}

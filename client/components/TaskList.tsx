@@ -8,7 +8,7 @@ export default function TaskList() {
   const [currentTask, setCurrentTask] = useState('')
 
   if (isError) {
-    return <div>There was an error trying to get the tasks</div>
+    return <div>There was an error trying to get the tasks ...</div>
   }
 
   if (isLoading) {

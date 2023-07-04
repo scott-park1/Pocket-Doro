@@ -46,7 +46,7 @@ export default function TaskForm({ setCurrentTask }: Props) {
       <h3>What do you want to work on today? ✍🏼</h3>
       <div>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="task">Task:</label>
+          <label htmlFor="tasks">Task: </label>
           <input
             type="text"
             name="task"
@@ -54,7 +54,9 @@ export default function TaskForm({ setCurrentTask }: Props) {
             value={tasks.task}
             onChange={handleChange}
           />
-          <button type="submit">Submit</button>
+          <button type="submit" className="submitbutton">
+            Submit
+          </button>
         </form>
       </div>
     </>
