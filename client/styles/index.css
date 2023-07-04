@@ -114,76 +114,6 @@ body {
   position: absolute;
 }
 
-.taskBubble {
-  font-family: 'Baloo 2', cursive;
-  font-size: 18px;
-  color: #fbeee0;
-  position: absolute;
-  top: 120px;
-  right: 190px;
-  padding-right: 110px;
-  text-shadow:
-  -1px -1px 0 #000,
-  1px -1px 0 #000,
-  -1px 1px 0 #000,
-  1px 1px 0 #000;
-  /* text-shadow:
-  -1px -1px 0  #B8336A,
-  1px -1px 0 #B8336A,
-  -1px 1px 0  #B8336A,
-  1px 1px 0  #B8336A; */
-}
-
-#task {
-  margin-right: 10px;
-  border-radius: 4px;
-  height:20px;
-}
-
-.tasks {
-  font-size: 20px;
-  position: absolute;
-  font-family: 'Baloo 2', cursive;
-  color: #fbeee0;
-  margin-left: -50px;
-  text-shadow:
-  -1px -1px 0  #B8336A,
-  1px -1px 0 #B8336A,
-  -1px 1px 0  #B8336A,
-  1px 1px 0  #B8336A;
-  /* text-shadow:
-  -1px -1px 0 #000,
-  1px -1px 0 #000,
-  -1px 1px 0 #000,
-  1px 1px 0 #000; */
-}
-
-.task-submit {
-  margin-top: 8%;
-  margin-left: 80px;
-}
-
-h2 {
-  font-size: 20px;
-  font-family: 'Baloo 2', cursive;
-  color: #fbeee0;
-  text-shadow:
-  -1px -1px 0  #B8336A,
-  1px -1px 0 #B8336A,
-  -1px 1px 0  #B8336A,
-  1px 1px 0  #B8336A;
-  /* text-shadow:
-  -1px -1px 0 #000,
-  1px -1px 0 #000,
-  -1px 1px 0 #000,
-  1px 1px 0 #000; */
-}
-
-.current-previous-task {
-  font-size: 18px;
-  margin-top: -2%;
-}
-
 .submitbutton {
   font-size: 18px;
   font-family: 'Baloo 2', cursive;
@@ -212,7 +142,7 @@ h2 {
 /*Timer big box*/
 .timeBubble {
   position: absolute;
-  top: 450px;
+  top: 110px;
   right: 250px;
   padding-right: 110px;
 }
@@ -244,6 +174,7 @@ h2 {
   z-index: -1;
 }
 
+/*PUT TASK HEEEEEERRRRRRREEEEEEE*/
 .timer-buttons-wrapper {
   position: absolute;
   top: 325px;

@@ -1,9 +1,18 @@
-import { useState, useEffect, ChangeEvent } from 'react'
 
+import { useState, useEffect, useCallback } from 'react'
+import { updateTimerSettings, getTimerSettings } from '../apis/timer-settings'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import TaskList from './TaskList'
 const alarmTone = new Audio('/alarm.mp3')
 
 const playSound = () => {
   alarmTone.play()
+}
+
+const initialData = {
+  intervalLength: 25,
+  shortBreakLength: 5,
+  longBreakLength: 30,
 }
 
 interface Props {
@@ -11,6 +20,11 @@ interface Props {
   onSkipBreak: () => void
   resting: boolean
   setResting: (value: React.SetStateAction<boolean>) => void
+  // i don't think we actually need id column in db?
+  id: number
+  intervalLength: number
+  shortBreakLength: number
+  longBreakLength: number
 }
 
 export default function Timer({
@@ -19,43 +33,74 @@ export default function Timer({
   resting,
   setResting,
 }: Props) {
+  //minutes should be interval length from db? then base seconds of that?
   const [minutes, setMinutes] = useState(25)
   const [seconds, setSeconds] = useState(0)
+
   const [completedIntervals, setCompletedIntervals] = useState(0)
   const [isPaused, setIsPaused] = useState(true)
-  const [workingLength, setWorkingLength] = useState(24)
-  const [shortBreakLength, setShortBreakLength] = useState(4)
-  const [longBreakLength, setLongBreakLength] = useState(2)
+  const [timerHasStarted, setTimerHasStarted] = useState(false)
+
   const [showSettings, setShowSettings] = useState(false)
   const [totalWorkingTime, setTotalWorkingTime] = useState(0)
+  const [showForm, setShowForm] = useState(false)
 
-  function handleWorkingMinutesChange(e: ChangeEvent<HTMLInputElement>) {
-    const value = e.target.value
-    setWorkingLength(parseInt(value) - 1)
-    // needs to reset the timer. at the moment it will only use value for the next interval
+  const queryClient = useQueryClient()
+
+  const updateTimerSettingsMutation = useMutation(updateTimerSettings, {
+    onSuccess: async () => [queryClient.invalidateQueries(['timer'])],
+  })
+
+  const {
+    data: timerSettings,
+    isError,
+    isLoading,
+  } = useQuery(['timer'], getTimerSettings)
+  // use either placeholderData or initialData?
+
+  const intervalLength =
+    timerSettings?.interval_length || initialData.intervalLength
+  const shortBreakLength =
+    timerSettings?.short_break_length || initialData.shortBreakLength
+  const longBreakLength =
+    timerSettings?.long_break_length || initialData.longBreakLength
+
+  const [shortBreakInput, setShortBreakInput] = useState(shortBreakLength)
+  const [longBreakInput, setLongBreakInput] = useState(longBreakLength)
+  const [intervalInput, setIntervalInput] = useState(intervalLength)
+
+  const handleUpdateSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    updateTimerSettingsMutation.mutate({
+      timerSettings: {
+        interval_length: intervalInput,
+        short_break_length: shortBreakInput,
+        long_break_length: longBreakInput,
+      },
+      token: '', // do something here? wrap settings in Auth component? make separate settings component then pass props?  isAuthenication
+    })
   }
-  function handleLongBreakChange(e: ChangeEvent<HTMLInputElement>) {
-    const value = e.target.value
-    setLongBreakLength(parseInt(value) - 1)
+
+  function handleTimerSettings(e: React.FormEvent<HTMLButtonElement>) {
+    displaySettings()
+    handleUpdateSubmit(e)
   }
-  function handleShortBreakChange(e: ChangeEvent<HTMLInputElement>) {
-    const value = e.target.value
-    setShortBreakLength(parseInt(value) - 1)
-  }
-  // All of these handleChange functions probably need to multiply the value by 60,
-  // so the timer works in minutes, rather than seconds?
 
   function displaySettings() {
     setIsPaused(true)
     setShowSettings(!showSettings)
   }
-
-  const changeTimer = () => {
+  
+  function displayForm() {
+    setShowForm(!showForm)
+  }
+  
+  const changeTimer = useCallback(() => {
     setResting(!resting)
     playSound()
 
     if (resting) {
-      setMinutes(workingLength)
+      setMinutes(intervalLength)
       setSeconds(59)
       return
     }
@@ -68,7 +113,28 @@ export default function Timer({
 
     setMinutes(shortBreakLength)
     setSeconds(59)
-  }
+  }, [
+    setResting,
+    resting,
+    completedIntervals,
+    shortBreakLength,
+    intervalLength,
+    longBreakLength,
+  ])
+
+  useEffect(() => {
+    console.log(timerSettings)
+    if (timerSettings && !timerHasStarted) {
+      if (!resting) {
+        setMinutes(intervalLength)
+        setSeconds(0)
+        return
+      }
+      setMinutes(shortBreakLength)
+      setSeconds(0)
+      return
+    }
+  }, [timerSettings])
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -117,6 +183,11 @@ export default function Timer({
     minutes,
     totalWorkingTime,
     setTotalWorkingTime,
+    isPaused,
+    resting,
+    intervalLength,
+    shortBreakLength,
+    timerSettings,
   ])
 
   function skipBreak() {
@@ -125,11 +196,15 @@ export default function Timer({
   }
 
   function pauseTimer() {
+    setTimerHasStarted(true)
     setIsPaused(!isPaused)
   }
 
   const timerMinutes = minutes < 10 ? `0${minutes}` : minutes
   const timerSeconds = seconds < 10 ? `0${seconds}` : seconds
+
+  // bug here with total minnuts exceeding 60
+  // also should we store this in the db? bad performance because saving data every second/minute?
 
   const workingMinutes = Math.floor(totalWorkingTime / 60)
   const workingHours = Math.floor(workingMinutes / 60)
@@ -142,15 +217,14 @@ export default function Timer({
     return `${workingHours}:${workingMinutes}`
   }
 
-  //   if (workingMinutes > 100) {
-  //     return `${workingHours} hours and ${workingMinutes - 100} minutes`
-  //   }
-  //   if (workingHours === 0) {
-  //     return `${workingMinutes - 100} minutes`
-  //   }
-  //   return `${workingHours} hours and ${workingMinutes - 100} minutes`
-  // }
+  if (isError) {
+    return <div>Sorry! There was an error while trying to load the timer</div>
+  }
 
+  if (isLoading) {
+    return <div> Loading timer...</div>
+  }
+  
   return (
     <>
       {resting ? (
@@ -194,76 +268,93 @@ export default function Timer({
           ))}
         <button
           className="timer-button-close-settings"
-          onClick={displaySettings}
+          onClick={handleTimerSettings}
         >
           {showSettings ? 'Close' : 'Settings'}
         </button>
+        <button className="timer-button" onClick={displayForm}>
+          {showForm ? 'Close' : 'Tasks'}
+        </button>
+        {showForm && (
+          <div className="task-settings-wrapper">
+            {' '}
+            <TaskList />{' '}
+          </div>
+        )}
       </div>
       <div>
         {showSettings && (
           <>
-            <div className="settings-wrapper">
-              <label
-                className="settings-headers"
-                htmlFor="short-break-settings"
-              >
-                Interval:
-              </label>
-              <input
-                className="slider"
-                type="range"
-                id="working-minutes-settings"
-                name="working-minutes"
-                min="0"
-                max="120"
-                defaultValue={workingLength}
-                step="5"
-                onChange={handleWorkingMinutesChange}
-              ></input>
-              <br />
-              <div className="settings-values">{workingLength + 1} minutes</div>
-              <br />
-              <label
-                className="settings-headers"
-                htmlFor="short-break-settings"
-              >
-                Short Break:
-              </label>
-              <input
-                className="slider"
-                type="range"
-                id="short-break-settings"
-                name="short-break"
-                min="0"
-                max="30"
-                defaultValue={shortBreakLength}
-                step="5"
-                onChange={handleShortBreakChange}
-              ></input>
-              <br />
-              <div className="settings-values">
-                {shortBreakLength + 1} minutes
+            <form>
+              <div className="settings-wrapper">
+                <label
+                  className="settings-headers"
+                  htmlFor="short-break-settings"
+                >
+                  Interval:
+                </label>
+                <input
+                  aria-label="edit interval length"
+                  className="slider"
+                  type="range"
+                  name="working-minutes"
+                  min="0"
+                  max="120"
+                  defaultValue={intervalLength}
+                  step="5"
+                  onChange={(e) => {
+                    setIntervalInput(Number(e.target.value))
+                  }}
+                ></input>
+                <br />
+                <div className="settings-values">{intervalInput} minutes</div>
+                <br />
+                <label
+                  className="settings-headers"
+                  htmlFor="short-break-settings"
+                >
+                  Short Break:
+                </label>
+                <input
+                  aria-label="edit short break length"
+                  className="slider"
+                  type="range"
+                  name="short-break"
+                  min="0"
+                  max="30"
+                  defaultValue={shortBreakLength}
+                  step="5"
+                  onChange={(e) => {
+                    setShortBreakInput(Number(e.target.value))
+                  }}
+                ></input>
+                <br />
+                <div className="settings-values">{shortBreakInput} minutes</div>
+                <br />
+                <label
+                  className="settings-headers"
+                  htmlFor="long-break-settings"
+                >
+                  Long Break:
+                </label>
+                <input
+                  aria-label="edit long break length"
+                  className="slider"
+                  type="range"
+                  name="long-break"
+                  min="0"
+                  max="120"
+                  defaultValue={longBreakLength}
+                  step="5"
+                  onChange={(e) => {
+                    setLongBreakInput(Number(e.target.value))
+                  }}
+                ></input>
+                <br />
+                <div className="settings-values">{longBreakInput} minutes</div>
               </div>
-              <br />
-              <label className="settings-headers" htmlFor="long-break-settings">
-                Long Break:
-              </label>
-              <input
-                className="slider"
-                type="range"
-                id="long-break-settings"
-                name="long-break"
-                min="0"
-                max="120"
-                defaultValue={longBreakLength}
-                step="5"
-                onChange={handleLongBreakChange}
-              ></input>
-              <br />
-              <div className="settings-values">
-                {longBreakLength + 1} minutes
-              </div>
-            </div>
+              <button onSubmit={handleUpdateSubmit}>save changes</button>
+            </form>
           </>
         )}
       </div>

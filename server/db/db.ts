@@ -1,9 +1,6 @@
 import db from './connection'
 import { User, UserData } from '../../models/user'
-import {
-  TimePreference,
-  UpdateTimePreference,
-} from '../../models/timer-preferences'
+import { TimePreference, UpdateTimePreference } from '../../models/timer'
 import connection from './connection'
 
 export async function getUser(): Promise<User[]> {
@@ -11,13 +8,15 @@ export async function getUser(): Promise<User[]> {
   return users
 }
 
-export async function addTask(newTask: UserData): Promise<UserData> {
+export async function addTask(newTask: UserData): Promise<User> {
   const [task] = await db('user').insert({ task: newTask.task }).returning('*')
   return task
 }
 
+//new user would have to create new user settings
+
 export async function getTimePreferences(): Promise<TimePreference[]> {
-  const preferences = await db('timerPreferences').select('*')
+  const preferences = await db('timerPreferences').select('*').first() // get at user_id
   return preferences
 }
 
@@ -26,7 +25,7 @@ export async function updateTimePreferences(
   updatedTimes: UpdateTimePreference,
   db = connection
 ): Promise<TimePreference[]> {
-  const updatedPreferences = await db('wishlist')
+  const updatedPreferences = await db('timerPreferences')
     .update(updatedTimes)
     .where({ id })
     .returning('*')
