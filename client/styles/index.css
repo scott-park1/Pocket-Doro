@@ -8,6 +8,7 @@
 
 body {
   background-color: rgb(253, 198, 59);
+  /* background-color: skyblue; */
   text-align: center;
 }
 
@@ -26,9 +27,10 @@ body {
 .startlink {
   margin-top: 20px;
   margin-bottom: 20px;
-  background-color: rgb(109, 193, 45);
+  background-color: #fbeee0;
+  box-shadow: #422800 4px 4px 0 0;
   border: 3px solid black;
-  border-radius: 12px;
+  border-radius: 30px;
   color: black;
   padding: 10px 10px;
   text-align: center;
@@ -36,7 +38,13 @@ body {
   display: inline-block;
   font-size: 50px;
   font-family: 'Baloo 2', cursive;
+  transition: background-color 0s ease;
 }
+
+.startlink:hover {
+  background-color: white;
+}
+
 
 .footer {
   font-family: 'Baloo 2', cursive;
@@ -46,6 +54,7 @@ body {
   width: 100%;
   text-align: center;
   color: rgb(242, 71, 71);
+  /* z-index: max ; */
 }
 
 .map {
