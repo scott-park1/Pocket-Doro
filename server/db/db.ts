@@ -7,10 +7,6 @@ export async function getUser(): Promise<User[]> {
 }
 
 export async function addTask(newTask: UserData): Promise<UserData> {
-  const [task] = await db('user').insert(newTask).returning('*')
+  const [task] = await db('user').insert({ task: newTask.task }).returning('*')
   return task
-}
-
-export async function deleteTask(id: number): Promise<void> {
-  await db('user').where({ id }).delete()
 }

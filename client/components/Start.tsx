@@ -24,7 +24,8 @@ function Start() {
     //change emoticon
   }
 
-  const handleSwitchChange = (checked: any) => { // Does this need to be "any" or could it be a boolean?
+  const handleSwitchChange = (checked: any) => {
+    // Does this need to be "any" or could it be a boolean?
     setChecked(checked)
   }
 
@@ -64,7 +65,6 @@ function Start() {
         <Emoticon skippedBreaks={skippedBreaks} resting={resting} />
         <div className="timeBubble">
           <TaskList />
-          <TaskForm />
           <Timer
             skippedBreaks={skippedBreaks}
             onSkipBreak={onSkipBreak}
