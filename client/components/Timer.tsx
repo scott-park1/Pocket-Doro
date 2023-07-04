@@ -109,7 +109,7 @@ export default function Timer({
         }
       }
       if (!resting) setTotalWorkingTime(totalWorkingTime + 1)
-    }, 1)
+    }, 1000)
 
     return () => {
       clearInterval(interval)
