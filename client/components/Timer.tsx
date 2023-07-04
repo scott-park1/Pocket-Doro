@@ -8,9 +8,9 @@ const playSound = () => {
 }
 
 const initialData = {
-  intervalLength: 24,
-  shortBreakLength: 4,
-  longBreakLength: 29,
+  intervalLength: 25,
+  shortBreakLength: 5,
+  longBreakLength: 30,
 }
 
 interface Props {
@@ -37,15 +37,10 @@ export default function Timer({
 
   const [completedIntervals, setCompletedIntervals] = useState(0)
   const [isPaused, setIsPaused] = useState(true)
-  // const [workingLength, setWorkingLength] = useState(24)
-  // const [shortBreakLength, setShortBreakLength] = useState(4)
-  // const [longBreakLength, setLongBreakLength] = useState(29)
+  const [timerHasStarted, setTimerHasStarted] = useState(false)
+
   const [showSettings, setShowSettings] = useState(false)
   const [totalWorkingTime, setTotalWorkingTime] = useState(0)
-
-  const [shortBreakInput, setShortBreakInput] = useState(4)
-  const [longBreakInput, setLongBreakInput] = useState(29)
-  const [intervalInput, setIntervalInput] = useState(24)
 
   const queryClient = useQueryClient()
 
@@ -67,6 +62,10 @@ export default function Timer({
   const longBreakLength =
     timerSettings?.long_break_length || initialData.longBreakLength
 
+  const [shortBreakInput, setShortBreakInput] = useState(shortBreakLength)
+  const [longBreakInput, setLongBreakInput] = useState(longBreakLength)
+  const [intervalInput, setIntervalInput] = useState(intervalLength)
+
   const handleUpdateSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault()
     updateTimerSettingsMutation.mutate({
@@ -75,8 +74,13 @@ export default function Timer({
         short_break_length: shortBreakInput,
         long_break_length: longBreakInput,
       },
-      token: '', // do something here? wrap settings in Auth component? make separate settings component then pass props?
+      token: '', // do something here? wrap settings in Auth component? make separate settings component then pass props?  isAuthenication
     })
+  }
+
+  function handleTimerSettings(e: React.FormEvent<HTMLButtonElement>) {
+    displaySettings()
+    handleUpdateSubmit(e)
   }
 
   function displaySettings() {
@@ -110,6 +114,20 @@ export default function Timer({
     intervalLength,
     longBreakLength,
   ])
+
+  useEffect(() => {
+    console.log(timerSettings)
+    if (timerSettings && !timerHasStarted) {
+      if (!resting) {
+        setMinutes(intervalLength)
+        setSeconds(0)
+        return
+      }
+      setMinutes(shortBreakLength)
+      setSeconds(0)
+      return
+    }
+  }, [timerSettings])
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -160,6 +178,9 @@ export default function Timer({
     setTotalWorkingTime,
     isPaused,
     resting,
+    intervalLength,
+    shortBreakLength,
+    timerSettings,
   ])
 
   function skipBreak() {
@@ -168,6 +189,7 @@ export default function Timer({
   }
 
   function pauseTimer() {
+    setTimerHasStarted(true)
     setIsPaused(!isPaused)
   }
 
@@ -242,7 +264,7 @@ export default function Timer({
           ))}
         <button
           className="timer-button-close-settings"
-          onClick={displaySettings}
+          onClick={handleTimerSettings}
         >
           {showSettings ? 'Close' : 'Settings'}
         </button>
@@ -272,9 +294,7 @@ export default function Timer({
                   }}
                 ></input>
                 <br />
-                <div className="settings-values">
-                  {intervalLength + 1} minutes
-                </div>
+                <div className="settings-values">{intervalInput} minutes</div>
                 <br />
                 <label
                   className="settings-headers"
@@ -296,9 +316,7 @@ export default function Timer({
                   }}
                 ></input>
                 <br />
-                <div className="settings-values">
-                  {shortBreakLength + 1} minutes
-                </div>
+                <div className="settings-values">{shortBreakInput} minutes</div>
                 <br />
                 <label
                   className="settings-headers"
@@ -320,9 +338,7 @@ export default function Timer({
                   }}
                 ></input>
                 <br />
-                <div className="settings-values">
-                  {longBreakLength + 1} minutes
-                </div>
+                <div className="settings-values">{longBreakInput} minutes</div>
               </div>
               <button onSubmit={handleUpdateSubmit}>save changes</button>
             </form>

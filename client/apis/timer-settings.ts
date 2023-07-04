@@ -5,9 +5,12 @@ import { TimePreference, UpdateTimePreference } from '../../models/timer'
 const rootUrl = '/api/v1/timer'
 
 export async function getTimerSettings(): Promise<TimePreference> {
-  return request
+  return await request
     .get(`${rootUrl}`)
-    .then((res) => res.body.timerSettings)
+    .then((res) => {
+      console.log(res.body)
+      return res.body.timeSettings
+    })
     .catch(logError)
 }
 
@@ -20,7 +23,7 @@ export async function updateTimerSettings({
   token,
 }: UpdateTimerFunction) {
   return await request
-    .put(`${rootUrl}/${timerSettings}`)
+    .put(`${rootUrl}`)
     .set(`Authorization`, `Bearer ${token}`)
     .send({ timerSettings })
     .then((res) => res.body.timerSettings)

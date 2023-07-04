@@ -13,8 +13,10 @@ export async function addTask(newTask: UserData): Promise<UserData> {
   return task
 }
 
+//new user would have to create new user settings
+
 export async function getTimePreferences(): Promise<TimePreference[]> {
-  const preferences = await db('timerPreferences').select('*')
+  const preferences = await db('timerPreferences').select('*').first() // get at user_id
   return preferences
 }
 
