@@ -12,7 +12,7 @@ interface Props {
   onSkipBreak: () => void
   resting: boolean
   setResting: (value: React.SetStateAction<boolean>) => void
-  // i don't think we actually need id?
+  // i don't think we actually need id column in db?
   id: number
   intervalLength: number
   shortBreakLength: number
@@ -25,19 +25,21 @@ export default function Timer({
   resting,
   setResting,
 }: Props) {
+  //minutes should be interval length from db? then base seconds of that?
   const [minutes, setMinutes] = useState(25)
   const [seconds, setSeconds] = useState(0)
+
   const [completedIntervals, setCompletedIntervals] = useState(0)
   const [isPaused, setIsPaused] = useState(true)
   // const [workingLength, setWorkingLength] = useState(24)
   // const [shortBreakLength, setShortBreakLength] = useState(4)
   // const [longBreakLength, setLongBreakLength] = useState(29)
+  const [showSettings, setShowSettings] = useState(false)
+  const [totalWorkingTime, setTotalWorkingTime] = useState(0)
 
   const [shortBreakInput, setShortBreakInput] = useState(4)
   const [longBreakInput, setLongBreakInput] = useState(29)
   const [intervalInput, setIntervalInput] = useState(24)
-  const [showSettings, setShowSettings] = useState(false)
-  const [totalWorkingTime, setTotalWorkingTime] = useState(0)
 
   const queryClient = useQueryClient()
 
@@ -63,25 +65,9 @@ export default function Timer({
         short_break_length: shortBreakInput,
         long_break_length: longBreakInput,
       },
-      token: '', // do something here?
+      token: '', // do something here? wrap settings in Auth component? make separate settings component then pass props?
     })
   }
-
-  // function handleWorkingMinutesChange(e: ChangeEvent<HTMLInputElement>) {
-  //   const value = e.target.value
-  //   setWorkingLength(parseInt(value) - 1)
-  //   // needs to reset the timer. at the moment it will only use value for the next interval
-  // }
-  // function handleLongBreakChange(e: ChangeEvent<HTMLInputElement>) {
-  //   const value = e.target.value
-  //   setLongBreakLength(parseInt(value) - 1)
-  // }
-  // function handleShortBreakChange(e: ChangeEvent<HTMLInputElement>) {
-  //   const value = e.target.value
-  //   setShortBreakLength(parseInt(value) - 1)
-  // }
-  // All of these handleChange functions probably need to multiply the value by 60,
-  // so the timer works in minutes, rather than seconds?
 
   function displaySettings() {
     setIsPaused(true)
@@ -189,11 +175,10 @@ export default function Timer({
       return `${workingHours}:0${workingMinutes}`
     }
 
-    // or could use total working time?
-
     return `${workingHours}:${workingMinutes}`
   }
 
+  // if !timer data use 25, 5, 30 so it still works? make it work for not being logged in too?
   if (isError) {
     return <div>Sorry! There was an error while trying to load the timer</div>
   }
