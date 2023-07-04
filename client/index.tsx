@@ -12,8 +12,8 @@ export const router = createBrowserRouter(routes)
 document.addEventListener('DOMContentLoaded', () => {
   createRoot(document.getElementById('app') as HTMLElement).render(
     <Auth0Provider
-      domain="https://whai-2023-jen.au.auth0.com/"
-      clientId="q70YHkwASxKxqhSyjlma5ExiPKVARnxV"
+      domain="https://whai-2023-jen.au.auth0.com"
+      clientId="pRPM7JAxccw8StNbwbtZ2XIiRQIWott8"
       authorizationParams={{
         audience: 'https://pocket-doro/api',
         redirect_uri: window.location.origin,
