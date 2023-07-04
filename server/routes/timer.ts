@@ -1,5 +1,5 @@
 import express from 'express'
-import { UpdateTimePreference } from '../../models/timer-preferences'
+import { UpdateTimePreference } from '../../models/timer'
 import { checkJwt, JwtRequest } from '../utils/auth'
 
 import * as db from '../db/db'

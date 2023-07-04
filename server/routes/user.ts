@@ -4,7 +4,6 @@ import { UserData } from '../../models/user'
 
 const router = express.Router()
 
-//GET /api/v1/movies
 router.get('/', async (req, res) => {
   try {
     const user = await db.getUser()

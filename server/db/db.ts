@@ -1,9 +1,6 @@
 import db from './connection'
 import { User, UserData } from '../../models/user'
-import {
-  TimePreference,
-  UpdateTimePreference,
-} from '../../models/timer-preferences'
+import { TimePreference, UpdateTimePreference } from '../../models/timer'
 import connection from './connection'
 
 export async function getUser(): Promise<User[]> {
@@ -26,7 +23,7 @@ export async function updateTimePreferences(
   updatedTimes: UpdateTimePreference,
   db = connection
 ): Promise<TimePreference[]> {
-  const updatedPreferences = await db('wishlist')
+  const updatedPreferences = await db('timerPreferences')
     .update(updatedTimes)
     .where({ id })
     .returning('*')
