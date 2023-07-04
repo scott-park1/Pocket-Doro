@@ -9,7 +9,7 @@ describe('<Home />', () => {
     renderRoute('/')
 
     const title = screen.getByRole('heading', { name: /pocket doro/i })
-    expect(title).toContainHTML('Pocket Doro')
+    expect(title).toBeInTheDocument()
   })
 
   it('renders a startlink that has the text start and a class name', () => {

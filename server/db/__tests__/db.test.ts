@@ -43,17 +43,25 @@ describe('addTask', () => {
   it('should add a task to the database', async () => {
     const EXPECTED_ID = 4
     const EXPECTED_LENGTH = 4
-    // const userTaskToAdd = {
-    //   task: 'play the guitar',
-    // }
+    const userTaskToAdd = {
+      task: 'play the guitar',
+    }
 
-    const ids = await db.addTask('play the guitar')
-    const newId = ids[0]
-    console.log(`newId`, newId) // undefined
+    const newTask = await db.addTask(userTaskToAdd)
+
+    console.log(`newTask`, newTask) // undefined
 
     const userTasks = await db.getUser()
     expect(userTasks).toHaveLength(EXPECTED_LENGTH)
 
-    expect(newId).toBe(EXPECTED_ID)
+    expect(newTask.id).toBe(EXPECTED_ID)
+  })
+})
+
+describe('getTimePreferences', () => {
+  it('should render all time preferences', async () => {
+    const preferences = await db.getTimePreferences()
+
+    expect(preferences).toHaveLength(1)
   })
 })
