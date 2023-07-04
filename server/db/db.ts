@@ -11,7 +11,7 @@ export async function getUser(): Promise<User[]> {
   return users
 }
 
-export async function addTask(newTask: UserData): Promise<UserData> {
+export async function addTask(newTask: UserData): Promise<User> {
   const [task] = await db('user').insert({ task: newTask.task }).returning('*')
   return task
 }
