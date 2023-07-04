@@ -4,7 +4,7 @@ import { TimePreference, UpdateTimePreference } from '../../models/timer'
 
 const rootUrl = '/api/v1/timer'
 
-export async function getTimerSettings(): Promise<TimePreference[]> {
+export async function getTimerSettings(): Promise<TimePreference> {
   return request
     .get(`${rootUrl}`)
     .then((res) => res.body.timerSettings)

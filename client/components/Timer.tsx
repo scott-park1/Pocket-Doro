@@ -1,6 +1,6 @@
-import { useState, useEffect, ChangeEvent, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { updateTimerSettings, getTimerSettings } from '../apis/timer-settings'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 const alarmTone = new Audio('/alarm.mp3')
 
 const playSound = () => {
@@ -12,6 +12,7 @@ interface Props {
   onSkipBreak: () => void
   resting: boolean
   setResting: (value: React.SetStateAction<boolean>) => void
+  // i don't think we actually need id?
   id: number
   intervalLength: number
   shortBreakLength: number
@@ -23,9 +24,6 @@ export default function Timer({
   onSkipBreak,
   resting,
   setResting,
-  intervalLength,
-  shortBreakLength,
-  longBreakLength,
 }: Props) {
   const [minutes, setMinutes] = useState(25)
   const [seconds, setSeconds] = useState(0)
@@ -33,10 +31,10 @@ export default function Timer({
   const [isPaused, setIsPaused] = useState(true)
   // const [workingLength, setWorkingLength] = useState(24)
   // const [shortBreakLength, setShortBreakLength] = useState(4)
-  // const [longBreakLength, setLongBreakLength] = useState(2)
+  // const [longBreakLength, setLongBreakLength] = useState(29)
 
   const [shortBreakInput, setShortBreakInput] = useState(4)
-  const [longBreakInput, setLongBreakInput] = useState(2)
+  const [longBreakInput, setLongBreakInput] = useState(29)
   const [intervalInput, setIntervalInput] = useState(24)
   const [showSettings, setShowSettings] = useState(false)
   const [totalWorkingTime, setTotalWorkingTime] = useState(0)
@@ -47,7 +45,17 @@ export default function Timer({
     onSuccess: async () => [queryClient.invalidateQueries(['timer'])],
   })
 
-  const handleUpdateSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const {
+    data: timerSettings,
+    isError,
+    isLoading,
+  } = useQuery(['timer'], getTimerSettings)
+
+  const intervalLength = timerSettings?.interval_length || 24
+  const shortBreakLength = timerSettings?.short_break_length || 4
+  const longBreakLength = timerSettings?.long_break_length || 29
+
+  const handleUpdateSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault()
     updateTimerSettingsMutation.mutate({
       timerSettings: {
@@ -55,7 +63,7 @@ export default function Timer({
         short_break_length: shortBreakInput,
         long_break_length: longBreakInput,
       },
-      token: '', // do something here
+      token: '', // do something here?
     })
   }
 
@@ -98,7 +106,14 @@ export default function Timer({
 
     setMinutes(shortBreakLength)
     setSeconds(59)
-  })
+  }, [
+    setResting,
+    resting,
+    completedIntervals,
+    shortBreakLength,
+    intervalLength,
+    longBreakLength,
+  ])
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -163,6 +178,9 @@ export default function Timer({
   const timerMinutes = minutes < 10 ? `0${minutes}` : minutes
   const timerSeconds = seconds < 10 ? `0${seconds}` : seconds
 
+  // bug here with total minnuts exceeding 60
+  // also should we store this in the db? bad performance because saving data every second/minute?
+
   const workingMinutes = Math.floor(totalWorkingTime / 60)
   const workingHours = Math.floor(workingMinutes / 60)
 
@@ -171,7 +189,17 @@ export default function Timer({
       return `${workingHours}:0${workingMinutes}`
     }
 
+    // or could use total working time?
+
     return `${workingHours}:${workingMinutes}`
+  }
+
+  if (isError) {
+    return <div>Sorry! There was an error while trying to load the timer</div>
+  }
+
+  if (isLoading) {
+    return <div> Loading timer...</div>
   }
 
   return (
@@ -301,7 +329,7 @@ export default function Timer({
                   {longBreakLength + 1} minutes
                 </div>
               </div>
-              <button>save changes</button>
+              <button onSubmit={handleUpdateSubmit}>save changes</button>
             </form>
           </>
         )}
