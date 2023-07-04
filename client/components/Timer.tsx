@@ -109,7 +109,7 @@ export default function Timer({
         }
       }
       if (!resting) setTotalWorkingTime(totalWorkingTime + 1)
-    }, 1000)
+    }, 10)
 
     return () => {
       clearInterval(interval)
@@ -170,7 +170,7 @@ export default function Timer({
             Time spent working: {totalWorkingTime}
           </p>
           <button onClick={skipBreak} className="skipbutton">
-            Skip break
+            Skip Break
           </button>
         </>
       ) : (

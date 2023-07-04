@@ -30,9 +30,7 @@ function Start() {
   }
 
   useEffect(() => {
-    document.body.style.backgroundColor = checked
-      ? 'black'
-      : 'rgb(253, 198, 59)'
+    document.body.style.backgroundColor = checked ? '#293241 ' : '#F6C12D'
   }, [checked]) // good use of useEffect dependencies
 
   return (
