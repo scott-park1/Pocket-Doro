@@ -7,7 +7,11 @@ const initialFormData: UserData = {
   task: '',
 }
 
-export default function TaskForm() {
+interface Props {
+  setCurrentTask: (task: string) => void
+}
+
+export default function TaskForm({ setCurrentTask }: Props) {
   const [tasks, setTasks] = useState<UserData>(initialFormData)
   const queryClient = useQueryClient()
 
@@ -25,6 +29,7 @@ export default function TaskForm() {
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     addTaskMutation.mutate(tasks)
+    setCurrentTask(tasks.task)
     setTasks(initialFormData)
   }
 
@@ -38,18 +43,20 @@ export default function TaskForm() {
 
   return (
     <>
-      <h3>What do you want to work on? ✍🏼</h3>
+      <h3>What do you want to work on today? ✍🏼</h3>
       <div>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="tasks">Task:</label>
+          <label htmlFor="tasks">Task: </label>
           <input
             type="text"
-            name="tasks"
-            id="tasks"
+            name="task"
+            id="task"
             value={tasks.task}
             onChange={handleChange}
           />
-          <button type="submit">Submit</button>
+          <button type="submit" className="submitbutton">
+            Submit
+          </button>
         </form>
       </div>
     </>
