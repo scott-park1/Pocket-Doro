@@ -69,7 +69,7 @@ export default function Clouds() {
       setCloudPositions((positions) =>
         positions.map((position) => {
           let newLeft = position.left + position.speed
-          if (newLeft > 105) newLeft = Math.random() * -50
+          if (newLeft > 125) newLeft = Math.random() * -50
 
           return {
             ...position,
