@@ -43,39 +43,63 @@ interface CloudPosition {
   top: number
   left: number
   speed: number
-  direction: 'left' | 'right'
+  scale: number
 }
 
 export default function Clouds() {
   const [cloudPositions, setCloudPositions] = useState<CloudPosition[]>([])
 
   useEffect(() => {
-    const positions: CloudPosition[] = cloudImages.map(() => ({
-      top: Math.random() * 90 + 25,
-      left: Math.random() * 90 + 15,
-      speed: Math.random() * 5 + 50,
-      direction: Math.random() < 0.5 ? 'left' : 'right', // Set initial direction
-    }))
+    const positions: CloudPosition[] = cloudImages.map(() => {
+      const left = Math.random() * -50
+
+      return {
+        top: Math.random() * 90 + 25,
+        left,
+        speed: Math.random() * 0.05 + 0.01,
+        scale: Math.random() + 1,
+      }
+    })
 
     setCloudPositions(positions)
   }, [])
 
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCloudPositions((positions) =>
+        positions.map((position) => {
+          let newLeft = position.left + position.speed
+          if (newLeft > 105) newLeft = Math.random() * -50
+
+          return {
+            ...position,
+            left: newLeft,
+          }
+        })
+      )
+    }, 1000 / 60)
+
+    return () => clearInterval(intervalId)
+  }, [])
+
   return (
     <div className="clouds">
-      {cloudImages.map((cloudImage, index) => (
-        <img
-          key={index}
-          src={cloudImage}
-          alt={`cloud-${index + 1}`}
-          className={`cloud-${index % 2 === 0 ? 'left' : 'right'}`}
-          style={{
-            top: `${cloudPositions[index]?.top}vh`,
-            left: `${cloudPositions[index]?.left}%`,
-            animationDuration: `${cloudPositions[index]?.speed}s`,
-            imageRendering: 'pixelated',
-          }}
-        />
-      ))}
+      <div className="cloud-container">
+        {cloudImages.map((cloudImage, index) => (
+          <img
+            key={index}
+            src={cloudImage}
+            alt={`cloud-${index + 1}`}
+            className={`cloud-${index % 2 === 0 ? 'left' : 'right'}`}
+            style={{
+              top: `${cloudPositions[index]?.top}vh`,
+              left: `${cloudPositions[index]?.left}%`,
+              animationDuration: `${cloudPositions[index]?.speed}s`,
+              imageRendering: 'pixelated',
+            }}
+          />
+        ))}
+      </div>
     </div>
   )
 }
