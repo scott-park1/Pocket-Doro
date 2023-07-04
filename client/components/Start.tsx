@@ -66,9 +66,9 @@ function Start() {
           <div className="emoticon-overlay">
             <Emoticon skippedBreaks={skippedBreaks} resting={resting} />
           </div>
-          <div className="taskBubble">
+          {/* <div className="taskBubble">
             <TaskList />
-          </div>
+          </div> */}
           <div className="timeBubble">
             <Timer
               skippedBreaks={skippedBreaks}
