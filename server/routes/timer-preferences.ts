@@ -45,3 +45,5 @@ router.put('/:id', checkJwt, async (req: JwtRequest, res) => {
     res.status(500).send('Something went wrong!')
   }
 })
+
+export default router
