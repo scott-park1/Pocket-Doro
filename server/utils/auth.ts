@@ -1,5 +1,3 @@
-import { auth } from 'express-oauth2-jwt-bearer'
-
 import { expressjwt as jwt, GetVerificationKey } from 'express-jwt'
 import { Request } from 'express'
 import { ParamsDictionary } from 'express-serve-static-core'
@@ -9,7 +7,7 @@ import jwks from 'jwks-rsa'
 const domain = 'https://whai-2023-jen.au.auth0.com'
 const audience = 'https://pocket-doro/api'
 
-export const checkJwt = auth({
+export const checkJwt = jwt({
   secret: jwks.expressJwtSecret({
     cache: true,
     rateLimit: true,
