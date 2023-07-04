@@ -7,6 +7,12 @@ const playSound = () => {
   alarmTone.play()
 }
 
+const initialData = {
+  intervalLength: 24,
+  shortBreakLength: 4,
+  longBreakLength: 29,
+}
+
 interface Props {
   skippedBreaks: number
   onSkipBreak: () => void
@@ -52,10 +58,14 @@ export default function Timer({
     isError,
     isLoading,
   } = useQuery(['timer'], getTimerSettings)
+  // use either placeholderData or initialData?
 
-  const intervalLength = timerSettings?.interval_length || 24
-  const shortBreakLength = timerSettings?.short_break_length || 4
-  const longBreakLength = timerSettings?.long_break_length || 29
+  const intervalLength =
+    timerSettings?.interval_length || initialData.intervalLength
+  const shortBreakLength =
+    timerSettings?.short_break_length || initialData.shortBreakLength
+  const longBreakLength =
+    timerSettings?.long_break_length || initialData.longBreakLength
 
   const handleUpdateSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault()
