@@ -67,7 +67,6 @@ function Start() {
         </div>
         <div className="taskBubble">
           <TaskList />
-          <TaskForm />
         </div>
         <div className="timeBubble">
           <Timer
