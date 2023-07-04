@@ -1,7 +1,6 @@
-import { useState, useEffect, ChangeEvent } from 'react'
-import Emoticon from './Emoticon'
-// add import for play/pause icons
-
+import { useState, useEffect, ChangeEvent, useCallback } from 'react'
+import { updateTimerSettings, getTimerSettings } from '../apis/timer-settings'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 const alarmTone = new Audio('/alarm.mp3')
 
 const playSound = () => {
@@ -13,6 +12,10 @@ interface Props {
   onSkipBreak: () => void
   resting: boolean
   setResting: (value: React.SetStateAction<boolean>) => void
+  id: number
+  intervalLength: number
+  shortBreakLength: number
+  longBreakLength: number
 }
 
 export default function Timer({
@@ -20,30 +23,55 @@ export default function Timer({
   onSkipBreak,
   resting,
   setResting,
+  intervalLength,
+  shortBreakLength,
+  longBreakLength,
 }: Props) {
   const [minutes, setMinutes] = useState(25)
   const [seconds, setSeconds] = useState(0)
   const [completedIntervals, setCompletedIntervals] = useState(0)
   const [isPaused, setIsPaused] = useState(true)
-  const [workingLength, setWorkingLength] = useState(24)
-  const [shortBreakLength, setShortBreakLength] = useState(4)
-  const [longBreakLength, setLongBreakLength] = useState(2)
+  // const [workingLength, setWorkingLength] = useState(24)
+  // const [shortBreakLength, setShortBreakLength] = useState(4)
+  // const [longBreakLength, setLongBreakLength] = useState(2)
+
+  const [shortBreakInput, setShortBreakInput] = useState(4)
+  const [longBreakInput, setLongBreakInput] = useState(2)
+  const [intervalInput, setIntervalInput] = useState(24)
   const [showSettings, setShowSettings] = useState(false)
   const [totalWorkingTime, setTotalWorkingTime] = useState(0)
 
-  function handleWorkingMinutesChange(e: ChangeEvent<HTMLInputElement>) {
-    const value = e.target.value
-    setWorkingLength(parseInt(value) - 1)
-    // needs to reset the timer. at the moment it will only use value for the next interval
+  const queryClient = useQueryClient()
+
+  const updateTimerSettingsMutation = useMutation(updateTimerSettings, {
+    onSuccess: async () => [queryClient.invalidateQueries(['timer'])],
+  })
+
+  const handleUpdateSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    updateTimerSettingsMutation.mutate({
+      timerSettings: {
+        interval_length: intervalInput,
+        short_break_length: shortBreakInput,
+        long_break_length: longBreakInput,
+      },
+      token: '', // do something here
+    })
   }
-  function handleLongBreakChange(e: ChangeEvent<HTMLInputElement>) {
-    const value = e.target.value
-    setLongBreakLength(parseInt(value) - 1)
-  }
-  function handleShortBreakChange(e: ChangeEvent<HTMLInputElement>) {
-    const value = e.target.value
-    setShortBreakLength(parseInt(value) - 1)
-  }
+
+  // function handleWorkingMinutesChange(e: ChangeEvent<HTMLInputElement>) {
+  //   const value = e.target.value
+  //   setWorkingLength(parseInt(value) - 1)
+  //   // needs to reset the timer. at the moment it will only use value for the next interval
+  // }
+  // function handleLongBreakChange(e: ChangeEvent<HTMLInputElement>) {
+  //   const value = e.target.value
+  //   setLongBreakLength(parseInt(value) - 1)
+  // }
+  // function handleShortBreakChange(e: ChangeEvent<HTMLInputElement>) {
+  //   const value = e.target.value
+  //   setShortBreakLength(parseInt(value) - 1)
+  // }
   // All of these handleChange functions probably need to multiply the value by 60,
   // so the timer works in minutes, rather than seconds?
 
@@ -52,14 +80,12 @@ export default function Timer({
     setShowSettings(!showSettings)
   }
 
-  const changeTimer = () => {
+  const changeTimer = useCallback(() => {
     setResting(!resting)
     playSound()
 
-    // something weird with boolean here
-
     if (resting) {
-      setMinutes(workingLength)
+      setMinutes(intervalLength)
       setSeconds(59)
       return
     }
@@ -72,7 +98,7 @@ export default function Timer({
 
     setMinutes(shortBreakLength)
     setSeconds(59)
-  }
+  })
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -121,12 +147,13 @@ export default function Timer({
     minutes,
     totalWorkingTime,
     setTotalWorkingTime,
+    isPaused,
+    resting,
   ])
 
   function skipBreak() {
     changeTimer()
     onSkipBreak()
-    // setSkippingBreak(true)
   }
 
   function pauseTimer() {
@@ -146,15 +173,6 @@ export default function Timer({
 
     return `${workingHours}:${workingMinutes}`
   }
-
-  //   if (workingMinutes > 100) {
-  //     return `${workingHours} hours and ${workingMinutes - 100} minutes`
-  //   }
-  //   if (workingHours === 0) {
-  //     return `${workingMinutes - 100} minutes`
-  //   }
-  //   return `${workingHours} hours and ${workingMinutes - 100} minutes`
-  // }
 
   return (
     <>
@@ -209,68 +227,82 @@ export default function Timer({
       <div>
         {showSettings && (
           <>
-            <div className="settings-wrapper">
-              <label
-                className="settings-headers"
-                htmlFor="short-break-settings"
-              >
-                Interval:
-              </label>
-              <input
-                className="slider"
-                type="range"
-                id="working-minutes-settings"
-                name="working-minutes"
-                min="0"
-                max="120"
-                defaultValue={workingLength}
-                step="5"
-                onChange={handleWorkingMinutesChange}
-              ></input>
-              <br />
-              <div className="settings-values">{workingLength + 1} minutes</div>
-              <br />
-              <label
-                className="settings-headers"
-                htmlFor="short-break-settings"
-              >
-                Short Break:
-              </label>
-              <input
-                className="slider"
-                type="range"
-                id="short-break-settings"
-                name="short-break"
-                min="0"
-                max="30"
-                defaultValue={shortBreakLength}
-                step="5"
-                onChange={handleShortBreakChange}
-              ></input>
-              <br />
-              <div className="settings-values">
-                {shortBreakLength + 1} minutes
+            <form>
+              <div className="settings-wrapper">
+                <label
+                  className="settings-headers"
+                  htmlFor="short-break-settings"
+                >
+                  Interval:
+                </label>
+                <input
+                  aria-label="edit interval length"
+                  className="slider"
+                  type="range"
+                  name="working-minutes"
+                  min="0"
+                  max="120"
+                  defaultValue={intervalLength}
+                  step="5"
+                  onChange={(e) => {
+                    setIntervalInput(Number(e.target.value))
+                  }}
+                ></input>
+                <br />
+                <div className="settings-values">
+                  {intervalLength + 1} minutes
+                </div>
+                <br />
+                <label
+                  className="settings-headers"
+                  htmlFor="short-break-settings"
+                >
+                  Short Break:
+                </label>
+                <input
+                  aria-label="edit short break length"
+                  className="slider"
+                  type="range"
+                  name="short-break"
+                  min="0"
+                  max="30"
+                  defaultValue={shortBreakLength}
+                  step="5"
+                  onChange={(e) => {
+                    setShortBreakInput(Number(e.target.value))
+                  }}
+                ></input>
+                <br />
+                <div className="settings-values">
+                  {shortBreakLength + 1} minutes
+                </div>
+                <br />
+                <label
+                  className="settings-headers"
+                  htmlFor="long-break-settings"
+                >
+                  Long Break:
+                </label>
+                <input
+                  aria-label="edit long break length"
+                  className="slider"
+                  type="range"
+                  name="long-break"
+                  min="0"
+                  max="120"
+                  defaultValue={longBreakLength}
+                  step="5"
+                  onChange={(e) => {
+                    setLongBreakInput(Number(e.target.value))
+                  }}
+                ></input>
+                <br />
+                <div className="settings-values">
+                  {longBreakLength + 1} minutes
+                </div>
               </div>
-              <br />
-              <label className="settings-headers" htmlFor="long-break-settings">
-                Long Break:
-              </label>
-              <input
-                className="slider"
-                type="range"
-                id="long-break-settings"
-                name="long-break"
-                min="0"
-                max="120"
-                defaultValue={longBreakLength}
-                step="5"
-                onChange={handleLongBreakChange}
-              ></input>
-              <br />
-              <div className="settings-values">
-                {longBreakLength + 1} minutes
-              </div>
-            </div>
+              <button>save changes</button>
+            </form>
           </>
         )}
       </div>

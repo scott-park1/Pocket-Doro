@@ -1,6 +1,6 @@
 import request from 'superagent'
 
-import { TimePreference } from '../../models/timer'
+import { TimePreference, UpdateTimePreference } from '../../models/timer'
 
 const rootUrl = '/api/v1/timer'
 
@@ -12,7 +12,7 @@ export async function getTimerSettings(): Promise<TimePreference[]> {
 }
 
 interface UpdateTimerFunction {
-  timerSettings: TimePreference
+  timerSettings: UpdateTimePreference
   token: string
 }
 export async function updateTimerSettings({
@@ -20,7 +20,7 @@ export async function updateTimerSettings({
   token,
 }: UpdateTimerFunction) {
   return await request
-    .put(`${rootUrl}/${timerSettings.id}`)
+    .put(`${rootUrl}/${timerSettings}`)
     .set(`Authorization`, `Bearer ${token}`)
     .send({ timerSettings })
     .then((res) => res.body.timerSettings)
