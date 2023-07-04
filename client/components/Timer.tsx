@@ -1,6 +1,4 @@
 import { useState, useEffect, ChangeEvent } from 'react'
-import Emoticon from './Emoticon'
-// add import for play/pause icons
 
 const alarmTone = new Audio('/alarm.mp3')
 
@@ -55,8 +53,6 @@ export default function Timer({
   const changeTimer = () => {
     setResting(!resting)
     playSound()
-
-    // something weird with boolean here
 
     if (resting) {
       setMinutes(workingLength)
@@ -126,7 +122,6 @@ export default function Timer({
   function skipBreak() {
     changeTimer()
     onSkipBreak()
-    // setSkippingBreak(true)
   }
 
   function pauseTimer() {

@@ -4,7 +4,6 @@ import Map from './Map'
 import { useState, useEffect } from 'react'
 import Switch from 'react-ios-switch'
 import Emoticon from './Emoticon'
-// import TaskForm from './TaskForm'
 import TaskList from './TaskList'
 import Footer from './Footer'
 
