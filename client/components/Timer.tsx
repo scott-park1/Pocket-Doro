@@ -1,6 +1,8 @@
+
 import { useState, useEffect, useCallback } from 'react'
 import { updateTimerSettings, getTimerSettings } from '../apis/timer-settings'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import TaskList from './TaskList'
 const alarmTone = new Audio('/alarm.mp3')
 
 const playSound = () => {
@@ -41,6 +43,7 @@ export default function Timer({
 
   const [showSettings, setShowSettings] = useState(false)
   const [totalWorkingTime, setTotalWorkingTime] = useState(0)
+  const [showForm, setShowForm] = useState(false)
 
   const queryClient = useQueryClient()
 
@@ -87,7 +90,11 @@ export default function Timer({
     setIsPaused(true)
     setShowSettings(!showSettings)
   }
-
+  
+  function displayForm() {
+    setShowForm(!showForm)
+  }
+  
   const changeTimer = useCallback(() => {
     setResting(!resting)
     playSound()
@@ -164,7 +171,7 @@ export default function Timer({
         }
       }
       if (!resting) setTotalWorkingTime(totalWorkingTime + 1)
-    }, 1000)
+    }, 10)
 
     return () => {
       clearInterval(interval)
@@ -210,7 +217,6 @@ export default function Timer({
     return `${workingHours}:${workingMinutes}`
   }
 
-  // if !timer data use 25, 5, 30 so it still works? make it work for not being logged in too?
   if (isError) {
     return <div>Sorry! There was an error while trying to load the timer</div>
   }
@@ -218,7 +224,7 @@ export default function Timer({
   if (isLoading) {
     return <div> Loading timer...</div>
   }
-
+  
   return (
     <>
       {resting ? (
@@ -233,7 +239,7 @@ export default function Timer({
             Time spent working: {totalWorkingTime}
           </p>
           <button onClick={skipBreak} className="skipbutton">
-            Skip break
+            Skip Break
           </button>
         </>
       ) : (
@@ -268,6 +274,15 @@ export default function Timer({
         >
           {showSettings ? 'Close' : 'Settings'}
         </button>
+        <button className="timer-button" onClick={displayForm}>
+          {showForm ? 'Close' : 'Tasks'}
+        </button>
+        {showForm && (
+          <div className="task-settings-wrapper">
+            {' '}
+            <TaskList />{' '}
+          </div>
+        )}
       </div>
       <div>
         {showSettings && (

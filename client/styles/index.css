@@ -7,14 +7,14 @@
 }
 
 body {
-  background-color: rgb(253, 198, 59);
+  background-color: #F6C12D;
   text-align: center;
 }
 
 .title {
   font-family: 'Cherry Bomb One', cursive;
   font-size: 200px;
-  color: rgb(242, 71, 71);
+  color: #B8336A;
   margin-bottom: 10px;
   text-shadow:
   -4px -4px 0 #000,
@@ -24,33 +24,56 @@ body {
 }
 
 .startlink {
+  font-size: 35px;
+  font-family: 'Baloo 2', cursive;
+  font-weight: bold;
   margin-top: 20px;
   margin-bottom: 20px;
-  background-color: rgb(109, 193, 45);
-  border: 3px solid black;
-  border-radius: 12px;
-  color: black;
-  padding: 10px 10px;
+  padding: 25px 25px 25px 25px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 50px;
-  font-family: 'Baloo 2', cursive;
+  background-color: #fbeee0;
+  border: 2px solid #293241;
+  border-radius: 60px;
+  box-shadow: #293241 8px 8px 0 0;
+  color: #293241;
 }
 
+.start-title {
+  font-family: 'Cherry Bomb One', cursive;
+  font-size: 60px;
+  color: #B8336A;
+  margin-top: 10px;
+  text-shadow:
+  -2px -2px 0 #000,
+  2px -2px 0 #000,
+  -2px 2px 0 #000,
+  2px 2px 0 #000;
+}
+
+.startlink:hover {
+  background-color: #fff;
+}
+
+.startlink:hover {
+  background-color: white;
+}
+
+
 .footer {
-  font-family: 'Baloo 2', cursive;
+  font-family: 'Cherry Bomb One', cursive;
   position: absolute;
   left: 0;
   bottom: 0;
   width: 100%;
   text-align: center;
-  color: rgb(242, 71, 71);
+  color: #B8336A;
 }
 
 .map {
   position: relative;
-  margin-top: 40px;
+  margin-top: -10px;
   margin-left: 50px;
   max-width: 50%;
   z-index: -50000;
@@ -58,7 +81,7 @@ body {
 
 .emoticon-overlay {
   position: absolute;
-  top: 360px;
+  top: 440px;
   right: 1350px;
 }
 
@@ -72,7 +95,7 @@ body {
 
 .avatar-overlay {
   position: absolute;
-  top: 5px;
+  top: 40px;
   right: 480px;
 }
 
@@ -91,81 +114,96 @@ body {
   position: absolute;
 }
 
-.taskBubble {
+.submitbutton {
+  font-size: 18px;
   font-family: 'Baloo 2', cursive;
-  color: rgb(71, 52, 243);
-  position: absolute;
-  top: 150px;
-  right: 200px;
-  padding-right: 110px;
+  background-color: #fbeee0;
+  border: 2px solid #293241;
+  border-radius: 30px;
+  box-shadow:#293241 4px 4px 0 0;
+  color: #293241;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  padding: 0 12px;
+  line-height: 30px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-right: 20px;
 }
 
-#tasks {
-  margin-right: 3px;
-  border: 2px solid rgb(71, 52, 243);
-  border-radius: 4px;
+.submitbutton:hover {
+    background-color: #fff;
 }
 
+/*Timer big box*/
 .timeBubble {
   position: absolute;
-  top: 380px;
+  top: 110px;
   right: 250px;
   padding-right: 110px;
 }
 
-.submitbutton {
-  font-family: 'Baloo 2', cursive;
-  border-radius: 10px;
-  border: 2px solid rgb(71, 52, 243);
-  color: rgb(71, 52, 243);
-}
-
 .timer {
-  font-weight: bold;
-  font-family: 'Baloo 2', cursive;
   position: absolute;
   top: 30px;
   left: 100px;
   right: 30px;
-  box-shadow: 0px 50px 0px 80px #ff81a7;
-  border-style: none none solid;
-  border-radius: 40px 40px 0 0;
-  overflow: hidden;
-  color: #ff7e5e;
-  width: 200px;
-  font-size: 50px;
+  width: 300px;
+  height: 80px;
   margin-top: 50px;
+  overflow: hidden;
+  font-size: 50px;
+  font-weight: bold;
+  font-family: 'Baloo 2', cursive;
+  background-color: #B8336A;
+  color: #fbeee0;
+  text-shadow:
+  -1px -1px 0 #000,
+  1px -1px 0 #000,
+  -1px 1px 0 #000,
+  1px 1px 0 #000;
+  border-style: none none solid;
+  border-radius: 40px 40px 40px 40px;
+  border: 2px solid #fbeee0;
+  /* box-shadow: 0px 50px 0px 80px #0b8500; */
+  box-shadow:  #fbeee0 8px 8px 0 0;
   z-index: -1;
 }
 
+/*PUT TASK HEEEEEERRRRRRREEEEEEE*/
 .timer-buttons-wrapper {
+  position: absolute;
+  top: 325px;
+  left: -20px;
+  width: 500px;
+  height: 0%;
   margin-top: 50px;
-  margin-left: 25px;
-  font-family: 'Baloo 2', cursive;
-  font-weight: 900;
+  margin-left: 20px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  top: 325px;
-  left: -70px;
-  width: 500px;
-  height: 5%;
-} 
+  font-family: 'Baloo 2', cursive;
+  font-weight: 900;
+}
 
-.timer-button{
+.timer-button {
   background-color: #fbeee0;
-  border: 2px solid #422800;
+  border: 2px solid #293241;
   border-radius: 30px;
-  box-shadow: #422800 4px 4px 0 0;
-  color: #422800;
+  box-shadow: #293241 4px 4px 0 0;
+  color:#293241;
   cursor: pointer;
   display: inline-block;
   font-weight: 600;
   font-size: 18px;
-  padding: 0 18px;
-  line-height: 50px;
+  font-family: 'Baloo 2', cursive;
+  padding: 0 12px;
+  line-height: 30px;
   text-align: center;
   text-decoration: none;
   user-select: none;
@@ -176,22 +214,23 @@ body {
 
 .timer-button-close-settings {
   background-color: #fbeee0;
-  border: 2px solid #422800;
+  font-family: 'Baloo 2', cursive;
+  border: 2px solid#293241;
   border-radius: 30px;
-  box-shadow: #422800 4px 4px 0 0;
-  color: #422800;
+  box-shadow:#293241 4px 4px 0 0;
+  color:#293241;
   cursor: pointer;
   display: inline-block;
   font-weight: 600;
   font-size: 18px;
-  padding: 0 18px;
-  line-height: 50px;
+  padding: 0 12px;
+  line-height: 30px;
   text-align: center;
   text-decoration: none;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  margin-left: -10px;
+  margin-left: 0px;
 }
 
 .timer-button:hover {
@@ -203,83 +242,121 @@ body {
 }
 
 .timer-button:active {
-  box-shadow: #422800 2px 2px 0 0;
+  box-shadow: #293241 2px 2px 0 0;
   transform: translate(2px, 2px);
 }
 
 .timer-button-close-settings:active {
-  box-shadow: #422800 2px 2px 0 0;
+  box-shadow:#293241 2px 2px 0 0;
   transform: translate(2px, 2px);
+  font-family: 'Baloo 2', cursive;
 }
 
 .timertext {
   font-family: 'Baloo 2', cursive;
-  color: black;
-  text-align: left;
-  margin-left: 110px;
+  color: #fbeee0;
+  font-size: 18px;
+  text-shadow: 
+  -1px -1px 0 #000,
+  1px -1px 0 #000,
+  -1px 1px 0 #000,
+  1px 1px 0 #000;
+  text-align: center;
+  margin-left: 150px;
   margin-top: 190px;
-  width: 200px;
+  width: 210px;
 }
 
 .break {
   position: absolute;
   font-family: 'Baloo 2', cursive;
-  color: rgb(242, 71, 71);
-  margin-left: 75px;
+  font-size: large;
+  color: #B8336A;
+  margin-left: 110px;
+  text-shadow:
+  -1px -1px 0  #fbeee0,
+  1px -1px 0 #fbeee0,
+  -1px 1px 0  #fbeee0,
+  1px 1px 0 #fbeee0;
 }
 
 .skipbutton {
   font-family: 'Baloo 2', cursive;
-  color: rgb(242, 71, 71);
-  margin-top: 30px;
-  margin-left: 90px;
-  border-radius: 10px;
-  border: 2px solid rgb(242, 71, 71);
+  font-size: 18px;
+  color: #B8336A;
+  background-color: #fbeee0;
+  margin-top: 5px;
+  margin-left: 160px;
+  border-radius: 30px;
+  border: 2px solid #B8336A;
+  box-shadow:#B8336A 4px 4px 0 0;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  padding: 0 12px;
+  line-height: 30px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-right: 20px;
 }
 
-/* @media (min-width: 768px) {
-  .timer-button {
-    min-width: 120px;
-    padding: 0 25px;
-  }
-} */
+.skipbutton:hover{
+  background-color: #fff;
+}
 
 .settings-wrapper {
   bottom: -300px;
-  right: -50px;
-  padding: 20px;
+  right: -75px;
+  padding: 40px;
   display: flex;
   flex-direction: column;
   position: absolute;
   width: 500px;
   height: 60%;
-  background-color: #b5b5ff;
-  border-radius: 20px;
+  background-color:  #B8336A;
+  border-radius: 60px;
+  border: 2px solid #fbeee0;
+  box-shadow: #fbeee0 16px 16px 0 0;
+  color: #fbeee0;
 }
 
 .settings-headers {
   font-family: 'Baloo 2', cursive;
   font-weight: 900;
-  font-size: x-large;
+  font-size: 20px;
+  color: #fbeee0;
+  text-shadow: 
+  -1px -1px 0 #000,
+  1px -1px 0 #000,
+  -1px 1px 0 #000,
+  1px 1px 0 #000;
 }
 
 .settings-values {
   font-family: 'Baloo 2', cursive;
   font-weight: 900;
-  font-size: medium;
+  font-size: 18px;
+  color: #fbeee0;
+  text-shadow: 
+  -1px -1px 0 #000,
+  1px -1px 0 #000,
+  -1px 1px 0 #000,
+  1px 1px 0 #000;
 }
 
-/* settings range slider styling */
 .slider {
   /* removing default appearance */
-  -webkit-appearance: none;
-  appearance: none;
+  /* -webkit-appearance: none;
+  appearance: none; */
   /* creating a custom design */
   width: 100%;
   cursor: grab;
-  outline: none;
+  /* outline: none; */
   /*  slider progress trick  */
-  overflow: hidden;
+  /* overflow: hidden; */
   border-radius: 16px;
 }
 
@@ -292,18 +369,17 @@ body {
 }
 
 /* Track: webkit browsers */
-.slider::-webkit-slider-runnable-track {
+/* .slider::-webkit-slider-runnable-track {
   height: 15px;
-  background: #ccc;
+  background:  #fbeee0;
   border-radius: 16px;
-}
+} */
 
 /* Track: Mozilla Firefox */
-.slider::-moz-range-track {
+/* .slider::-moz-range-track {
   height: 15px;
-  background: #ccc;
   border-radius: 16px;
-}
+} */
 
 @media (min-width: 0px) and (max-width: 480px) {
   .title {
@@ -333,20 +409,55 @@ body {
   }
 
   .map {
-    margin-top: 140px;
+    margin-top: 100px;
     margin-left: 95px;
     max-width: 480px;
     width: 60%;
   }
 
+  .emoticon-overlay {
+    top: 200px;
+    right: 230px;
+  }
+
   .avatar-overlay {
-    top: -90px;
+    top: -180px;
     right: 20px;
   }
 
+  h3 {
+    font-size: 12px;
+  }
+
+  .tasks {
+    font-size: 12px;
+  }
+
+  .taskBubble {
+    top: 380px;
+    right: 10px;
+    padding-right: 100px;
+  }
+  
+  #task {
+    margin-right: 3px;
+    border: 2px solid rgb(71, 52, 243);
+    border-radius: 4px;
+  }
+  
+  .current-previous-task {
+    font-size: 10px;
+  }
+
+  .submitbutton {
+    border-radius: 10px;
+    border: 2px solid rgb(71, 52, 243);
+    font-size: 10px;
+  }
+
   .timeBubble {
-    top: 300px;
-    right: 50px;
+    top: 570px;
+    right: -10px;
   }
 
   .timer {
@@ -357,7 +468,6 @@ body {
     border-radius: 30px 30px 0 0;
     width: 100px;
     font-size: 20px;
-    margin-top: 50px;
     z-index: -1;
   }
   
@@ -365,6 +475,8 @@ body {
     font-size: 10px;
     margin-left: -160px;
     margin-top: 195px;
+    padding-left: 20px;
+    width: 200px;
   }
   
   .break {
@@ -376,7 +488,7 @@ body {
   .skipbutton {
     font-size: 10px;
     margin-top: 30px;
-    margin-left: -160px;
+    margin-left: -220px;
     border-radius: 10px;
     border: 2px solid rgb(242, 71, 71);
   }
@@ -411,8 +523,8 @@ body {
   }
 
   .settings-wrapper {
-    bottom: -230px;
-    right: 15px;
+    bottom: -200px;
+    right: 75px;
     padding: 1px;
     width: 350px;
     height: 60%;
@@ -466,20 +578,55 @@ body {
   }
 
   .map {
-    margin-top: 140px;
+    margin-top: 100px;
     margin-left: 175px;
     max-width: 720px;
     width: 50%;
   }
 
+  .emoticon-overlay {
+    top: 220px;
+    right: 350px;
+  }
+
   .avatar-overlay {
-    top: -60px;
+    top: -150px;
     right: 30px;
   }
 
+  h3 {
+    font-size: 13px;
+  }
+
+  .tasks {
+    font-size: 13px;
+  }
+
+  .taskBubble {
+    top: 470px;
+    right: 130px;
+    padding-right: 100px;
+  }
+  
+  #task {
+    margin-right: 3px;
+    border: 2px solid rgb(71, 52, 243);
+    border-radius: 4px;
+  }
+  
+  .current-previous-task {
+    font-size: 11px;
+  }
+
+  .submitbutton {
+    border-radius: 10px;
+    border: 2px solid rgb(71, 52, 243);
+    font-size: 10px;
+  }
+
   .timeBubble {
-    top: 370px;
-    right: 170px;
+    top: 680px;
+    right: 115px;
   }
 
   .timer {
@@ -490,14 +637,15 @@ body {
     border-radius: 30px 30px 0 0;
     width: 100px;
     font-size: 20px;
-    margin-top: 50px;
     z-index: -1;
   }
   
   .timertext {
-    font-size: 10px;
+    font-size: 11px;
     margin-left: -160px;
     margin-top: 195px;
+    padding-left: 20px;
+    width: 200px;
   }
   
   .break {
@@ -509,7 +657,7 @@ body {
   .skipbutton {
     font-size: 10px;
     margin-top: 30px;
-    margin-left: -160px;
+    margin-left: -225px;
     border-radius: 10px;
     border: 2px solid rgb(242, 71, 71);
   }
@@ -544,8 +692,8 @@ body {
   }
 
   .settings-wrapper {
-    bottom: -230px;
-    right: 15px;
+    bottom: -200px;
+    right: 75px;
     padding: 1px;
     width: 350px;
     height: 60%;
@@ -601,51 +749,87 @@ body {
     width: 50%;
   }
 
+  .emoticon-overlay {
+    top: 310px;
+    right: 700px;
+  }
+
   .avatar-overlay {
-    top: 10px;
+    top: -40px;
     right: 250px;
   }
 
+  h3 {
+    font-size: 14px;
+  }
+
+  .tasks {
+    font-size: 14px;
+  }
+
+  .taskBubble {
+    top: 100px;
+    right: 10px;
+    padding-right: 100px;
+  }
+  
+  #task {
+    margin-right: 3px;
+    border: 2px solid rgb(71, 52, 243);
+    border-radius: 4px;
+  }
+  
+  .current-previous-task {
+    font-size: 12px;
+  }
+
+  .submitbutton {
+    border-radius: 10px;
+    border: 2px solid rgb(71, 52, 243);
+    font-size: 12px;
+  }
+
   .timeBubble {
-    top: 120px;
-    right: 40px;
+    top: 320px;
+    right: 5px;
   }
 
   .timer {
-    left: -130px;
+    left: -140px;
     top: 100px;
     box-shadow: 0px 30px 0px 50px #ff81a7;
     border-style: none none solid;
     border-radius: 30px 30px 0 0;
     width: 100px;
     font-size: 20px;
-    margin-top: 50px;
     z-index: -1;
   }
 
   .timertext {
-    font-size: 10px;
-    margin-left: -160px;
+    font-size: 12px;
+    margin-left: -180px;
     margin-top: 195px;
+    padding-left: 20px;
+    width: 200px;
   }
   
   .break {
-    font-size: 10px;
+    font-size: 12px;
     top: 90px;
-    margin-left: -160px;
+    margin-left: -180px;
   }
   
   .skipbutton {
-    font-size: 10px;
-    margin-top: 30px;
-    margin-left: -160px;
+    font-size: 12px;
+    margin-top: 15px;
+    margin-left: -220px;
     border-radius: 10px;
     border: 2px solid rgb(242, 71, 71);
   }
   
   .timer-buttons-wrapper {
     margin-top: 50px;
-    margin-left: -255px;
+    margin-left: -265px;
     top: 300px;
     left: -75px;
     width: 500px;
@@ -673,8 +857,8 @@ body {
   }
 
   .settings-wrapper {
-    bottom: -230px;
-    right: 15px;
+    bottom: -200px;
+    right: 65px;
     padding: 1px;
     width: 350px;
     height: 60%;
@@ -728,23 +912,80 @@ body {
   }
   
   .map {
-    margin-top: 60px;
+    margin-top: 200px;
     max-width: 1440px;
     width: 50%;
   }
 
+  .emoticon-overlay {
+    top: 420px;
+    right: 1010px;
+  }
+
   .avatar-overlay {
-    top: 20px;
-    right: 350px;
+    top: 100px;
+    right: 370px;
+  }
+
+  h3 {
+    font-size: 16px;
+  }
+
+  .tasks {
+    font-size: 16px;
+  }
+
+  .taskBubble {
+    top: 140px;
+    right: 80px;
+    padding-right: 100px;
+  }
+  
+  #task {
+    margin-right: 3px;
+    border: 2px solid rgb(71, 52, 243);
+    border-radius: 4px;
+  }
+  
+  .current-previous-task {
+    font-size: 14px;
+  }
+
+  .submitbutton {
+    border-radius: 10px;
+    border: 2px solid rgb(71, 52, 243);
+    font-size: 14px;
   }
   
   .timeBubble {
-    top: 120px;
-    right: 150px;
+    top: 480px;
+    right: 120px;
   }
 
   .timertext {
     width: 190px;
     text-align: left;
+  }
+
+  .timer-buttons-wrapper {
+    margin-top: 110px;
+    margin-left: 20px;
+    top: 300px;
+    left: -70px;
+    width: 500px;
+    height: 1%;
+  }
+
+  .settings-wrapper {
+    bottom: -350px;
+    right: -55px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 500px;
+    height: 70%;
+    background-color: #b5b5ff;
+    border-radius: 20px;
   }
 }
