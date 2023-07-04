@@ -4,8 +4,8 @@ import Map from './Map'
 import { useState, useEffect } from 'react'
 import Switch from 'react-ios-switch'
 import Emoticon from './Emoticon'
-import TaskForm from './TaskForm'
 import TaskList from './TaskList'
+import Footer from './Footer'
 
 function Start() {
   const [checked, setChecked] = useState(false)
@@ -24,15 +24,13 @@ function Start() {
     //change emoticon
   }
 
-  const handleSwitchChange = (checked: any) => {
+  const handleSwitchChange = (checked: boolean) => {
     // Does this need to be "any" or could it be a boolean?
     setChecked(checked)
   }
 
   useEffect(() => {
-    document.body.style.backgroundColor = checked
-      ? 'black'
-      : 'rgb(253, 198, 59)'
+    document.body.style.backgroundColor = checked ? '#293241 ' : '#F6C12D'
   }, [checked]) // good use of useEffect dependencies
 
   return (
@@ -46,8 +44,8 @@ function Start() {
         offColor="white"
         onChange={handleSwitchChange}
         onColor="rgb(76, 217, 100)"
-        pendingOffColor={undefined} // For these undefined props, I wonder if they can be omitted entirely?
-        pendingOnColor={undefined}
+        // pendingOffColor={undefined} // For these undefined props, I wonder if they can be omitted entirely?
+        // pendingOnColor={undefined}
         readOnly={false}
         style={{
           position: 'absolute',
@@ -56,27 +54,32 @@ function Start() {
           zIndex: 99,
           margin: '50px 30px 0px 0px',
         }}
+        aria-label="Toggle switch"
       />
-      <div className="flex-container">
-        <div className="avatar-overlay">
-          <Avatar />
-        </div>
-        <Map checked={checked} />
-        <div className="emoticon-overlay">
-          <Emoticon skippedBreaks={skippedBreaks} resting={resting} />
-        </div>
-        <div className="taskBubble">
-          <TaskList />
-        </div>
-        <div className="timeBubble">
-          <Timer
-            skippedBreaks={skippedBreaks}
-            onSkipBreak={onSkipBreak}
-            resting={resting}
-            setResting={handleSetResting}
-          />
+      <div>
+        <h1 className="start-title">POCKET DORO</h1>
+        <div className="flex-container">
+          <div className="avatar-overlay">
+            <Avatar />
+          </div>
+          <Map checked={checked} />
+          <div className="emoticon-overlay">
+            <Emoticon skippedBreaks={skippedBreaks} resting={resting} />
+          </div>
+          <div className="taskBubble">
+            <TaskList />
+          </div>
+          <div className="timeBubble">
+            <Timer
+              skippedBreaks={skippedBreaks}
+              onSkipBreak={onSkipBreak}
+              resting={resting}
+              setResting={handleSetResting}
+            />
+          </div>
         </div>
       </div>
+      <Footer />
     </>
   )
 }
