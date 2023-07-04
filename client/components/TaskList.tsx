@@ -7,7 +7,7 @@ export default function TaskList() {
 
   console.log('tasklist', tasks)
   if (isError) {
-    return <div>There was an error trying to get the tasks</div>
+    return <div>There was an error trying to get the tasks ...</div>
   }
 
   if (isLoading) {
