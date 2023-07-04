@@ -5,11 +5,11 @@ import { screen } from '@testing-library/react'
 import { renderRoute } from '../../test-utils'
 
 describe('<Home />', () => {
-  it.todo('renders the title Pocket-Doro', () => {
+  it('renders the title Pocket Doro', () => {
     renderRoute('/')
 
-    const title = screen.getByRole('heading', { name: /pocket/i })
-    expect(title).toContainHTML('pocket')
+    const title = screen.getByRole('heading', { name: /pocket doro/i })
+    expect(title).toContainHTML('Pocket Doro')
   })
 
   it('renders a startlink that has the text start and a class name', () => {
