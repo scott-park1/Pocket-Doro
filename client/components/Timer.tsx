@@ -21,7 +21,6 @@ export default function Timer({
   resting,
   setResting,
 }: Props) {
-
   const [minutes, setMinutes] = useState(25)
   const [seconds, setSeconds] = useState(0)
   const [completedIntervals, setCompletedIntervals] = useState(0)
@@ -110,8 +109,7 @@ export default function Timer({
         }
       }
       if (!resting) setTotalWorkingTime(totalWorkingTime + 1)
-    }, 1000)
-
+    }, 1)
 
     return () => {
       clearInterval(interval)
@@ -169,7 +167,7 @@ export default function Timer({
           <p className="timertext">
             Completed work cycles: {completedIntervals} <br />
             Breaks skipped: {skippedBreaks} <br />
-            Time spent working: {timeSpentWorking}
+            Time spent working: {totalWorkingTime}
           </p>
           <button onClick={skipBreak} className="skipbutton">
             Skip break
@@ -183,7 +181,7 @@ export default function Timer({
           <p className="timertext">
             Completed work cycles: {completedIntervals} <br />
             Breaks skipped: {skippedBreaks} <br />
-            Time spent working: {timeSpentWorking}
+            Time spent working: {totalWorkingTime}
           </p>
         </>
       )}
