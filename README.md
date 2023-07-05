@@ -21,7 +21,7 @@ Dark mode utilises react-ios-switch
 Pocket Doro is designed to be a companion app to help you improve your productivity. It is not a substitute for self-discipline and focus. Remember to use it as a tool to assist you in managing your study or work sessions effectively.
 We hope you enjoy using Pocket Doro and find it beneficial for your productivity journey. Happy studying!
 
-To access Pocket Doro please click here (dokku deployment link will go here)
+To access Pocket Doro please click here https://pocketdoro.pushed.nz/
 
 ## Installation instruction
 npm install
