@@ -39,7 +39,7 @@ function Start() {
         name="mySwitch"
         offColor="white"
         onChange={handleSwitchChange}
-        onColor="rgb(76, 217, 100)"
+        onColor="#B8336A"
         readOnly={false}
         style={{
           position: 'absolute',

@@ -36,7 +36,7 @@ export default function Emoticon({ skippedBreaks }: Props) {
 
   useEffect(() => {
     const handleResize = () => {
-      const newScale = 300 / window.innerWidth
+      const newScale = 450 / window.innerWidth 
       setScale(newScale)
     }
 

@@ -14,11 +14,11 @@ export default function Avatar() {
   const [scale, setScale] = useState(0.25)
   const frameCount = 8 // rows
   const wrapAfter = 8 // columns
-  const fps = 10 // speed
+  const fps = 0 // speed
 
   useEffect(() => {
     const handleResize = () => {
-      const newScale = 300 / window.innerWidth
+      const newScale = 350 / window.innerWidth
       setScale(newScale)
     }
 
