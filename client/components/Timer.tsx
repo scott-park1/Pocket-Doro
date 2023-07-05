@@ -202,17 +202,18 @@ export default function Timer({
   // bug here with total minutes exceeding 60
   // also should we store this in the db? bad performance because saving data every second/minute?
 
-  const workingMinutes = Math.floor(totalWorkingTime / 60)
-  const workingHours = Math.floor(workingMinutes / 60)
+  // const workingMinutes = Math.floor(totalWorkingTime / 60)
+  // const workingHours = Math.floor(workingMinutes / 60)
 
-  function displayTimeSpentWorking() {
-    if (workingMinutes < 10) {
-      return `${workingHours}:0${workingMinutes}`
-    }
+  // function displayTimeSpentWorking() {
+  //   if (workingMinutes < 10) {
+  //     return `${workingHours}:0${workingMinutes}`
+  //   }
 
-    return `${workingHours}:${workingMinutes}`
-  }
+  //   return `${workingHours}:${workingMinutes}`
+  // }
 
+  // no classes applied to error and loading handling
   if (isError) {
     return <div>Sorry! There was an error while trying to load the timer</div>
   }
@@ -232,7 +233,7 @@ export default function Timer({
           <p className="timertext" data-testid="timer-information">
             Completed work cycles: {completedIntervals} <br />
             Breaks skipped: {skippedBreaks} <br />
-            Time spent working: {displayTimeSpentWorking()}
+            {/* Time spent working: {displayTimeSpentWorking()} */}
           </p>
           <button onClick={skipBreak} className="skipbutton">
             Skip Break
