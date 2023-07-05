@@ -18,7 +18,7 @@ export default function Avatar() {
 
   useEffect(() => {
     const handleResize = () => {
-      const newScale = 300 / window.innerWidth // adjust to find best fit
+      const newScale = 300 / window.innerWidth
       setScale(newScale)
     }
 
@@ -34,10 +34,10 @@ export default function Avatar() {
     <div className="avatar" style={{ imageRendering: 'pixelated' }}>
       <SpriteAnimator
         sprite={walk}
-        width={spriteWidth} // Since most of these properties are identical from sprite to sprite, 
-        height={spriteHeight} // you could create a settings object and spread it on each sprite,
-        scale={scale} // overriding anything that needs to be unique. Save you lotsa code
-        frameCount={frameCount} // and maintainance.
+        width={spriteWidth}
+        height={spriteHeight}
+        scale={scale}
+        frameCount={frameCount}
         wrapAfter={wrapAfter}
         fps={fps}
         shouldAnimate={true}
@@ -53,7 +53,7 @@ export default function Avatar() {
         fps={fps}
         shouldAnimate={true}
         direction="horizontal"
-        className="clothes" // Is this the correct className for all of these?
+        className="clothes"
       />
       <SpriteAnimator
         sprite={hair}

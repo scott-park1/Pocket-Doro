@@ -17,9 +17,9 @@ describe('<Start>', () => {
     expect(screen.getByRole('contentinfo')).toBeInTheDocument()
   })
 
-  // it('should render information about the timer and how much you worked on', async () => {
-  //   renderRoute('/start')
-  //   const timertext = screen.getByTestId('timer-information')
-  //   expect(timertext).toBeInTheDocument()
-  // })
+  it.skip('should render information about the timer and how much you worked on', async () => {
+    renderRoute('/start')
+    const timertext = screen.getByTestId('timer-information')
+    expect(timertext).toBeInTheDocument()
+  })
 })
