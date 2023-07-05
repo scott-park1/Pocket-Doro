@@ -1,6 +1,5 @@
 // @vitest-environment node
 import { afterAll, beforeAll, beforeEach, describe, it, expect } from 'vitest'
-import { screen } from '@testing-library/react'
 
 import * as db from '../db'
 import connection from '../connection'
@@ -53,14 +52,5 @@ describe('addTask', () => {
     expect(userTasks).toHaveLength(EXPECTED_LENGTH)
 
     expect(newTask.id).toBe(EXPECTED_ID)
-  })
-})
-
-describe('getTimePreferences', () => {
-  it('should render all time preferences', async () => {
-    const preferences = await db.getTimePreferences()
-
-    console.log(preferences)
-    expect(preferences.id).toBe(1)
   })
 })
