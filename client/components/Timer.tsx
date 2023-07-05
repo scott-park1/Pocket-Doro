@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useCallback } from 'react'
 import { updateTimerSettings, getTimerSettings } from '../apis/timer-settings'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
@@ -20,7 +19,6 @@ interface Props {
   onSkipBreak: () => void
   resting: boolean
   setResting: (value: React.SetStateAction<boolean>) => void
-  // i don't think we actually need id column in db?
   id: number
   intervalLength: number
   shortBreakLength: number
@@ -33,7 +31,6 @@ export default function Timer({
   resting,
   setResting,
 }: Props) {
-  //minutes should be interval length from db? then base seconds of that?
   const [minutes, setMinutes] = useState(25)
   const [seconds, setSeconds] = useState(0)
 
@@ -56,7 +53,6 @@ export default function Timer({
     isError,
     isLoading,
   } = useQuery(['timer'], getTimerSettings)
-  // use either placeholderData or initialData?
 
   const intervalLength =
     timerSettings?.interval_length || initialData.intervalLength
@@ -77,11 +73,12 @@ export default function Timer({
         short_break_length: shortBreakInput,
         long_break_length: longBreakInput,
       },
-      token: '', // do something here? wrap settings in Auth component? make separate settings component then pass props?  isAuthenication
+      token: '', // do something here? wrap settings in Auth component? make separate settings component then pass props?  isAuthenicated
     })
   }
 
   function handleTimerSettings(e: React.FormEvent<HTMLButtonElement>) {
+    e.preventDefault()
     displaySettings()
     handleUpdateSubmit(e)
   }
@@ -90,11 +87,11 @@ export default function Timer({
     setIsPaused(true)
     setShowSettings(!showSettings)
   }
-  
+
   function displayForm() {
     setShowForm(!showForm)
   }
-  
+
   const changeTimer = useCallback(() => {
     setResting(!resting)
     playSound()
@@ -123,7 +120,6 @@ export default function Timer({
   ])
 
   useEffect(() => {
-    console.log(timerSettings)
     if (timerSettings && !timerHasStarted) {
       if (!resting) {
         setMinutes(intervalLength)
@@ -171,7 +167,7 @@ export default function Timer({
         }
       }
       if (!resting) setTotalWorkingTime(totalWorkingTime + 1)
-    }, 10)
+    }, 1000)
 
     return () => {
       clearInterval(interval)
@@ -203,7 +199,7 @@ export default function Timer({
   const timerMinutes = minutes < 10 ? `0${minutes}` : minutes
   const timerSeconds = seconds < 10 ? `0${seconds}` : seconds
 
-  // bug here with total minnuts exceeding 60
+  // bug here with total minutes exceeding 60
   // also should we store this in the db? bad performance because saving data every second/minute?
 
   const workingMinutes = Math.floor(totalWorkingTime / 60)
@@ -224,7 +220,7 @@ export default function Timer({
   if (isLoading) {
     return <div> Loading timer...</div>
   }
-  
+
   return (
     <>
       {resting ? (
@@ -236,7 +232,7 @@ export default function Timer({
           <p className="timertext" data-testid="timer-information">
             Completed work cycles: {completedIntervals} <br />
             Breaks skipped: {skippedBreaks} <br />
-            Time spent working: {totalWorkingTime}
+            Time spent working: {displayTimeSpentWorking()}
           </p>
           <button onClick={skipBreak} className="skipbutton">
             Skip Break
@@ -276,10 +272,11 @@ export default function Timer({
           {showForm ? 'Close' : 'Tasks'}
         </button>
         {showForm && (
-          <div className="task-settings-wrapper">
-            {' '}
-            <TaskList />{' '}
-          </div>
+          <>
+            <div className="task-settings-wrapper">
+              <TaskList />
+            </div>
+          </>
         )}
       </div>
       <div>
@@ -298,7 +295,7 @@ export default function Timer({
                   className="slider"
                   type="range"
                   name="working-minutes"
-                  min="0"
+                  min="5"
                   max="120"
                   defaultValue={intervalLength}
                   step="5"
@@ -320,7 +317,7 @@ export default function Timer({
                   className="slider"
                   type="range"
                   name="short-break"
-                  min="0"
+                  min="5"
                   max="30"
                   defaultValue={shortBreakLength}
                   step="5"
@@ -342,7 +339,7 @@ export default function Timer({
                   className="slider"
                   type="range"
                   name="long-break"
-                  min="0"
+                  min="5"
                   max="120"
                   defaultValue={longBreakLength}
                   step="5"
@@ -353,7 +350,6 @@ export default function Timer({
                 <br />
                 <div className="settings-values">{longBreakInput} minutes</div>
               </div>
-              <button onSubmit={handleUpdateSubmit}>save changes</button>
             </form>
           </>
         )}

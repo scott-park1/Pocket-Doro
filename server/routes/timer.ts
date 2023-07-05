@@ -17,22 +17,25 @@ router.get('/', async (req, res) => {
   }
 })
 
-router.put('/:id', checkJwt, async (req: JwtRequest, res) => {
+router.put('/:id', async (req: JwtRequest, res) => {
   const { timerSettings } = req.body as { timerSettings: TimePreference }
 
-  const auth0Id = req.auth?.sub
-
+  // const auth0Id = req.auth?.sub
+  console.log(req.params.id)
   const id = Number(req.params.id)
+
+  console.log('timerSettings', timerSettings)
+  console.log('id', id)
 
   if (!timerSettings || !id) {
     console.error('Bad Request - no timer settings or id')
     return res.status(400).send('Bad request')
   }
 
-  if (!auth0Id) {
-    console.error('No auth0Id')
-    return res.status(401).send('Unauthorized')
-  }
+  // if (!auth0Id) {
+  //   console.error('No auth0Id')
+  //   return res.status(401).send('Unauthorized')
+  // }
 
   try {
     const updatedPreferences = await db.updateTimePreferences(id, timerSettings)

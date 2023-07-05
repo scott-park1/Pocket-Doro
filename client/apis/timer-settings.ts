@@ -22,8 +22,9 @@ export async function updateTimerSettings({
   timerSettings,
   token,
 }: UpdateTimerFunction) {
+  console.log('timerSettings', timerSettings)
   return await request
-    .put(`${rootUrl}`)
+    .put(`${rootUrl}/1`)
     .set(`Authorization`, `Bearer ${token}`)
     .send({ timerSettings })
     .then((res) => res.body.timerSettings)

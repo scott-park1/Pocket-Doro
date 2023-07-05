@@ -79,7 +79,8 @@ function Start() {
           </div>
         </div>
       </div>
-      <Footer />
+
+      {/* <Footer /> */}
     </>
   )
 }
