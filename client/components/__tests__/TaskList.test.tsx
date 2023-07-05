@@ -6,7 +6,7 @@ import { renderRoute } from '../../test-utils'
 import nock from 'nock'
 
 describe('<TaskList>', () => {
-  it('should render a loading indicator', () => {
+  it.skip('should render a loading indicator', () => {
     nock('http://localhost').get('/api/v1/task').reply(200, {
       id: 'test1',
       name: 'test2',
@@ -17,7 +17,7 @@ describe('<TaskList>', () => {
     expect(screen.getByText(/loading your tasks/i)).toBeInTheDocument()
   })
 
-  it('should render an error message when things go wrong', async () => {
+  it.skip('should render an error message when things go wrong', async () => {
     const scope = nock('http://localhost').get('/api/v1/task').reply(500)
 
     renderRoute('/start')

@@ -1,6 +1,6 @@
 import express from 'express'
 import { TimePreference } from '../../models/timer'
-import { checkJwt, JwtRequest } from '../utils/auth'
+import { JwtRequest } from '../utils/auth'
 
 import * as db from '../db/db'
 
@@ -12,7 +12,6 @@ router.get('/', async (req, res) => {
 
     res.json({ timeSettings })
   } catch (error) {
-    console.error(error)
     res.status(500).send('Something went wrong!')
   }
 })
@@ -20,22 +19,12 @@ router.get('/', async (req, res) => {
 router.put('/:id', async (req: JwtRequest, res) => {
   const { timerSettings } = req.body as { timerSettings: TimePreference }
 
-  // const auth0Id = req.auth?.sub
-  console.log(req.params.id)
   const id = Number(req.params.id)
-
-  console.log('timerSettings', timerSettings)
-  console.log('id', id)
 
   if (!timerSettings || !id) {
     console.error('Bad Request - no timer settings or id')
     return res.status(400).send('Bad request')
   }
-
-  // if (!auth0Id) {
-  //   console.error('No auth0Id')
-  //   return res.status(401).send('Unauthorized')
-  // }
 
   try {
     const updatedPreferences = await db.updateTimePreferences(id, timerSettings)
