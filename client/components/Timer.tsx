@@ -231,7 +231,7 @@ export default function Timer({
           <p className="timertext" data-testid="timer-information">
             Completed work cycles: {completedIntervals} <br />
             Breaks skipped: {skippedBreaks} <br />
-            Time spent working: {totalWorkingTime}
+            {/* Time spent working: {totalWorkingTime} */}
           </p>
         </>
       )}
