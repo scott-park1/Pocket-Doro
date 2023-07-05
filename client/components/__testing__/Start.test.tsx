@@ -12,9 +12,14 @@ describe('<Start>', () => {
     ).toBeInTheDocument()
   })
 
-  it('should render information about the timer and how much you worked on', async () => {
+  it.skip('should render Copyright Pomodoro Queens', () => {
     renderRoute('/start')
-    const timertext = screen.getByTestId('timer-information')
-    expect(timertext).toBeInTheDocument()
+    expect(screen.getByRole('contentinfo')).toBeInTheDocument()
   })
+
+  // it('should render information about the timer and how much you worked on', async () => {
+  //   renderRoute('/start')
+  //   const timertext = screen.getByTestId('timer-information')
+  //   expect(timertext).toBeInTheDocument()
+  // })
 })

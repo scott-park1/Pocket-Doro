@@ -1,7 +1,7 @@
 function Footer() {
   return (
-    <footer className="footer">
-      <p>&copy;Copyright Pomodoro Queens</p>
+    <footer className="footer" role="contentinfo">
+      &copy;Copyright Pomodoro Queens
     </footer>
   )
 }
