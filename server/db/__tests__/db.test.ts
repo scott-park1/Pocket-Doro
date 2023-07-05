@@ -49,9 +49,6 @@ describe('addTask', () => {
     }
 
     const newTask = await db.addTask(userTaskToAdd)
-
-    console.log(`newTask`, newTask) // undefined
-
     const userTasks = await db.getUser()
     expect(userTasks).toHaveLength(EXPECTED_LENGTH)
 
@@ -64,7 +61,6 @@ describe('getTimePreferences', () => {
     const preferences = await db.getTimePreferences()
 
     console.log(preferences)
-    // expect(preferences).toHaveLength(1)
     expect(preferences.id).toBe(1)
   })
 })
