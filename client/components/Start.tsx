@@ -43,7 +43,7 @@ function Start() {
         name="mySwitch"
         offColor="white"
         onChange={handleSwitchChange}
-        onColor="rgb(76, 217, 100)"
+        onColor="#B8336A"
         // pendingOffColor={undefined} // For these undefined props, I wonder if they can be omitted entirely?
         // pendingOnColor={undefined}
         readOnly={false}
@@ -66,9 +66,6 @@ function Start() {
           <div className="emoticon-overlay">
             <Emoticon skippedBreaks={skippedBreaks} resting={resting} />
           </div>
-          {/* <div className="taskBubble">
-            <TaskList />
-          </div> */}
           <div className="timeBubble">
             <Timer
               skippedBreaks={skippedBreaks}

@@ -14,11 +14,11 @@ export default function Avatar() {
   const [scale, setScale] = useState(0.25)
   const frameCount = 8 // rows
   const wrapAfter = 8 // columns
-  const fps = 10 // speed
+  const fps = 0 // speed
 
   useEffect(() => {
     const handleResize = () => {
-      const newScale = 300 / window.innerWidth // adjust to find best fit
+      const newScale = 350 / window.innerWidth // adjust to find best fit
       setScale(newScale)
     }
 
@@ -34,7 +34,7 @@ export default function Avatar() {
     <div className="avatar" style={{ imageRendering: 'pixelated' }}>
       <SpriteAnimator
         sprite={walk}
-        width={spriteWidth} // Since most of these properties are identical from sprite to sprite, 
+        width={spriteWidth} // Since most of these properties are identical from sprite to sprite,
         height={spriteHeight} // you could create a settings object and spread it on each sprite,
         scale={scale} // overriding anything that needs to be unique. Save you lotsa code
         frameCount={frameCount} // and maintainance.
