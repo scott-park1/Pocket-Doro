@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { SpriteAnimator } from './sprites/SpriteAnimator'
 import { useState } from 'react'
 
@@ -9,7 +9,7 @@ interface Props {
   resting: boolean
 }
 
-export default function Emoticon({ skippedBreaks, resting }: Props) {
+export default function Emoticon({ skippedBreaks }: Props) {
   const [tiredLevel, setTiredLevel] = useState(0)
   const [previousSkippedBreaks, setPreviousSkippedBreaks] = useState(0)
 
@@ -20,11 +20,9 @@ export default function Emoticon({ skippedBreaks, resting }: Props) {
   const wrapAfter = 5
   const fps = 0
 
-  // let startEmoticon = 5
-  const onBreak = 14
   const study = 3
-  const tired = 6 //skip 1 break
-  const veryTired = 9 //skip 2 breaks
+  const tired = 6
+  const veryTired = 9
   const veryVeryTired = 13
 
   useEffect(() => {
@@ -38,7 +36,7 @@ export default function Emoticon({ skippedBreaks, resting }: Props) {
 
   useEffect(() => {
     const handleResize = () => {
-      const newScale = 300 / window.innerWidth // adjust to find best fit
+      const newScale = 300 / window.innerWidth
       setScale(newScale)
     }
 
